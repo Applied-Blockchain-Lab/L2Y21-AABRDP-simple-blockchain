@@ -41,7 +41,7 @@ class Chain {
             return;
         }
 
-        this.chai = newChain;
+        this.chain = newChain;
         console.log('Replacing with the new chain!')
     }
 }
