@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev-test": "node dev-test"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain#readme",
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "express": "^4.17.1"
   },
   "devDependencies": {

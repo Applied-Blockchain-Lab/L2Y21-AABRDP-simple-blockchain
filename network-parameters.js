@@ -1,0 +1,4 @@
+const DIFFICULTY = 3;
+const CREATION_TIME = 30000;
+
+module.exports = { DIFFICULTY, CREATION_TIME };
