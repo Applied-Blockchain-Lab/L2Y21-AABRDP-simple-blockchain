@@ -42,4 +42,4 @@ jobs:
           
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_BOZHIDAR_USERNAME }}/simple-blockchain/:latest
+          tags: ${{ secrets.DOCKER_HUB_BOZHIDAR_USERNAME }}/simple-blockchain:latest
