@@ -1,35 +1,34 @@
 const SHA256 = require('crypto-js/sha256');
 
-const { DIFFICULTY, CREATION_TIME } = require('.././network-parameters');
+const { DIFFICULTY, CREATION_TIME } = require('../network-parameters');
 
 class Block {
-
-    constructor (timestamp, parentHash, hash, nonce, difficulty, transactions) {
+    constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {
         this.timestamp = timestamp;
         this.parentHash = parentHash;
         this.hash = hash;
         this.nonce = nonce;
         this.difficulty = difficulty || DIFFICULTY;
         this.transactions = transactions;
-}
+    }
 
     static genesisBlock() {
-        return new Block('000000','-','111-111', 0, DIFFICULTY, []);
+        return new Block('000000', '-', '111-111', 0, DIFFICULTY, []);
     }
 
     static mineBlock(lastBlock, transactions) {
         let nonce = 0;
-        let hash, timestamp;
+        let hash;
+        let timestamp;
         const parentHash = lastBlock.hash;
         let { difficulty } = lastBlock;
 
-        do{
+        do {
             nonce++;
             timestamp = Date.now();
             difficulty = Block.adjustDifficulty(lastBlock, timestamp);
             hash = Block.generateHash(timestamp, parentHash, nonce, difficulty, transactions);
-
-        } while(hash.substring(0, DIFFICULTY) != '0'.repeat(DIFFICULTY));
+        } while (hash.substring(0, DIFFICULTY) !== '0'.repeat(DIFFICULTY));
 
         return new Block(timestamp, parentHash, hash, nonce, difficulty, transactions);
     }
@@ -39,24 +38,28 @@ class Block {
     }
 
     static blockHash(block) {
-        const {timestamp, parentHash, nonce, difficulty, transactions} = block;
+        const {
+            timestamp, parentHash, nonce, difficulty, transactions,
+        } = block;
 
-        return Block.generateHash(timestamp, parentHash, nonce,difficulty, transactions);
+        return Block.generateHash(timestamp, parentHash, nonce, difficulty, transactions);
     }
 
     static adjustDifficulty(lastBlock, currentTime) {
         let { difficulty } = lastBlock;
-        difficulty = lastBlock.timestamp + CREATION_TIME > currentTime ? difficulty + 1 : difficulty - 1;
+        difficulty = lastBlock.timestamp + CREATION_TIME > currentTime
+            ? difficulty + 1 : difficulty - 1;
 
         return difficulty;
     }
 
-    hasValidTransactions(){
-        for(const tx of this.transactions){
-            if(!tx.isValid())
+    hasValidTransactions() {
+        return this.transactions.forEach((tx) => {
+            if (!tx.isValid()) {
                 return false;
-        }
-        return true;
+            }
+            return true;
+        });
     }
 }
 module.exports = Block;
