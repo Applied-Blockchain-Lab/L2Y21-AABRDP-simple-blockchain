@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "crypto-js": "^4.1.1",
+    "elliptic": "^6.5.4",
     "express": "^4.17.1"
   },
   "devDependencies": {
