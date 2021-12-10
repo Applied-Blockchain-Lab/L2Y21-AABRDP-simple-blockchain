@@ -1,22 +1,22 @@
 const EC = require('elliptic').ec;
-const ec = new EC('ed25519');
-
 const { generateHash } = require('../utils/crypto-util');
 
+const ec = new EC('ed25519');
+
 class Transaction {
-    constructor(fromAddress, toAddress, amount, myKeyForSign) {
+    constructor(fromAddress, toAddress, amount, signature) {
         this.timestamp = Date.now();
         this.fromAddress = fromAddress;
         this.toAddress = toAddress;
         this.amount = amount;
-        this.signature = this.sign(myKeyForSign);
-        this.hash = this.generateHash();
+        this.signature = signature;
+        this.hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount + signature);
     }
 
     sign(signingKey) {
         if (signingKey.getPublic('hex') !== this.fromAddress) return ('You cannot sign transaction for other wallets!');
 
-        const hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount);
+        const hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount + this.signature);
         const sign = signingKey.sign(hash, 'base64');
         return sign.toDER('hex');
     }
