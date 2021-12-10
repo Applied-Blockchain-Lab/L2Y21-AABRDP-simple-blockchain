@@ -14,8 +14,12 @@ router.get('/chain', (req, res) => {
     res.json(app.chain);
 });
 
-router.get('/generate/:secret', (req, res) => {
-    res.json(generateKeyPair(req.params.secret));
+router.get('/generate', (req, res) => {
+    const { privateKey, publicKey } = generateKeyPair();
+    res.json({
+        'Generated private key': privateKey,
+        'Generated public key': publicKey,
+    });
 });
 
 router.get('/blocks/latest', (req, res) => {

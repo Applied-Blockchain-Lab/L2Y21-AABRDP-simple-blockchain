@@ -1,10 +1,24 @@
-const EdDSA = require('elliptic').eddsa;
+const fs = require('fs');
+const path = require('path');
+const EC = require('elliptic').ec;
 
-const ed25519 = new EdDSA('ed25519');
+const { KEY_PAIRS_FOLDER } = require('../config/ports-folders');
+
+const ec = new EC('secp256k1');
 
 module.exports = {
-    generateKeyPair(secret) {
-        const keyPair = ed25519.keyFromSecret(secret);
-        return keyPair.getPublic('hex');
+    generateKeyPair() {
+        const keyPair = ec.genKeyPair();
+
+        const data = {
+            privateKey: keyPair.getPrivate('hex'),
+            publicKey: keyPair.getPublic('hex'),
+        };
+        fs.writeFileSync(
+            path.join(__dirname, `../${KEY_PAIRS_FOLDER}/${keyPair.getPublic('hex')}.json`),
+            JSON.stringify(data, null, 2),
+        );
+
+        return data;
     },
 };
