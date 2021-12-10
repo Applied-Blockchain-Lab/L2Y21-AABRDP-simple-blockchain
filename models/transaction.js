@@ -1,7 +1,7 @@
-const SHA256 = require('crypto-js/sha256');
 const EC = require('elliptic').ec;
-
 const ec = new EC('ed25519');
+
+const { generateHash } = require('../utils/crypto-util');
 
 class Transaction {
     constructor(fromAddress, toAddress, amount, myKeyForSign) {
@@ -16,13 +16,9 @@ class Transaction {
     sign(signingKey) {
         if (signingKey.getPublic('hex') !== this.fromAddress) return ('You cannot sign transaction for other wallets!');
 
-        const hash = this.generateHash();
+        const hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount);
         const sign = signingKey.sign(hash, 'base64');
         return sign.toDER('hex');
-    }
-
-    generateHash() {
-        return SHA256(this.timestamp, this.fromAddress + this.toAddress + this.amount).toString();
     }
 
     isValid() {
