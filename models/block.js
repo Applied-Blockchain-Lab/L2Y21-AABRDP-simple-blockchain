@@ -1,6 +1,6 @@
 const SHA256 = require('crypto-js/sha256');
 
-const { DIFFICULTY, CREATION_TIME } = require('../network-parameters');
+const { DIFFICULTY, CREATION_TIME } = require('../config/network-parameters');
 
 class Block {
     constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {

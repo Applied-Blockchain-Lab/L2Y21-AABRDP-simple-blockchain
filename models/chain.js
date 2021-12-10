@@ -1,6 +1,6 @@
 const Block = require('./block');
 const Transaction = require('./transaction');
-const { BLOCK_SIZE } = require('../network-parameters');
+const { BLOCK_SIZE } = require('../config/network-parameters');
 
 class Chain {
     constructor() {
