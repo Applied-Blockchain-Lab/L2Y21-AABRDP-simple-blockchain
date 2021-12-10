@@ -31,7 +31,7 @@ router.get('/address/ballance/:address', (req, res) => {
 });
 
 router.get('/AddTransaction', (req, res) => {
-    app.chain.addTransaction(req.body.fromAddress, req.body.toAddress, req.body.amount, req.body.myKeyForSign);
+    app.chain.addTransaction(req.body.fromAddress, req.body.toAddress, req.body.amount);
     console.log('New transaction!');
 });
 

@@ -13,5 +13,6 @@ module.exports = {
         indent: ['error', 4],
         'max-len': 0,
         'no-unused-vars': ['error', { args: 'none' }],
+        'class-methods-use-this': ['error', { exceptMethods: ['messageHandler', 'sendTransaction'] }],
     },
 };
