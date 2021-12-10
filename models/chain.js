@@ -68,6 +68,10 @@ class Chain {
         return true;
     }
 
+    clearPendingTransactions() {
+        this.pendingTransactions = [];
+    }
+
     getLatestBlock() {
         return this.chain[this.chain.length - 1];
     }
