@@ -56,5 +56,16 @@ class Block {
             return true;
         });
     }
+
+    toString() {
+        return `Block -
+            Timestamp    : ${this.timestamp}
+            Parent hash  : ${this.parentHash}
+            Hash         : ${this.hash}
+            Nonce        : ${this.nonce}
+            Difficulty   : ${this.difficulty}
+            Transactions : ${this.transactions}
+        `;
+    }
 }
 module.exports = Block;

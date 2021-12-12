@@ -44,7 +44,7 @@ router.post('/addtransaction', (req, res) => {
 
 router.post('/minetransactions', (req, res) => {
     const block = app.miner.mine(req.body.mineraddress);
-    console.log(`New block added: ${block}`);
+    console.log(`New block added: ${block.toString()}`);
     res.redirect('/chain');
 });
 
