@@ -20,6 +20,10 @@ class Chain {
 
         if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }
 
+        if (amount > this.getBalanceOfAddress(fromAddress)) {
+            return (`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);
+        }
+
         fs.readdirSync(path.join(__dirname, `../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {
             if (file === `${fromAddress}.json`) {
                 fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../${KEY_PAIRS_FOLDER}/${file}`)));

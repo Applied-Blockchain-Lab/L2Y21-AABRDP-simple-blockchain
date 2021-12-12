@@ -14,6 +14,7 @@ class Transaction {
     }
 
     sign(signingKeyPair) {
+        if (signingKeyPair === 0) { return 0; }
         if (signingKeyPair.getPublic('hex') !== this.fromAddress) { return ('You cannot sign transaction for other wallets!'); }
 
         const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();
