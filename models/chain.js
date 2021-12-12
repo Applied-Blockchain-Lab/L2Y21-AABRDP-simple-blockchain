@@ -21,7 +21,7 @@ class Chain {
         if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }
 
         if (amount > this.getBalanceOfAddress(fromAddress)) {
-            return (`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);
+            return console.log(`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);
         }
 
         fs.readdirSync(path.join(__dirname, `../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {
@@ -36,7 +36,9 @@ class Chain {
 
         if (!transaction.isValid()) return ('Cannot add invalid transaction!');
 
-        return this.pendingTransactions.push(transaction);
+        this.pendingTransactions.push(transaction);
+
+        return transaction;
     }
 
     addBlock() {

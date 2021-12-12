@@ -46,13 +46,13 @@ class WsServer {
 
             switch (data.type) {
             case MESSAGE_TYPES.chain:
-                // Replace chain with longest
+                this.blockchain.replaceChain(data.chain);
                 break;
             case MESSAGE_TYPES.transaction:
-                // Add transaction
+                this.blockchain.pendingTransactions.push(data.transaction);
                 break;
             case MESSAGE_TYPES.clear_transactions:
-                // Clear pending transaction pool
+                this.blockchain.clearPendingTransactions();
                 break;
             default:
                 break;
