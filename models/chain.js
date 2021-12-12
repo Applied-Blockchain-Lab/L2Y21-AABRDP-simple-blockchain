@@ -1,6 +1,13 @@
+const fs = require('fs');
+const path = require('path');
+const EC = require('elliptic').ec;
+
 const Block = require('./block');
 const Transaction = require('./transaction');
-const { BLOCK_SIZE } = require('../network-parameters');
+const { BLOCK_SIZE } = require('../config/network-parameters');
+const { KEY_PAIRS_FOLDER } = require('../config/ports-folders');
+
+const ec = new EC('secp256k1');
 
 class Chain {
     constructor() {
@@ -8,10 +15,21 @@ class Chain {
         this.pendingTransactions = [];
     }
 
-    addTransaction(fromAddress, toAddress, amount, myKeyForSign) {
-        if (fromAddress === '' || toAddress === '') return ('Transaction must include from and to addresses!');
+    addTransaction(fromAddress, toAddress, amount) {
+        let fileContent;
 
-        const transaction = new Transaction(fromAddress, toAddress, amount, myKeyForSign);
+        if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }
+
+        fs.readdirSync(path.join(__dirname, `../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {
+            if (file === `${fromAddress}.json`) {
+                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../${KEY_PAIRS_FOLDER}/${file}`)));
+            }
+        });
+
+        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');
+
+        const transaction = new Transaction(fromAddress, toAddress, amount, keyPair);
+
         if (!transaction.isValid()) return ('Cannot add invalid transaction!');
 
         return this.pendingTransactions.push(transaction);
@@ -48,6 +66,10 @@ class Chain {
             if (!currentBlock.hasValidTransactions()) return false;
         }
         return true;
+    }
+
+    clearPendingTransactions() {
+        this.pendingTransactions = [];
     }
 
     getLatestBlock() {

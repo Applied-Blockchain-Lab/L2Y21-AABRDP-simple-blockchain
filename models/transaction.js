@@ -1,41 +1,31 @@
-const SHA256 = require('crypto-js/sha256');
 const EC = require('elliptic').ec;
+const { generateHash } = require('../utils/crypto-util');
 
-const ec = new EC('ed25519');
+const ec = new EC('secp256k1');
 
 class Transaction {
-    constructor(fromAddress, toAddress, amount, myKeyForSign) {
+    constructor(fromAddress, toAddress, amount, keyPair) {
         this.timestamp = Date.now();
         this.fromAddress = fromAddress;
         this.toAddress = toAddress;
         this.amount = amount;
-        this.signature = this.sign(myKeyForSign);
-        this.hash = this.generateHash();
+        this.signature = this.sign(keyPair);
+        this.hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount + this.signature);
     }
 
-    sign(signingKey) {
-        if (signingKey.getPublic('hex') !== this.fromAddress) return ('You cannot sign transaction for other wallets!');
+    sign(signingKeyPair) {
+        if (signingKeyPair.getPublic('hex') !== this.fromAddress) { return ('You cannot sign transaction for other wallets!'); }
 
-        const hash = this.generateHash();
-        const sign = signingKey.sign(hash, 'base64');
-        return sign.toDER('hex');
-    }
-
-    generateHash() {
-        return SHA256(this.timestamp, this.fromAddress + this.toAddress + this.amount).toString();
+        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();
+        return signingKeyPair.sign(signData).toDER('hex');
     }
 
     isValid() {
-        let publicKey;
-
         if (!this.signature || this.signature.length === 0) return false;
 
-        try {
-            publicKey = ec.keyFromPublic(this.fromAddress, 'hex');
-        } catch (err) {
-            return false;
-        }
-        return publicKey.verify(this.generateHash(), this.signature);
+        const keyPair = ec.keyFromPublic(this.fromAddress, 'hex');
+        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();
+        return keyPair.verify(signData, this.signature);
     }
 }
 module.exports = Transaction;

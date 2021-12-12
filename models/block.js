@@ -1,6 +1,5 @@
-const SHA256 = require('crypto-js/sha256');
-
-const { DIFFICULTY, CREATION_TIME } = require('../network-parameters');
+const { generateHash } = require('../utils/crypto-util');
+const { DIFFICULTY, CREATION_TIME } = require('../config/network-parameters');
 
 class Block {
     constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {
@@ -27,14 +26,10 @@ class Block {
             nonce++;
             timestamp = Date.now();
             difficulty = Block.adjustDifficulty(lastBlock, timestamp);
-            hash = Block.generateHash(timestamp, parentHash, nonce, difficulty, transactions);
+            hash = generateHash(timestamp + parentHash + nonce + difficulty + transactions);
         } while (hash.substring(0, DIFFICULTY) !== '0'.repeat(DIFFICULTY));
 
         return new Block(timestamp, parentHash, hash, nonce, difficulty, transactions);
-    }
-
-    static generateHash(timestamp, parentHash, nonce, difficulty, transactions) {
-        return SHA256(`${timestamp}${parentHash}${nonce}${difficulty}${transactions}`).toString();
     }
 
     static blockHash(block) {
@@ -42,7 +37,7 @@ class Block {
             timestamp, parentHash, nonce, difficulty, transactions,
         } = block;
 
-        return Block.generateHash(timestamp, parentHash, nonce, difficulty, transactions);
+        return generateHash(timestamp + parentHash + nonce + difficulty + transactions);
     }
 
     static adjustDifficulty(lastBlock, currentTime) {
