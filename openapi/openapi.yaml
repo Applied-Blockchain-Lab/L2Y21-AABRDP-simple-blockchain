@@ -1,0 +1,158 @@
+openapi: '3.0.0'
+info: {
+ title: 'AABRDP blockchain',
+ version: '1.0.0',
+ description: 'AABRDP blockchain client',
+}
+
+paths:
+ /chain:
+  get:
+    summary: Get blockchain info
+    tags:
+      - GET data
+    description: Get blockchain info
+    responses:
+      200:
+        description: Fetched blockchain info
+        content:
+          application/json:
+            schema:
+              type: object 
+      500:
+        description: Fail fetching blockchain
+ /generate:
+  get:
+    summary: Generate key pair
+    tags:
+      - Key pair
+    description: Generate key pair with ECDSA - secp256k1. Files are stored in key pairs directory.
+    responses:
+      200:
+        description: Private and public key data
+        content:
+          application/json:
+            schema:
+              type: object
+ /blocks/latest:
+  get:
+    summary: Get last block
+    tags:
+      - GET data
+    description: Get last block from blockchain
+    responses:
+      200:
+        description: Get latest block object parameters
+        content:
+          application/json:
+            schema:
+              type: object
+ /transactions:
+  get:
+    summary: Get pending transactions
+    tags:
+      - GET data
+    description: Get pending transactions from blockchain
+    responses:
+      200:
+        description: Get pending transactions array
+        content:
+          application/json:
+            schema:
+              type: array
+ /address/balance/{address}:
+  get:
+    summary: Get balance of address
+    tags:
+      - GET data
+    description: Get balance of address in blockchain
+    parameters:
+      - in: path
+        name: address
+        schema:
+          type: string
+        required: true
+        description: string public key
+        example: 04f0d12eaf2c20da771ccfc8c86f3d26e445a44b0c1d8574d2232a3d2c50bc3933fdf9af2e0c36e444d1b53afbcbd6488203336b235b1b445f888c8abd5dbaae8f
+    responses:
+      200:
+        description: Get balance of address
+        content:
+          application/json:
+            schema:
+              type: integer
+ /addtransaction:
+  post:
+    summary: Add transaction
+    tags:
+      - Add transaction
+    description: Add transaction to the blockchain
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fromAddress:
+                type: string
+                example: 04f0d12eaf2c20da771ccfc8c86f3d26e445a44b0c1d8574d2232a3d2c50bc3933fdf9af2e0c36e444d1b53afbcbd6488203336b235b1b445f888c8abd5dbaae8f
+              toAddress:
+                type: string
+                example: testAddress
+              amount:
+                type: integer
+                example: 10
+    responses:
+      200:
+        description: Show current pending transactions
+        content:
+          application/json:
+            schema:
+              type: array
+ /minetransactions:
+  post:
+    summary: Mine transactions
+    tags:
+      - Mine transactions
+    description: Mine pending transactions in the blockchain. New block with transactions will be added.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              mineraddress:
+                type: string
+                example: 04f0d12eaf2c20da771ccfc8c86f3d26e445a44b0c1d8574d2232a3d2c50bc3933fdf9af2e0c36e444d1b53afbcbd6488203336b235b1b445f888c8abd5dbaae8f
+    responses:
+      200:
+        description: Show current chain
+        content:
+          application/json:
+            schema:
+              type: object
+ /getcoins:
+  post:
+    summary: Get coins
+    tags:
+      - Get coins
+    description: Get coins to address for testing purposes.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              toAddress:
+                type: string
+                example: 04f0d12eaf2c20da771ccfc8c86f3d26e445a44b0c1d8574d2232a3d2c50bc3933fdf9af2e0c36e444d1b53afbcbd6488203336b235b1b445f888c8abd5dbaae8f
+    responses:
+      200:
+        description: Show informative message.
+        content:
+          application/json:
+            schema:
+              type: string

@@ -20,6 +20,10 @@ class Chain {
 
         if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }
 
+        if (amount === 0) {
+            return console.log('Amount can\'t be 0!');
+        }
+
         if (amount > this.getBalanceOfAddress(fromAddress)) {
             return console.log(`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);
         }
@@ -42,7 +46,9 @@ class Chain {
     }
 
     addBlock() {
-        if (this.pendingTransactions.length === 0) return ('No pendingTransactions - cannot mine new block!');
+        if (this.pendingTransactions.length <= 1) {
+            return console.log('No pendingTransactions - cannot mine new block!');
+        }
 
         const newBlock = Block.mineBlock(this.getLatestBlock(), this.getFromPendingTransactions());
         this.chain.push(newBlock);
@@ -102,6 +108,12 @@ class Chain {
             });
         });
         return balance;
+    }
+
+    getCoins(toAddress) {
+        const transaction = new Transaction(0, toAddress, 100, 0);
+
+        this.pendingTransactions.push(transaction);
     }
 }
 module.exports = Chain;
