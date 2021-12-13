@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = require('../app');
+
 const { generateKeyPair } = require('../utils/key-generator');
 
 const router = express.Router();
+
 router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
@@ -11,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/chain', (req, res) => {
-    res.json(app.chain);
+    res.json(app.blockchain);
 });
 
 router.get('/generate', (req, res) => {
@@ -23,16 +25,27 @@ router.get('/generate', (req, res) => {
 });
 
 router.get('/blocks/latest', (req, res) => {
-    res.json(app.chain.getLatestBlock());
+    res.json(app.blockchain.getLatestBlock());
 });
 
-router.get('/address/ballance/:address', (req, res) => {
-    res.json(app.chain.getBalanceOfAddress(req.params.address));
+router.get('/transactions', (req, res) => {
+    res.json(app.blockchain.pendingTransactions);
 });
 
-router.get('/AddTransaction', (req, res) => {
-    app.chain.addTransaction(req.body.fromAddress, req.body.toAddress, req.body.amount);
-    console.log('New transaction!');
+router.get('/address/balance/:address', (req, res) => {
+    res.json(app.blockchain.getBalanceOfAddress(req.params.address));
+});
+
+router.post('/addtransaction', (req, res) => {
+    const transaction = app.blockchain.addTransaction(req.body.fromAddress, req.body.toAddress, req.body.amount);
+    app.wsServer.broadcastTransaction(transaction);
+    res.redirect('/transactions');
+});
+
+router.post('/minetransactions', (req, res) => {
+    const block = app.miner.mine(req.body.mineraddress);
+    console.log(`New block added: ${block.toString()}`);
+    res.redirect('/chain');
 });
 
 module.exports = router;

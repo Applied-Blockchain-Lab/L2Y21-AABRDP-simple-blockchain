@@ -8,10 +8,10 @@ class Miner {
         this.wsServer = wsServer;
     }
 
-    mine(toAddress) {
-        const coinbaseTransaction = new Transaction(0, toAddress, MINING_REWARD, 0);
+    mine(minerAddress) {
+        const coinbaseTransaction = new Transaction(0, minerAddress, MINING_REWARD, 0);
 
-        this.blockchain.pendingTransactions.push(coinbaseTransaction);
+        this.blockchain.pendingTransactions.unshift(coinbaseTransaction);
 
         const newBlock = this.blockchain.addBlock();
 

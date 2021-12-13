@@ -27,7 +27,7 @@ class Block {
             timestamp = Date.now();
             difficulty = Block.adjustDifficulty(lastBlock, timestamp);
             hash = generateHash(timestamp + parentHash + nonce + difficulty + transactions);
-        } while (hash.substring(0, DIFFICULTY) !== '0'.repeat(DIFFICULTY));
+        } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));
 
         return new Block(timestamp, parentHash, hash, nonce, difficulty, transactions);
     }
@@ -55,6 +55,17 @@ class Block {
             }
             return true;
         });
+    }
+
+    toString() {
+        return `Block -
+            Timestamp    : ${this.timestamp}
+            Parent hash  : ${this.parentHash}
+            Hash         : ${this.hash}
+            Nonce        : ${this.nonce}
+            Difficulty   : ${this.difficulty}
+            Transactions : ${this.transactions}
+        `;
     }
 }
 module.exports = Block;
