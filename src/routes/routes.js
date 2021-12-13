@@ -1,16 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = require('../../app');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const path = require('path');
 
 const { generateKeyPair } = require('../utils/key-generator');
+
+const swaggerDocument = YAML.load(path.join(__dirname, '../../openapi/openapi.yaml'));
+const app = require('../../app');
 
 const router = express.Router();
 
 router.use(bodyParser.json());
+router.use('/api-docs', swaggerUi.serve);
 
 router.get('/', (req, res) => {
     res.send('Welcome to AABRDP-simple-blockchain!');
 });
+
+router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 router.get('/chain', (req, res) => {
     res.json(app.blockchain);
@@ -24,7 +32,7 @@ router.get('/generate', (req, res) => {
     });
 });
 
-router.get('/blocks/latest', (req, res) => {
+router.get('/blocks/last', (req, res) => {
     res.json(app.blockchain.getLatestBlock());
 });
 

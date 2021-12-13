@@ -20,6 +20,10 @@ class Chain {
 
         if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }
 
+        if (amount === 0) {
+            return console.log('Amount can\'t be 0!');
+        }
+
         if (amount > this.getBalanceOfAddress(fromAddress)) {
             return console.log(`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);
         }
