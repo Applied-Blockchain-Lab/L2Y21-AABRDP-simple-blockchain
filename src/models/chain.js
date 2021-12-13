@@ -105,5 +105,11 @@ class Chain {
         });
         return balance;
     }
+
+    getCoins(toAddress) {
+        const transaction = new Transaction(0, toAddress, 100, 0);
+
+        this.pendingTransactions.push(transaction);
+    }
 }
 module.exports = Chain;
