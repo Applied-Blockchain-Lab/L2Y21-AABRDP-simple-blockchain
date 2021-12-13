@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = require('../app');
+const app = require('../../app');
 
 const { generateKeyPair } = require('../utils/key-generator');
 

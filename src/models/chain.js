@@ -4,8 +4,8 @@ const EC = require('elliptic').ec;
 
 const Block = require('./block');
 const Transaction = require('./transaction');
-const { BLOCK_SIZE } = require('../config/network-parameters');
-const { KEY_PAIRS_FOLDER } = require('../config/ports-folders');
+const { BLOCK_SIZE } = require('../../config/network-parameters');
+const { KEY_PAIRS_FOLDER } = require('../../config/ports-folders');
 
 const ec = new EC('secp256k1');
 

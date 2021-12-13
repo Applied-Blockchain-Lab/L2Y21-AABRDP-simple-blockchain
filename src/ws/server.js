@@ -1,6 +1,6 @@
 const Websocket = require('ws');
 
-const { WS_PORT, PEERS } = require('../config/ports-folders');
+const { WS_PORT, PEERS } = require('../../config/ports-folders');
 
 const MESSAGE_TYPES = {
     chain: 'CHAIN',

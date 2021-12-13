@@ -1,6 +1,6 @@
 const Transaction = require('./transaction');
 
-const { MINING_REWARD } = require('../config/network-parameters');
+const { MINING_REWARD } = require('../../config/network-parameters');
 
 class Miner {
     constructor(blockchain, wsServer) {

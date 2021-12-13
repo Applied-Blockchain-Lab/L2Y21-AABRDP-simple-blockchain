@@ -1,5 +1,5 @@
 const { generateHash } = require('../utils/crypto-util');
-const { DIFFICULTY, CREATION_TIME } = require('../config/network-parameters');
+const { DIFFICULTY, CREATION_TIME } = require('../../config/network-parameters');
 
 class Block {
     constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {

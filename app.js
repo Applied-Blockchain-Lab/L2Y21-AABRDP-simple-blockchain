@@ -1,8 +1,8 @@
 const express = require('express');
-const routes = require('./routes/routes');
-const Blockchain = require('./models/chain');
-const WsServer = require('./ws/server');
-const Miner = require('./models/miner');
+const routes = require('./src/routes/routes');
+const Blockchain = require('./src/models/chain');
+const WsServer = require('./src/ws/server');
+const Miner = require('./src/models/miner');
 
 const { HTTP_PORT } = require('./config/ports-folders');
 
