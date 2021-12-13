@@ -104,7 +104,7 @@ paths:
                 type: integer
                 example: 10
     responses:
-      200
+      200:
         description: Show current pending transactions
         content:
           application/json:
@@ -127,7 +127,7 @@ paths:
                 type: string
                 example: 04f0d12eaf2c20da771ccfc8c86f3d26e445a44b0c1d8574d2232a3d2c50bc3933fdf9af2e0c36e444d1b53afbcbd6488203336b235b1b445f888c8abd5dbaae8f
     responses:
-      200
+      200:
         description: Show current chain
         content:
           application/json:
@@ -150,7 +150,7 @@ paths:
                 type: string
                 example: 04f0d12eaf2c20da771ccfc8c86f3d26e445a44b0c1d8574d2232a3d2c50bc3933fdf9af2e0c36e444d1b53afbcbd6488203336b235b1b445f888c8abd5dbaae8f
     responses:
-      200
+      200:
         description: Show informative message.
         content:
           application/json:
