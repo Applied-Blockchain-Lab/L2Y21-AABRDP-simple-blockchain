@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const EC = require('elliptic').ec;
 
-const { KEY_PAIRS_FOLDER } = require('../config/ports-folders');
+const { KEY_PAIRS_FOLDER } = require('../../config/ports-folders');
 
 const ec = new EC('secp256k1');
 
