@@ -42,7 +42,9 @@ class Chain {
     }
 
     addBlock() {
-        if (this.pendingTransactions.length === 0) return ('No pendingTransactions - cannot mine new block!');
+        if (this.pendingTransactions.length <= 1) {
+            return console.log('No pendingTransactions - cannot mine new block!');
+        }
 
         const newBlock = Block.mineBlock(this.getLatestBlock(), this.getFromPendingTransactions());
         this.chain.push(newBlock);

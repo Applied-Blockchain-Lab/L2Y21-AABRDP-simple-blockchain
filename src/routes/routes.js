@@ -44,8 +44,13 @@ router.post('/addtransaction', (req, res) => {
 
 router.post('/minetransactions', (req, res) => {
     const block = app.miner.mine(req.body.mineraddress);
-    console.log(`New block added: ${block.toString()}`);
-    res.redirect('/chain');
+
+    if (block) {
+        console.log(`New block added: ${block.toString()}`);
+        res.redirect('/chain');
+    } else {
+        res.json('No pendingTransactions - cannot mine new block!');
+    }
 });
 
 module.exports = router;
