@@ -49,12 +49,12 @@ class Block {
     }
 
     hasValidTransactions() {
-        return this.transactions.forEach((tx) => {
-            if (!tx.isValid()) {
+        for (let i = 0; i < this.transactions.length; i++) {
+            if (!this.transactions[i].isValid()) {
                 return false;
             }
-            return true;
-        });
+        }
+        return true;
     }
 
     toString() {
