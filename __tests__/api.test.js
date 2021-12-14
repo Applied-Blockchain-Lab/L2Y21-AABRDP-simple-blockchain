@@ -10,7 +10,7 @@ const { HTTP_PORT } = require('../config/ports-folders');
 
 describe('GET /', () => {
     it('should satisfy OpenAPI spec', async () => {
-        const res = await axios.get(`http://localhost:${HTTP_PORT}`);
+        const res = await axios.get(`http://localhost:${HTTP_PORT}/`);
 
         expect(res.status).toEqual(200);
         expect(res.data).toEqual('Welcome to AABRDP-simple-blockchain!');
