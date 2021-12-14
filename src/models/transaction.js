@@ -1,5 +1,6 @@
 const EC = require('elliptic').ec;
 const { generateHash } = require('../utils/crypto-util');
+const { REWARD_TX } = require('../../config/network-parameters');
 
 const ec = new EC('secp256k1');
 
@@ -22,6 +23,8 @@ class Transaction {
     }
 
     isValid() {
+        if (this.fromAddress === REWARD_TX) return true;
+
         if (!this.signature || this.signature.length === 0) return false;
         if (this.amount === 0) return false;
 

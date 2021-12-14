@@ -1,6 +1,6 @@
 const Transaction = require('./transaction');
 
-const { MINING_REWARD } = require('../../config/network-parameters');
+const { MINING_REWARD, REWARD_TX } = require('../../config/network-parameters');
 
 class Miner {
     constructor(blockchain, wsServer) {
@@ -9,7 +9,7 @@ class Miner {
     }
 
     mine(minerAddress) {
-        const coinbaseTransaction = new Transaction(0, minerAddress, MINING_REWARD, 0);
+        const coinbaseTransaction = new Transaction(REWARD_TX, minerAddress, MINING_REWARD, 0);
 
         this.blockchain.pendingTransactions.unshift(coinbaseTransaction);
 
