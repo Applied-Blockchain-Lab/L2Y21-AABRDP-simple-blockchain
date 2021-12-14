@@ -15,7 +15,7 @@ module.exports = {
             publicKey: keyPair.getPublic('hex'),
         };
         fs.writeFileSync(
-            path.join(__dirname, `../${KEY_PAIRS_FOLDER}/${keyPair.getPublic('hex')}.json`),
+            path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${keyPair.getPublic('hex')}.json`),
             JSON.stringify(data, null, 2),
         );
 

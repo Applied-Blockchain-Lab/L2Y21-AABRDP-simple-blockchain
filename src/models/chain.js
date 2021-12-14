@@ -28,9 +28,9 @@ class Chain {
             return console.log(`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);
         }
 
-        fs.readdirSync(path.join(__dirname, `../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {
+        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {
             if (file === `${fromAddress}.json`) {
-                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../${KEY_PAIRS_FOLDER}/${file}`)));
+                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));
             }
         });
 
@@ -110,9 +110,17 @@ class Chain {
         return balance;
     }
 
-    getCoins(toAddress) {
-        const transaction = new Transaction(0, toAddress, 100, 0);
+    getCoins(fromAddress, toAddress) {
+        let fileContent;
 
+        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {
+            if (file === `${fromAddress}.json`) {
+                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));
+            }
+        });
+
+        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');
+        const transaction = new Transaction(fromAddress, toAddress, 100, keyPair);
         this.pendingTransactions.push(transaction);
     }
 }
