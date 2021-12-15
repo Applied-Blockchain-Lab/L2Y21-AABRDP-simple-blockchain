@@ -1,5 +1,6 @@
 const EC = require('elliptic').ec;
 const { generateHash } = require('../utils/crypto-util');
+const { REWARD_TX } = require('../../config/network-parameters');
 
 const ec = new EC('secp256k1');
 
@@ -32,7 +33,7 @@ class Transaction {
      */
     sign(signingKeyPair) {
         if (signingKeyPair === 0) { return 0; }
-        if (signingKeyPair.getPublic('hex') !== this.fromAddress) { return ('You cannot sign transaction for other wallets!'); }
+        if (signingKeyPair.getPublic('hex') !== this.fromAddress) { return 0; }
 
         const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();
         return signingKeyPair.sign(signData).toDER('hex');
@@ -44,7 +45,10 @@ class Transaction {
      * @returns boolean
      */
     isValid() {
+        if (this.fromAddress === REWARD_TX) return true;
+
         if (!this.signature || this.signature.length === 0) return false;
+        if (this.amount === 0) return false;
 
         const keyPair = ec.keyFromPublic(this.fromAddress, 'hex');
         const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();

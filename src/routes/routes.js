@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const path = require('path');
@@ -12,7 +11,6 @@ const app = require('../../app');
 
 const router = express.Router();
 
-router.use(bodyParser.json());
 router.use('/api-docs', swaggerUi.serve);
 
 router.get('/', (req, res) => {
@@ -33,7 +31,7 @@ router.get('/generate', (req, res) => {
     });
 });
 
-router.get('/blocks/last', (req, res) => {
+router.get('/blocks/latest', (req, res) => {
     res.json(app.blockchain.getLatestBlock());
 });
 
