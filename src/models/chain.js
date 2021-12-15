@@ -57,11 +57,18 @@ class Chain {
     }
 
     replaceChain(newChain) {
-        if (newChain.length <= this.chain.length) return 'Received chain in not longer than the current chain.';
+        if (newChain.length <= this.chain.length) {
+            console.log('Received chain is not longer than the current chain.');
+            return 'Received chain is not longer than the current chain.';
+        }
 
-        if (!this.isValidChain(newChain)) return 'Received chain is not valid.';
+        if (!this.isValidChain(newChain)) {
+            console.log('Received chain is not valid.');
+            return 'Received chain is not valid.';
+        }
 
         this.chain = newChain;
+        console.log('Replacing with the new chain!');
         return 'Replacing with the new chain!';
     }
 
@@ -122,6 +129,7 @@ class Chain {
         const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');
         const transaction = new Transaction(fromAddress, toAddress, 100, keyPair);
         this.pendingTransactions.push(transaction);
+        return transaction;
     }
 }
 module.exports = Chain;

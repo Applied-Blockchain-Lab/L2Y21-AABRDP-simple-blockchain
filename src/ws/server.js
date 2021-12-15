@@ -1,21 +1,29 @@
 const Websocket = require('ws');
 
 const { WS_PORT, PEERS } = require('../../config/ports-folders');
+const ip = require('../utils/get-public-ip');
+
+const P2P_PORT = process.env.WS_PORT || WS_PORT;
 
 const MESSAGE_TYPES = {
     chain: 'CHAIN',
     transaction: 'TRANSACTION',
     clear_transactions: 'CLEAR_TRANSACTIONS',
+    peer: 'PEER',
 };
+
+let server;
 
 class WsServer {
     constructor(blockchain) {
         this.blockchain = blockchain;
         this.sockets = [];
+        this.connectedPeers = [];
     }
 
     listen() {
-        const server = new Websocket.Server({ port: WS_PORT });
+        server = new Websocket.Server({ port: P2P_PORT });
+
         server.on('connection', (socket) => this.connectSocket(socket));
 
         this.connectToPeers();
@@ -30,14 +38,33 @@ class WsServer {
         this.messageHandler(socket);
 
         this.sendChain(socket);
+
+        this.broadcastPeers(PEERS);
     }
 
     connectToPeers() {
         PEERS.forEach((peer) => {
-            const socket = new Websocket(peer);
+            // Check if peer exists - do not connect to peer's own address
+            if (peer !== `ws://localhost:${P2P_PORT}`) {
+                this.addAddressToPeers();
 
-            socket.on('open', () => this.connectSocket(socket));
+                this.connectedPeers.push(peer);
+
+                const socket = new Websocket(peer);
+
+                socket.on('open', () => this.connectSocket(socket));
+            }
         });
+    }
+
+    addAddressToPeers() {
+        PEERS.push(this.getPeerAddress());
+    }
+
+    getPeerAddress() {
+        // Get peer with public ip
+        // return `ws://${await ip.getPublicIp()}:${server.address().port}`
+        return `ws://localhost:${server.address().port}`;
     }
 
     messageHandler(socket) {
@@ -53,6 +80,10 @@ class WsServer {
                 break;
             case MESSAGE_TYPES.clear_transactions:
                 this.blockchain.clearPendingTransactions();
+                break;
+            case MESSAGE_TYPES.peer:
+                this.addNotExistingPeer(data.peers);
+                this.connectToNewPeers();
                 break;
             default:
                 break;
@@ -74,6 +105,13 @@ class WsServer {
         }));
     }
 
+    sendPeers(socket) {
+        socket.send(JSON.stringify({
+            type: MESSAGE_TYPES.peer,
+            peers: PEERS,
+        }));
+    }
+
     synchronizeChains() {
         this.sockets.forEach((socket) => this.sendChain(socket));
     }
@@ -86,6 +124,41 @@ class WsServer {
         this.sockets.forEach((socket) => socket.send(JSON.stringify({
             type: MESSAGE_TYPES.clear_transactions,
         })));
+    }
+
+    broadcastPeers(peers) {
+        this.sockets.forEach((socket) => socket.send(JSON.stringify({
+            type: MESSAGE_TYPES.peer,
+            peers,
+        })));
+    }
+
+    addNotExistingPeer(peers) {
+        peers.forEach((peer) => {
+            if (!PEERS.includes(peer)) {
+                PEERS.push(peer);
+            }
+        });
+    }
+
+    connectToNewPeers() {
+        let difference = [];
+        let actualArray = [];
+
+        if (this.connectedPeers.length > 0) {
+            difference = PEERS.filter((x) => !this.connectedPeers.includes(x));
+            actualArray = difference.filter((x) => x !== this.getPeerAddress());
+        }
+
+        if (actualArray.length > 0) {
+            actualArray.forEach((peer) => {
+                this.connectedPeers.push(peer);
+
+                const socket = new Websocket(peer);
+
+                socket.on('open', () => this.connectSocket(socket));
+            });
+        }
     }
 }
 
