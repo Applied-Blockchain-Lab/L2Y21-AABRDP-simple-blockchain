@@ -1,22 +1,65 @@
-const Websocket = require('ws');
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/ws/server.js | l2y21-aabrdp-simple-blockchain</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
 
-const { WS_PORT, PEERS } = require('../../config/ports-folders');
-const ip = require('../utils/get-public-ip');
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#models">models</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/block.js~Block.html">Block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/chain.js~Chain.html">Chain</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/miner.js~Miner.html">Miner</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/transaction.js~Transaction.html">Transaction</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#routes">routes</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-router">router</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getPublicIp">getPublicIp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#ws">ws</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ws/server.js~WsServer.html">WsServer</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/ws/server.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const Websocket = require(&apos;ws&apos;);
+
+const { WS_PORT, PEERS } = require(&apos;../../config/ports-folders&apos;);
+const ip = require(&apos;../utils/get-public-ip&apos;);
 
 const P2P_PORT = process.env.WS_PORT || WS_PORT;
 
 const MESSAGE_TYPES = {
-    chain: 'CHAIN',
-    transaction: 'TRANSACTION',
-    clear_transactions: 'CLEAR_TRANSACTIONS',
-    peer: 'PEER',
+    chain: &apos;CHAIN&apos;,
+    transaction: &apos;TRANSACTION&apos;,
+    clear_transactions: &apos;CLEAR_TRANSACTIONS&apos;,
+    peer: &apos;PEER&apos;,
 };
 
 let server;
 
 /**
  * WsServer class
- * @example <caption>Create a new websocket object</caption>
+ * @example &lt;caption&gt;Create a new websocket object&lt;/caption&gt;
  * let blockchain = new Blockchain();
  * let wsServer = new WsServer(blockchain);
  */
@@ -43,7 +86,7 @@ class WsServer {
     listen() {
         server = new Websocket.Server({ port: P2P_PORT });
 
-        server.on('connection', (socket) => this.connectSocket(socket));
+        server.on(&apos;connection&apos;, (socket) =&gt; this.connectSocket(socket));
 
         this.connectToPeers();
 
@@ -60,7 +103,7 @@ class WsServer {
      */
     connectSocket(socket) {
         this.sockets.push(socket);
-        console.log('Socket connected');
+        console.log(&apos;Socket connected&apos;);
 
         this.messageHandler(socket);
 
@@ -73,8 +116,8 @@ class WsServer {
      * Opens Websocket client connection to peers in peers list, excluding own address.
      */
     connectToPeers() {
-        PEERS.forEach((peer) => {
-            // Check if peer exists - do not connect to peer's own address
+        PEERS.forEach((peer) =&gt; {
+            // Check if peer exists - do not connect to peer&apos;s own address
             if (peer !== `ws://localhost:${P2P_PORT}`) {
                 this.addAddressToPeers();
 
@@ -82,7 +125,7 @@ class WsServer {
 
                 const socket = new Websocket(peer);
 
-                socket.on('open', () => this.connectSocket(socket));
+                socket.on(&apos;open&apos;, () =&gt; this.connectSocket(socket));
             }
         });
     }
@@ -109,7 +152,7 @@ class WsServer {
      * @param {object} socket - Socket object, returned by creating websocket client
      */
     messageHandler(socket) {
-        socket.on('message', (message) => {
+        socket.on(&apos;message&apos;, (message) =&gt; {
             const data = JSON.parse(message);
 
             switch (data.type) {
@@ -142,7 +185,7 @@ class WsServer {
             chain: this.blockchain.chain,
         }));
     }
-
+    
     /**
      * Sends message to socket - transaction object
      * @param {object} socket - Socket object, returned by creating websocket client
@@ -170,7 +213,7 @@ class WsServer {
      * Sends message to every socket - current chain
      */
     synchronizeChains() {
-        this.sockets.forEach((socket) => this.sendChain(socket));
+        this.sockets.forEach((socket) =&gt; this.sendChain(socket));
     }
 
     /**
@@ -178,14 +221,14 @@ class WsServer {
      * @param {object} transaction - Transaction class object
      */
     broadcastTransaction(transaction) {
-        this.sockets.forEach((socket) => this.sendTransaction(socket, transaction));
+        this.sockets.forEach((socket) =&gt; this.sendTransaction(socket, transaction));
     }
 
     /**
-     * Sends message to every socket - clears every socket's pending transactions list
+     * Sends message to every socket - clears every socket&apos;s pending transactions list
      */
     broadcastClearTransactions() {
-        this.sockets.forEach((socket) => socket.send(JSON.stringify({
+        this.sockets.forEach((socket) =&gt; socket.send(JSON.stringify({
             type: MESSAGE_TYPES.clear_transactions,
         })));
     }
@@ -195,7 +238,7 @@ class WsServer {
      * @param {string[]} peers - List of addresses of peers
      */
     broadcastPeers(peers) {
-        this.sockets.forEach((socket) => socket.send(JSON.stringify({
+        this.sockets.forEach((socket) =&gt; socket.send(JSON.stringify({
             type: MESSAGE_TYPES.peer,
             peers,
         })));
@@ -206,7 +249,7 @@ class WsServer {
      * @param {string[]} peers - List of addresses of peers
      */
     addNotExistingPeer(peers) {
-        peers.forEach((peer) => {
+        peers.forEach((peer) =&gt; {
             if (!PEERS.includes(peer)) {
                 PEERS.push(peer);
             }
@@ -220,21 +263,38 @@ class WsServer {
         let difference = [];
         let actualArray = [];
 
-        if (this.connectedPeers.length > 0) {
-            difference = PEERS.filter((x) => !this.connectedPeers.includes(x));
-            actualArray = difference.filter((x) => x !== this.getPeerAddress());
+        if (this.connectedPeers.length &gt; 0) {
+            difference = PEERS.filter((x) =&gt; !this.connectedPeers.includes(x));
+            actualArray = difference.filter((x) =&gt; x !== this.getPeerAddress());
         }
 
-        if (actualArray.length > 0) {
-            actualArray.forEach((peer) => {
+        if (actualArray.length &gt; 0) {
+            actualArray.forEach((peer) =&gt; {
                 this.connectedPeers.push(peer);
 
                 const socket = new Websocket(peer);
 
-                socket.on('open', () => this.connectSocket(socket));
+                socket.on(&apos;open&apos;, () =&gt; this.connectSocket(socket));
             });
         }
     }
 }
 
 module.exports = WsServer;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

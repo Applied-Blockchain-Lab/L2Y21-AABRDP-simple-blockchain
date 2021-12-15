@@ -36,6 +36,9 @@
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
+    "esdoc": "^1.1.0",
+    "esdoc-node": "^1.0.5",
+    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",

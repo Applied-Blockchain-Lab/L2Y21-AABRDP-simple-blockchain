@@ -8,6 +8,7 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
+    ignorePatterns: ['docs/'],
     rules: {
         'linebreak-style': 0,
         'no-plusplus': 0,
