@@ -15,7 +15,7 @@ const miner = new Miner(blockchain, wsServer);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
-app.listen(HTTP_PORT, () => {
+app.listen(process.env.HTTP_PORT || HTTP_PORT, () => {
     console.log(`HTTP server listening at http://localhost:${HTTP_PORT}`);
 });
 

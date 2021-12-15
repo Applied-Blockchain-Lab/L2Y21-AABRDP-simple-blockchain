@@ -1,0 +1,2597 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/models/block.js",
+    "content": "const { generateHash } = require('../utils/crypto-util');\r\nconst { DIFFICULTY, CREATION_TIME } = require('../../config/network-parameters');\r\n\r\n/**\r\n * Block class\r\n * @example <caption>Create a new block object</caption>\r\n * let block = new Block(timestamp, parentHash, hash, nonce, difficulty, transaction);\r\n */\r\nclass Block {\r\n    /**\r\n     * Block constructor\r\n     * @param {string} timestamp - Block creation time in seconds after Unix Epoch\r\n     * @param {string} parentHash - SHA256 hash of the previous block\r\n     * @param {string} hash - SHA256 hash of the current block\r\n     * @param {number} nonce - Counter for PoW algorithm\r\n     * @param {number} difficulty - Target number for current block (count of leading zeros)\r\n     * @param {object[]} transactions - List of transactions for the current block\r\n     */\r\n    constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {\r\n        this.timestamp = timestamp;\r\n        this.parentHash = parentHash;\r\n        this.hash = hash;\r\n        this.nonce = nonce;\r\n        this.difficulty = difficulty || DIFFICULTY;\r\n        this.transactions = transactions;\r\n    }\r\n\r\n    /**\r\n     * Method to create genesis block with default parameters\r\n     * @returns {object} New block object\r\n     */\r\n    static genesisBlock() {\r\n        return new Block('000000', '-', '111-111', 0, DIFFICULTY, []);\r\n    }\r\n    \r\n    /**\r\n     * Method to mine a new block. Loop stops when hash with current difficulty is found.\r\n     * @param {object} lastBlock - Block class object\r\n     * @param {object[]} transactions - Transactions which will be included in current block\r\n     * @returns New block object with calculated parameters - Block class object\r\n     */\r\n    static mineBlock(lastBlock, transactions) {\r\n        let nonce = 0;\r\n        let hash;\r\n        let timestamp;\r\n        const parentHash = lastBlock.hash;\r\n        let { difficulty } = lastBlock;\r\n\r\n        do {\r\n            nonce++;\r\n            timestamp = Date.now();\r\n            difficulty = Block.adjustDifficulty(lastBlock, timestamp);\r\n            hash = generateHash(timestamp + parentHash + nonce + difficulty + transactions);\r\n        } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));\r\n\r\n        return new Block(timestamp, parentHash, hash, nonce, difficulty, transactions);\r\n    }\r\n\r\n    /**\r\n     * Method for generating hash from existing block - helper to validate chain\r\n     * @param {object} block - Block class object\r\n     * @returns Hash from block parameter attributes - string\r\n     */\r\n    static blockHash(block) {\r\n        const {\r\n            timestamp, parentHash, nonce, difficulty, transactions,\r\n        } = block;\r\n\r\n        return generateHash(timestamp + parentHash + nonce + difficulty + transactions);\r\n    }\r\n\r\n    /**\r\n     * Method to adjust difficulty.\r\n     * Sets difficulty according to last block's timestamp and CREATION_TIME from config file.\r\n     * @param {object} lastBlock - Block class object\r\n     * @param {string} currentTime - Time in seconds\r\n     * @returns Adjusted difficulty - string\r\n     */\r\n    static adjustDifficulty(lastBlock, currentTime) {\r\n        let { difficulty } = lastBlock;\r\n        difficulty = lastBlock.timestamp + CREATION_TIME > currentTime\r\n            ? difficulty + 1 : difficulty - 1;\r\n\r\n        return difficulty;\r\n    }\r\n\r\n    /**\r\n     * Method to check if transactions in current block are valid, using isValid helper function\r\n     * @returns boolean\r\n     */\r\n    hasValidTransactions() {\r\n        for (let i = 0; i < this.transactions.length; i++) {\r\n            if (!this.transactions[i].isValid()) {\r\n                return false;\r\n            }\r\n        }\r\n        return true;\r\n    }\r\n\r\n    /**\r\n     * Method for logging Block class object\r\n     * @returns string\r\n     */\r\n    toString() {\r\n        return `Block -\r\n            Timestamp    : ${this.timestamp}\r\n            Parent hash  : ${this.parentHash}\r\n            Hash         : ${this.hash}\r\n            Nonce        : ${this.nonce}\r\n            Difficulty   : ${this.difficulty}\r\n            Transactions : ${this.transactions}\r\n        `;\r\n    }\r\n}\r\nmodule.exports = Block;\r\n",
+    "static": true,
+    "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/block.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "generateHash",
+    "memberof": "src/models/block.js",
+    "static": true,
+    "longname": "src/models/block.js~generateHash",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/block.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "variable",
+    "name": "DIFFICULTY",
+    "memberof": "src/models/block.js",
+    "static": true,
+    "longname": "src/models/block.js~DIFFICULTY",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/block.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "class",
+    "name": "Block",
+    "memberof": "src/models/block.js",
+    "static": true,
+    "longname": "src/models/block.js~Block",
+    "access": "public",
+    "export": true,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/block.js",
+    "importStyle": "Block",
+    "description": "Block class",
+    "examples": [
+      "<caption>Create a new block object</caption>\nlet block = new Block(timestamp, parentHash, hash, nonce, difficulty, transaction);"
+    ],
+    "lineNumber": 11,
+    "interface": false
+  },
+  {
+    "__docId__": 52,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/models/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/block.js~Block#constructor",
+    "access": "public",
+    "description": "Block constructor",
+    "lineNumber": 21,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "timestamp",
+        "description": "Block creation time in seconds after Unix Epoch"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "parentHash",
+        "description": "SHA256 hash of the previous block"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "hash",
+        "description": "SHA256 hash of the current block"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "nonce",
+        "description": "Counter for PoW algorithm"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "difficulty",
+        "description": "Target number for current block (count of leading zeros)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "transactions",
+        "description": "List of transactions for the current block"
+      }
+    ]
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "timestamp",
+    "memberof": "src/models/block.js~Block",
+    "static": false,
+    "longname": "src/models/block.js~Block#timestamp",
+    "access": "public",
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "name": "parentHash",
+    "memberof": "src/models/block.js~Block",
+    "static": false,
+    "longname": "src/models/block.js~Block#parentHash",
+    "access": "public",
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "name": "hash",
+    "memberof": "src/models/block.js~Block",
+    "static": false,
+    "longname": "src/models/block.js~Block#hash",
+    "access": "public",
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "name": "nonce",
+    "memberof": "src/models/block.js~Block",
+    "static": false,
+    "longname": "src/models/block.js~Block#nonce",
+    "access": "public",
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "member",
+    "name": "difficulty",
+    "memberof": "src/models/block.js~Block",
+    "static": false,
+    "longname": "src/models/block.js~Block#difficulty",
+    "access": "public",
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "name": "transactions",
+    "memberof": "src/models/block.js~Block",
+    "static": false,
+    "longname": "src/models/block.js~Block#transactions",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "method",
+    "name": "genesisBlock",
+    "memberof": "src/models/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/models/block.js~Block.genesisBlock",
+    "access": "public",
+    "description": "Method to create genesis block with default parameters",
+    "lineNumber": 34,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{object} New block object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "New block object"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 60,
+    "kind": "method",
+    "name": "mineBlock",
+    "memberof": "src/models/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/models/block.js~Block.mineBlock",
+    "access": "public",
+    "description": "Method to mine a new block. Loop stops when hash with current difficulty is found.",
+    "lineNumber": 44,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "New block object with calculated parameters - Block class object"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "lastBlock",
+        "description": "Block class object"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "transactions",
+        "description": "Transactions which will be included in current block"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "New block object with calculated parameters - Block class object"
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "method",
+    "name": "blockHash",
+    "memberof": "src/models/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/models/block.js~Block.blockHash",
+    "access": "public",
+    "description": "Method for generating hash from existing block - helper to validate chain",
+    "lineNumber": 66,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "Hash from block parameter attributes - string"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "block",
+        "description": "Block class object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "Hash from block parameter attributes - string"
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "adjustDifficulty",
+    "memberof": "src/models/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/models/block.js~Block.adjustDifficulty",
+    "access": "public",
+    "description": "Method to adjust difficulty.\nSets difficulty according to last block's timestamp and CREATION_TIME from config file.",
+    "lineNumber": 81,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "Adjusted difficulty - string"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "lastBlock",
+        "description": "Block class object"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "currentTime",
+        "description": "Time in seconds"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "Adjusted difficulty - string"
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "method",
+    "name": "hasValidTransactions",
+    "memberof": "src/models/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/block.js~Block#hasValidTransactions",
+    "access": "public",
+    "description": "Method to check if transactions in current block are valid, using isValid helper function",
+    "lineNumber": 93,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "boolean"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "boolean"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 64,
+    "kind": "method",
+    "name": "toString",
+    "memberof": "src/models/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/block.js~Block#toString",
+    "access": "public",
+    "description": "Method for logging Block class object",
+    "lineNumber": 106,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "string"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "string"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 65,
+    "kind": "file",
+    "name": "src/models/chain.js",
+    "content": "const fs = require('fs');\r\nconst path = require('path');\r\nconst EC = require('elliptic').ec;\r\n\r\nconst Block = require('./block');\r\nconst Transaction = require('./transaction');\r\nconst { BLOCK_SIZE } = require('../../config/network-parameters');\r\nconst { KEY_PAIRS_FOLDER } = require('../../config/ports-folders');\r\n\r\nconst ec = new EC('secp256k1');\r\n\r\n/**\r\n * Chain class\r\n * @example <caption>Create a new blockchain object</caption>\r\n * let blockchain = new Chain();\r\n */\r\nclass Chain {\r\n    constructor() {\r\n        /**\r\n         * List of Block class objects.\r\n         * @type {object[]} \r\n         */\r\n        this.chain = [Block.genesisBlock()];\r\n        /**\r\n         * List of Transaction class objects.\r\n         * @type {object[]}\r\n         */\r\n        this.pendingTransactions = [];\r\n    }\r\n\r\n    /**\r\n     * Method to add transaction in pendingTransactions array.\r\n     * Has few checks for validation.\r\n     * Reads public and private keys from .json file in keypairs directory.\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @param {number} amount - Amount to send\r\n     * @returns Transaction class object\r\n     */\r\n    addTransaction(fromAddress, toAddress, amount) {\r\n        let fileContent;\r\n\r\n        if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }\r\n\r\n        if (amount === 0) {\r\n            return console.log('Amount can\\'t be 0!');\r\n        }\r\n\r\n        if (amount > this.getBalanceOfAddress(fromAddress)) {\r\n            return console.log(`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);\r\n        }\r\n\r\n        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {\r\n            if (file === `${fromAddress}.json`) {\r\n                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));\r\n            }\r\n        });\r\n\r\n        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');\r\n\r\n        const transaction = new Transaction(fromAddress, toAddress, amount, keyPair);\r\n\r\n        if (!transaction.isValid()) return ('Cannot add invalid transaction!');\r\n\r\n        this.pendingTransactions.push(transaction);\r\n\r\n        return transaction;\r\n    }\r\n\r\n    /**\r\n     * Method to add Block class object to chain member in Chain class.\r\n     * @returns Block class object\r\n     */\r\n    addBlock() {\r\n        if (this.pendingTransactions.length <= 1) {\r\n            return console.log('No pendingTransactions - cannot mine new block!');\r\n        }\r\n\r\n        const newBlock = Block.mineBlock(this.getLatestBlock(), this.getFromPendingTransactions());\r\n        this.chain.push(newBlock);\r\n\r\n        return newBlock;\r\n    }\r\n\r\n    /**\r\n     * Method to replace current Chain class member with another Chain class member. \r\n     * It is used for broadcasting blockchain to other peers.\r\n     * @param {object[]} newChain - Chain class object\r\n     * @returns string\r\n     */\r\n    replaceChain(newChain) {\r\n        if (newChain.length <= this.chain.length) {\r\n            console.log('Received chain is not longer than the current chain.');\r\n            return 'Received chain is not longer than the current chain.';\r\n        }\r\n\r\n        if (!this.isValidChain(newChain)) {\r\n            console.log('Received chain is not valid.');\r\n            return 'Received chain is not valid.';\r\n        }\r\n\r\n        this.chain = newChain;\r\n        console.log('Replacing with the new chain!');\r\n        return 'Replacing with the new chain!';\r\n    }\r\n\r\n    /**\r\n     * Method to check if chain is valid.\r\n     * Checks are: \r\n     * - if chain list starts with genesis block;\r\n     * - if current block previous hash and previous block hash are matching;\r\n     * - if current block has valid transactions.\r\n     * @returns boolean\r\n     */\r\n    isValidChain() {\r\n        if (JSON.stringify(this.chain[0]) !== JSON.stringify(Block.genesisBlock())) return false;\r\n\r\n        for (let i = 1; i < this.chain.length; i++) {\r\n            const currentBlock = this.chain[i];\r\n            const previousBlock = this.chain[i - 1];\r\n\r\n            if (currentBlock.parentHash !== previousBlock.hash\r\n                || currentBlock.hash !== Block.blockHash(currentBlock)) return false;\r\n\r\n            if (!currentBlock.hasValidTransactions()) return false;\r\n        }\r\n        return true;\r\n    }\r\n\r\n    /**\r\n     * Clears pending transactions list in Chain class object.\r\n     */\r\n    clearPendingTransactions() {\r\n        this.pendingTransactions = [];\r\n    }\r\n\r\n    /**\r\n     * Returns last block from chain list.\r\n     * @returns object\r\n     */\r\n    getLatestBlock() {\r\n        return this.chain[this.chain.length - 1];\r\n    }\r\n\r\n    /**\r\n     * Cuts pending transaction list to BLOCK_SIZE, declared in config file.\r\n     * @returns Transaction class object array\r\n     */\r\n    getFromPendingTransactions() {\r\n        return this.pendingTransactions[BLOCK_SIZE - 1]\r\n            ? this.pendingTransactions.splice(0, BLOCK_SIZE)\r\n            : this.pendingTransactions.splice(0, this.pendingTransactions.length);\r\n    }\r\n\r\n    /**\r\n     * Returns balance of given address.\r\n     * Subtracts, if address is sender and adds, if address is receiver.\r\n     * @param {string} address - Public key in hex string generated by elliptic (secp256k1) library\r\n     * @returns number\r\n     */\r\n    getBalanceOfAddress(address) {\r\n        let balance = 0;\r\n\r\n        this.chain.forEach((block) => {\r\n            block.transactions.forEach((transaction) => {\r\n                if (transaction.fromAddress === address) {\r\n                    balance -= transaction.amount;\r\n                }\r\n                if (transaction.toAddress === address) {\r\n                    balance += transaction.amount;\r\n                }\r\n            });\r\n        });\r\n        return balance;\r\n    }\r\n\r\n    /**\r\n     * Sends coins to given address from faucet address.\r\n     * Faucet address .json file must be in keypairs directory.\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @returns transaction object\r\n     */\r\n    getCoins(fromAddress, toAddress) {\r\n        let fileContent;\r\n\r\n        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {\r\n            if (file === `${fromAddress}.json`) {\r\n                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));\r\n            }\r\n        });\r\n\r\n        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');\r\n        const transaction = new Transaction(fromAddress, toAddress, 100, keyPair);\r\n        this.pendingTransactions.push(transaction);\r\n        return transaction;\r\n    }\r\n}\r\nmodule.exports = Chain;\r\n",
+    "static": true,
+    "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/chain.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 66,
+    "kind": "variable",
+    "name": "BLOCK_SIZE",
+    "memberof": "src/models/chain.js",
+    "static": true,
+    "longname": "src/models/chain.js~BLOCK_SIZE",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/chain.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "variable",
+    "name": "KEY_PAIRS_FOLDER",
+    "memberof": "src/models/chain.js",
+    "static": true,
+    "longname": "src/models/chain.js~KEY_PAIRS_FOLDER",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/chain.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "variable",
+    "name": "ec",
+    "memberof": "src/models/chain.js",
+    "static": true,
+    "longname": "src/models/chain.js~ec",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/chain.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "class",
+    "name": "Chain",
+    "memberof": "src/models/chain.js",
+    "static": true,
+    "longname": "src/models/chain.js~Chain",
+    "access": "public",
+    "export": true,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/chain.js",
+    "importStyle": "Chain",
+    "description": "Chain class",
+    "examples": [
+      "<caption>Create a new blockchain object</caption>\nlet blockchain = new Chain();"
+    ],
+    "lineNumber": 19,
+    "interface": false
+  },
+  {
+    "__docId__": 70,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "member",
+    "name": "chain",
+    "memberof": "src/models/chain.js~Chain",
+    "static": false,
+    "longname": "src/models/chain.js~Chain#chain",
+    "access": "public",
+    "description": "List of Block class objects.",
+    "lineNumber": 25,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "member",
+    "name": "pendingTransactions",
+    "memberof": "src/models/chain.js~Chain",
+    "static": false,
+    "longname": "src/models/chain.js~Chain#pendingTransactions",
+    "access": "public",
+    "description": "List of Transaction class objects.",
+    "lineNumber": 30,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "addTransaction",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#addTransaction",
+    "access": "public",
+    "description": "Method to add transaction in pendingTransactions array.\nHas few checks for validation.\nReads public and private keys from .json file in keypairs directory.",
+    "lineNumber": 42,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "Transaction class object"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "fromAddress",
+        "description": "Sender public key in hex string (secp256k1)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "toAddress",
+        "description": "Receiver public key in hex string (secp256k1)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "amount",
+        "description": "Amount to send"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "Transaction class object"
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "addBlock",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#addBlock",
+    "access": "public",
+    "description": "Method to add Block class object to chain member in Chain class.",
+    "lineNumber": 76,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "Block class object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "Block class object"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "replaceChain",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#replaceChain",
+    "access": "public",
+    "description": "Method to replace current Chain class member with another Chain class member. \nIt is used for broadcasting blockchain to other peers.",
+    "lineNumber": 93,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "string"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "newChain",
+        "description": "Chain class object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "string"
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "name": "isValidChain",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#isValidChain",
+    "access": "public",
+    "description": "Method to check if chain is valid.\nChecks are: \n- if chain list starts with genesis block;\n- if current block previous hash and previous block hash are matching;\n- if current block has valid transactions.",
+    "lineNumber": 117,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "boolean"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "boolean"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "clearPendingTransactions",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#clearPendingTransactions",
+    "access": "public",
+    "description": "Clears pending transactions list in Chain class object.",
+    "lineNumber": 135,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "getLatestBlock",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#getLatestBlock",
+    "access": "public",
+    "description": "Returns last block from chain list.",
+    "lineNumber": 143,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "object"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 81,
+    "kind": "method",
+    "name": "getFromPendingTransactions",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#getFromPendingTransactions",
+    "access": "public",
+    "description": "Cuts pending transaction list to BLOCK_SIZE, declared in config file.",
+    "lineNumber": 151,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "Transaction class object array"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "Transaction class object array"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "getBalanceOfAddress",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#getBalanceOfAddress",
+    "access": "public",
+    "description": "Returns balance of given address.\nSubtracts, if address is sender and adds, if address is receiver.",
+    "lineNumber": 163,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "number"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "address",
+        "description": "Public key in hex string generated by elliptic (secp256k1) library"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "number"
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "method",
+    "name": "getCoins",
+    "memberof": "src/models/chain.js~Chain",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/chain.js~Chain#getCoins",
+    "access": "public",
+    "description": "Sends coins to given address from faucet address.\nFaucet address .json file must be in keypairs directory.",
+    "lineNumber": 186,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "transaction object"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "fromAddress",
+        "description": "Sender public key in hex string (secp256k1)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "toAddress",
+        "description": "Receiver public key in hex string (secp256k1)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "transaction object"
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "file",
+    "name": "src/models/miner.js",
+    "content": "const Transaction = require('./transaction');\r\n\r\nconst { MINING_REWARD } = require('../../config/network-parameters');\r\n\r\n/**\r\n * Miner class\r\n * @example <caption>Create a new miner object</caption>\r\n * let blockchain = new Chain();\r\n * let wsServer = new wsServer(...params);\r\n * let miner = new Miner(blockchain, wsServer);\r\n */\r\nclass Miner {\r\n    /**\r\n     * Miner constructor\r\n     * @param {object} blockchain - Blockchain class object.\r\n     * @param {object} wsServer - Websocket class object.\r\n     */\r\n    constructor(blockchain, wsServer) {\r\n        this.blockchain = blockchain;\r\n        this.wsServer = wsServer;\r\n    }\r\n\r\n    /**\r\n     * Method to mine new block in blockchain.\r\n     * Uses Websocket to synchronize chains and to clear pending transactions list.\r\n     * @param {string} minerAddress - Public key in hex string generated by elliptic (secp256k1) library\r\n     * @returns Block class object\r\n     */\r\n    mine(minerAddress) {\r\n        const coinbaseTransaction = new Transaction(0, minerAddress, MINING_REWARD, 0);\r\n\r\n        this.blockchain.pendingTransactions.unshift(coinbaseTransaction);\r\n\r\n        const newBlock = this.blockchain.addBlock();\r\n\r\n        this.wsServer.synchronizeChains();\r\n\r\n        this.blockchain.clearPendingTransactions();\r\n\r\n        this.wsServer.broadcastClearTransactions();\r\n\r\n        return newBlock;\r\n    }\r\n}\r\n\r\nmodule.exports = Miner;\r\n",
+    "static": true,
+    "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/miner.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 85,
+    "kind": "variable",
+    "name": "MINING_REWARD",
+    "memberof": "src/models/miner.js",
+    "static": true,
+    "longname": "src/models/miner.js~MINING_REWARD",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/miner.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "class",
+    "name": "Miner",
+    "memberof": "src/models/miner.js",
+    "static": true,
+    "longname": "src/models/miner.js~Miner",
+    "access": "public",
+    "export": true,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/miner.js",
+    "importStyle": "Miner",
+    "description": "Miner class",
+    "examples": [
+      "<caption>Create a new miner object</caption>\nlet blockchain = new Chain();\nlet wsServer = new wsServer(...params);\nlet miner = new Miner(blockchain, wsServer);"
+    ],
+    "lineNumber": 13,
+    "interface": false
+  },
+  {
+    "__docId__": 87,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/models/miner.js~Miner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/miner.js~Miner#constructor",
+    "access": "public",
+    "description": "Miner constructor",
+    "lineNumber": 19,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "blockchain",
+        "description": "Blockchain class object."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "wsServer",
+        "description": "Websocket class object."
+      }
+    ]
+  },
+  {
+    "__docId__": 88,
+    "kind": "member",
+    "name": "blockchain",
+    "memberof": "src/models/miner.js~Miner",
+    "static": false,
+    "longname": "src/models/miner.js~Miner#blockchain",
+    "access": "public",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "member",
+    "name": "wsServer",
+    "memberof": "src/models/miner.js~Miner",
+    "static": false,
+    "longname": "src/models/miner.js~Miner#wsServer",
+    "access": "public",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "method",
+    "name": "mine",
+    "memberof": "src/models/miner.js~Miner",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/miner.js~Miner#mine",
+    "access": "public",
+    "description": "Method to mine new block in blockchain.\nUses Websocket to synchronize chains and to clear pending transactions list.",
+    "lineNumber": 30,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "Block class object"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "minerAddress",
+        "description": "Public key in hex string generated by elliptic (secp256k1) library"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "Block class object"
+    }
+  },
+  {
+    "__docId__": 91,
+    "kind": "file",
+    "name": "src/models/transaction.js",
+    "content": "const EC = require('elliptic').ec;\r\nconst { generateHash } = require('../utils/crypto-util');\r\n\r\nconst ec = new EC('secp256k1');\r\n\r\n/**\r\n * Transaction class\r\n * @example <caption>Create a new transaction object</caption>\r\n * let transaction = new Transaction(sender public key, receiver public key, amount);\r\n */\r\nclass Transaction {\r\n    /**\r\n     * Transaction constructor\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @param {number} amount - Amount to send\r\n     * @param {object} keyPair - Private and public key object, generated with elliptic(secp256k1) library\r\n     */\r\n    constructor(fromAddress, toAddress, amount, keyPair) {\r\n        this.timestamp = Date.now();\r\n        this.fromAddress = fromAddress;\r\n        this.toAddress = toAddress;\r\n        this.amount = amount;\r\n        this.signature = this.sign(keyPair);\r\n        this.hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount + this.signature);\r\n    }\r\n\r\n    /**\r\n     * Method for creating a digital signature.\r\n     * @param {object} signingKeyPair - Private and public key object\r\n     * @returns Encoded hex string\r\n     */\r\n    sign(signingKeyPair) {\r\n        if (signingKeyPair === 0) { return 0; }\r\n        if (signingKeyPair.getPublic('hex') !== this.fromAddress) { return ('You cannot sign transaction for other wallets!'); }\r\n\r\n        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();\r\n        return signingKeyPair.sign(signData).toDER('hex');\r\n    }\r\n\r\n    /**\r\n     * Helper method to check if transaction object is valid.\r\n     * Verifies by using public key.\r\n     * @returns boolean\r\n     */\r\n    isValid() {\r\n        if (!this.signature || this.signature.length === 0) return false;\r\n\r\n        const keyPair = ec.keyFromPublic(this.fromAddress, 'hex');\r\n        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();\r\n        return keyPair.verify(signData, this.signature);\r\n    }\r\n}\r\nmodule.exports = Transaction;\r\n",
+    "static": true,
+    "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/transaction.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 92,
+    "kind": "variable",
+    "name": "generateHash",
+    "memberof": "src/models/transaction.js",
+    "static": true,
+    "longname": "src/models/transaction.js~generateHash",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/transaction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "variable",
+    "name": "ec",
+    "memberof": "src/models/transaction.js",
+    "static": true,
+    "longname": "src/models/transaction.js~ec",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/transaction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "class",
+    "name": "Transaction",
+    "memberof": "src/models/transaction.js",
+    "static": true,
+    "longname": "src/models/transaction.js~Transaction",
+    "access": "public",
+    "export": true,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/transaction.js",
+    "importStyle": "Transaction",
+    "description": "Transaction class",
+    "examples": [
+      "<caption>Create a new transaction object</caption>\nlet transaction = new Transaction(sender public key, receiver public key, amount);"
+    ],
+    "lineNumber": 12,
+    "interface": false
+  },
+  {
+    "__docId__": 95,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/models/transaction.js~Transaction",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#constructor",
+    "access": "public",
+    "description": "Transaction constructor",
+    "lineNumber": 20,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "fromAddress",
+        "description": "Sender public key in hex string (secp256k1)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "toAddress",
+        "description": "Receiver public key in hex string (secp256k1)"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "amount",
+        "description": "Amount to send"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "keyPair",
+        "description": "Private and public key object, generated with elliptic(secp256k1) library"
+      }
+    ]
+  },
+  {
+    "__docId__": 96,
+    "kind": "member",
+    "name": "timestamp",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#timestamp",
+    "access": "public",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "member",
+    "name": "fromAddress",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#fromAddress",
+    "access": "public",
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "member",
+    "name": "toAddress",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#toAddress",
+    "access": "public",
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 99,
+    "kind": "member",
+    "name": "amount",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#amount",
+    "access": "public",
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "member",
+    "name": "signature",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#signature",
+    "access": "public",
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "member",
+    "name": "hash",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#hash",
+    "access": "public",
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "sign",
+    "memberof": "src/models/transaction.js~Transaction",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#sign",
+    "access": "public",
+    "description": "Method for creating a digital signature.",
+    "lineNumber": 34,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "Encoded hex string"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "signingKeyPair",
+        "description": "Private and public key object"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "Encoded hex string"
+    }
+  },
+  {
+    "__docId__": 103,
+    "kind": "method",
+    "name": "isValid",
+    "memberof": "src/models/transaction.js~Transaction",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#isValid",
+    "access": "public",
+    "description": "Helper method to check if transaction object is valid.\nVerifies by using public key.",
+    "lineNumber": 47,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "boolean"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "boolean"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 104,
+    "kind": "file",
+    "name": "src/routes/routes.js",
+    "content": "const express = require('express');\r\nconst bodyParser = require('body-parser');\r\nconst swaggerUi = require('swagger-ui-express');\r\nconst YAML = require('yamljs');\r\nconst path = require('path');\r\n\r\nconst { generateKeyPair } = require('../utils/key-generator');\r\nconst { PEERS } = require('../../config/ports-folders');\r\n\r\nconst swaggerDocument = YAML.load(path.join(__dirname, '../../openapi/openapi.yaml'));\r\nconst app = require('../../app');\r\n\r\nconst router = express.Router();\r\n\r\nrouter.use(bodyParser.json());\r\nrouter.use('/api-docs', swaggerUi.serve);\r\n\r\nrouter.get('/', (req, res) => {\r\n    res.send('Welcome to AABRDP-simple-blockchain!');\r\n});\r\n\r\nrouter.get('/api-docs', swaggerUi.setup(swaggerDocument));\r\n\r\nrouter.get('/chain', (req, res) => {\r\n    res.json(app.blockchain);\r\n});\r\n\r\nrouter.get('/generate', (req, res) => {\r\n    const { privateKey, publicKey } = generateKeyPair();\r\n    res.json({\r\n        'Generated private key': privateKey,\r\n        'Generated public key': publicKey,\r\n    });\r\n});\r\n\r\nrouter.get('/blocks/last', (req, res) => {\r\n    res.json(app.blockchain.getLatestBlock());\r\n});\r\n\r\nrouter.get('/transactions', (req, res) => {\r\n    res.json(app.blockchain.pendingTransactions);\r\n});\r\n\r\nrouter.get('/address/balance/:address', (req, res) => {\r\n    res.json(app.blockchain.getBalanceOfAddress(req.params.address));\r\n});\r\n\r\nrouter.post('/addtransaction', (req, res) => {\r\n    const transaction = app.blockchain.addTransaction(req.body.fromAddress, req.body.toAddress, req.body.amount);\r\n    app.wsServer.broadcastTransaction(transaction);\r\n    res.redirect('/transactions');\r\n});\r\n\r\nrouter.post('/minetransactions', (req, res) => {\r\n    const block = app.miner.mine(req.body.mineraddress);\r\n\r\n    if (block) {\r\n        console.log(`New block added: ${block.toString()}`);\r\n        res.redirect('/chain');\r\n    } else {\r\n        res.json('No pendingTransactions - cannot mine new block!');\r\n    }\r\n});\r\n\r\nrouter.post('/getcoins', (req, res) => {\r\n    const transaction = app.blockchain.getCoins(req.body.fromAddress, req.body.toAddress);\r\n    app.wsServer.broadcastTransaction(transaction);\r\n    res.json('100 coins will be added to your address after new block is mined!');\r\n});\r\n\r\nrouter.get('/peers', (req, res) => {\r\n    if (PEERS.length === 0) {\r\n        res.json('No peers');\r\n    } else {\r\n        res.json(PEERS);\r\n    }\r\n});\r\n\r\nmodule.exports = router;\r\n",
+    "static": true,
+    "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/routes/routes.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 105,
+    "kind": "variable",
+    "name": "generateKeyPair",
+    "memberof": "src/routes/routes.js",
+    "static": true,
+    "longname": "src/routes/routes.js~generateKeyPair",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "variable",
+    "name": "PEERS",
+    "memberof": "src/routes/routes.js",
+    "static": true,
+    "longname": "src/routes/routes.js~PEERS",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "variable",
+    "name": "swaggerDocument",
+    "memberof": "src/routes/routes.js",
+    "static": true,
+    "longname": "src/routes/routes.js~swaggerDocument",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "variable",
+    "name": "router",
+    "memberof": "src/routes/routes.js",
+    "static": true,
+    "longname": "src/routes/routes.js~router",
+    "access": "public",
+    "export": true,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
+    "importStyle": "router",
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 109,
+    "kind": "file",
+    "name": "src/utils/get-public-ip.js",
+    "content": "const publicIp = require('public-ip');\r\n\r\nexports.getPublicIp = async () => {\r\n    const ip = await publicIp.v4();\r\n    return ip;\r\n};\r\n",
+    "static": true,
+    "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/utils/get-public-ip.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 110,
+    "kind": "function",
+    "name": "getPublicIp",
+    "memberof": "src/utils/get-public-ip.js",
+    "generator": false,
+    "async": true,
+    "static": true,
+    "longname": "src/utils/get-public-ip.js~getPublicIp",
+    "access": "public",
+    "export": true,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/utils/get-public-ip.js",
+    "importStyle": "{getPublicIp}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 111,
+    "kind": "file",
+    "name": "src/ws/server.js",
+    "content": "const Websocket = require('ws');\r\n\r\nconst { WS_PORT, PEERS } = require('../../config/ports-folders');\r\nconst ip = require('../utils/get-public-ip');\r\n\r\nconst P2P_PORT = process.env.WS_PORT || WS_PORT;\r\n\r\nconst MESSAGE_TYPES = {\r\n    chain: 'CHAIN',\r\n    transaction: 'TRANSACTION',\r\n    clear_transactions: 'CLEAR_TRANSACTIONS',\r\n    peer: 'PEER',\r\n};\r\n\r\nlet server;\r\n\r\n/**\r\n * WsServer class\r\n * @example <caption>Create a new websocket object</caption>\r\n * let blockchain = new Blockchain();\r\n * let wsServer = new WsServer(blockchain);\r\n */\r\nclass WsServer {\r\n    /**\r\n     * WsServer constructor\r\n     * @param {object} blockchain - Blockchain class object\r\n     */\r\n    constructor(blockchain) {\r\n        this.blockchain = blockchain;\r\n        /**\r\n         * @type {object[]} - List of socket objects\r\n         */\r\n        this.sockets = [];\r\n        /**\r\n         * @type {string[]} - List of addresses of connected peers\r\n         */\r\n        this.connectedPeers = [];\r\n    }\r\n\r\n    /**\r\n     * Starts Websocket Server. Connects to peers and listens for connections.\r\n     */\r\n    listen() {\r\n        server = new Websocket.Server({ port: P2P_PORT });\r\n\r\n        server.on('connection', (socket) => this.connectSocket(socket));\r\n\r\n        this.connectToPeers();\r\n\r\n        console.log(`Listening for peer-to-peer connections on ${WS_PORT}`);\r\n    }\r\n\r\n    /**\r\n     * Functionalities:\r\n     * - Adds current socket to socket list;\r\n     * - Sends socket to message handler method;\r\n     * - Sends current chain to other peers;\r\n     * - Broadcasts own peers list to other peers.\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    connectSocket(socket) {\r\n        this.sockets.push(socket);\r\n        console.log('Socket connected');\r\n\r\n        this.messageHandler(socket);\r\n\r\n        this.sendChain(socket);\r\n\r\n        this.broadcastPeers(PEERS);\r\n    }\r\n\r\n    /**\r\n     * Opens Websocket client connection to peers in peers list, excluding own address.\r\n     */\r\n    connectToPeers() {\r\n        PEERS.forEach((peer) => {\r\n            // Check if peer exists - do not connect to peer's own address\r\n            if (peer !== `ws://localhost:${P2P_PORT}`) {\r\n                this.addAddressToPeers();\r\n\r\n                this.connectedPeers.push(peer);\r\n\r\n                const socket = new Websocket(peer);\r\n\r\n                socket.on('open', () => this.connectSocket(socket));\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Adds own address to peers list\r\n     */\r\n    addAddressToPeers() {\r\n        PEERS.push(this.getPeerAddress());\r\n    }\r\n\r\n    /**\r\n     * Returns address and port\r\n     * @returns address of peer - string\r\n     */\r\n    getPeerAddress() {\r\n        // Get peer with public ip\r\n        // return `ws://${await ip.getPublicIp()}:${server.address().port}`\r\n        return `ws://localhost:${server.address().port}`;\r\n    }\r\n\r\n    /**\r\n     * Handles incoming message by comparing different message types\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    messageHandler(socket) {\r\n        socket.on('message', (message) => {\r\n            const data = JSON.parse(message);\r\n\r\n            switch (data.type) {\r\n            case MESSAGE_TYPES.chain:\r\n                this.blockchain.replaceChain(data.chain);\r\n                break;\r\n            case MESSAGE_TYPES.transaction:\r\n                this.blockchain.pendingTransactions.push(data.transaction);\r\n                break;\r\n            case MESSAGE_TYPES.clear_transactions:\r\n                this.blockchain.clearPendingTransactions();\r\n                break;\r\n            case MESSAGE_TYPES.peer:\r\n                this.addNotExistingPeer(data.peers);\r\n                this.connectToNewPeers();\r\n                break;\r\n            default:\r\n                break;\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Sends message to socket - chain object\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    sendChain(socket) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.chain,\r\n            chain: this.blockchain.chain,\r\n        }));\r\n    }\r\n    \r\n    /**\r\n     * Sends message to socket - transaction object\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     * @param {object} transaction - Transaction class object\r\n     */\r\n    sendTransaction(socket, transaction) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.transaction,\r\n            transaction,\r\n        }));\r\n    }\r\n\r\n    /**\r\n     * Sends message to socket - peers list\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    sendPeers(socket) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.peer,\r\n            peers: PEERS,\r\n        }));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - current chain\r\n     */\r\n    synchronizeChains() {\r\n        this.sockets.forEach((socket) => this.sendChain(socket));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - current transaction\r\n     * @param {object} transaction - Transaction class object\r\n     */\r\n    broadcastTransaction(transaction) {\r\n        this.sockets.forEach((socket) => this.sendTransaction(socket, transaction));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - clears every socket's pending transactions list\r\n     */\r\n    broadcastClearTransactions() {\r\n        this.sockets.forEach((socket) => socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.clear_transactions,\r\n        })));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - peers list\r\n     * @param {string[]} peers - List of addresses of peers\r\n     */\r\n    broadcastPeers(peers) {\r\n        this.sockets.forEach((socket) => socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.peer,\r\n            peers,\r\n        })));\r\n    }\r\n\r\n    /**\r\n     * Adds peers from another node peer list to current node peer list - only unique ones\r\n     * @param {string[]} peers - List of addresses of peers\r\n     */\r\n    addNotExistingPeer(peers) {\r\n        peers.forEach((peer) => {\r\n            if (!PEERS.includes(peer)) {\r\n                PEERS.push(peer);\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Connects to peers after receiving new peers from another node.\r\n     */\r\n    connectToNewPeers() {\r\n        let difference = [];\r\n        let actualArray = [];\r\n\r\n        if (this.connectedPeers.length > 0) {\r\n            difference = PEERS.filter((x) => !this.connectedPeers.includes(x));\r\n            actualArray = difference.filter((x) => x !== this.getPeerAddress());\r\n        }\r\n\r\n        if (actualArray.length > 0) {\r\n            actualArray.forEach((peer) => {\r\n                this.connectedPeers.push(peer);\r\n\r\n                const socket = new Websocket(peer);\r\n\r\n                socket.on('open', () => this.connectSocket(socket));\r\n            });\r\n        }\r\n    }\r\n}\r\n\r\nmodule.exports = WsServer;\r\n",
+    "static": true,
+    "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/ws/server.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 112,
+    "kind": "variable",
+    "name": "WS_PORT",
+    "memberof": "src/ws/server.js",
+    "static": true,
+    "longname": "src/ws/server.js~WS_PORT",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/ws/server.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 113,
+    "kind": "variable",
+    "name": "P2P_PORT",
+    "memberof": "src/ws/server.js",
+    "static": true,
+    "longname": "src/ws/server.js~P2P_PORT",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/ws/server.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 114,
+    "kind": "variable",
+    "name": "MESSAGE_TYPES",
+    "memberof": "src/ws/server.js",
+    "static": true,
+    "longname": "src/ws/server.js~MESSAGE_TYPES",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/ws/server.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"chain\": string, \"transaction\": string, \"clear_transactions\": string, \"peer\": string}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 115,
+    "kind": "class",
+    "name": "WsServer",
+    "memberof": "src/ws/server.js",
+    "static": true,
+    "longname": "src/ws/server.js~WsServer",
+    "access": "public",
+    "export": true,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/ws/server.js",
+    "importStyle": "WsServer",
+    "description": "WsServer class",
+    "examples": [
+      "<caption>Create a new websocket object</caption>\nlet blockchain = new Blockchain();\nlet wsServer = new WsServer(blockchain);"
+    ],
+    "lineNumber": 24,
+    "interface": false
+  },
+  {
+    "__docId__": 116,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#constructor",
+    "access": "public",
+    "description": "WsServer constructor",
+    "lineNumber": 29,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "blockchain",
+        "description": "Blockchain class object"
+      }
+    ]
+  },
+  {
+    "__docId__": 117,
+    "kind": "member",
+    "name": "blockchain",
+    "memberof": "src/ws/server.js~WsServer",
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#blockchain",
+    "access": "public",
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 118,
+    "kind": "member",
+    "name": "sockets",
+    "memberof": "src/ws/server.js~WsServer",
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#sockets",
+    "access": "public",
+    "description": "",
+    "lineNumber": 34,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 119,
+    "kind": "member",
+    "name": "connectedPeers",
+    "memberof": "src/ws/server.js~WsServer",
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#connectedPeers",
+    "access": "public",
+    "description": "",
+    "lineNumber": 38,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 120,
+    "kind": "method",
+    "name": "listen",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#listen",
+    "access": "public",
+    "description": "Starts Websocket Server. Connects to peers and listens for connections.",
+    "lineNumber": 44,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 121,
+    "kind": "method",
+    "name": "connectSocket",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#connectSocket",
+    "access": "public",
+    "description": "Functionalities:\n- Adds current socket to socket list;\n- Sends socket to message handler method;\n- Sends current chain to other peers;\n- Broadcasts own peers list to other peers.",
+    "lineNumber": 62,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "socket",
+        "description": "Socket object, returned by creating websocket client"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 122,
+    "kind": "method",
+    "name": "connectToPeers",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#connectToPeers",
+    "access": "public",
+    "description": "Opens Websocket client connection to peers in peers list, excluding own address.",
+    "lineNumber": 76,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 123,
+    "kind": "method",
+    "name": "addAddressToPeers",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#addAddressToPeers",
+    "access": "public",
+    "description": "Adds own address to peers list",
+    "lineNumber": 94,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 124,
+    "kind": "method",
+    "name": "getPeerAddress",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#getPeerAddress",
+    "access": "public",
+    "description": "Returns address and port",
+    "lineNumber": 102,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "address of peer - string"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "address of peer - string"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 125,
+    "kind": "method",
+    "name": "messageHandler",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#messageHandler",
+    "access": "public",
+    "description": "Handles incoming message by comparing different message types",
+    "lineNumber": 112,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "socket",
+        "description": "Socket object, returned by creating websocket client"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 126,
+    "kind": "method",
+    "name": "sendChain",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#sendChain",
+    "access": "public",
+    "description": "Sends message to socket - chain object",
+    "lineNumber": 140,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "socket",
+        "description": "Socket object, returned by creating websocket client"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 127,
+    "kind": "method",
+    "name": "sendTransaction",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#sendTransaction",
+    "access": "public",
+    "description": "Sends message to socket - transaction object",
+    "lineNumber": 152,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "socket",
+        "description": "Socket object, returned by creating websocket client"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "transaction",
+        "description": "Transaction class object"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 128,
+    "kind": "method",
+    "name": "sendPeers",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#sendPeers",
+    "access": "public",
+    "description": "Sends message to socket - peers list",
+    "lineNumber": 163,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "socket",
+        "description": "Socket object, returned by creating websocket client"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 129,
+    "kind": "method",
+    "name": "synchronizeChains",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#synchronizeChains",
+    "access": "public",
+    "description": "Sends message to every socket - current chain",
+    "lineNumber": 173,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 130,
+    "kind": "method",
+    "name": "broadcastTransaction",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#broadcastTransaction",
+    "access": "public",
+    "description": "Sends message to every socket - current transaction",
+    "lineNumber": 181,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "transaction",
+        "description": "Transaction class object"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 131,
+    "kind": "method",
+    "name": "broadcastClearTransactions",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#broadcastClearTransactions",
+    "access": "public",
+    "description": "Sends message to every socket - clears every socket's pending transactions list",
+    "lineNumber": 188,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 132,
+    "kind": "method",
+    "name": "broadcastPeers",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#broadcastPeers",
+    "access": "public",
+    "description": "Sends message to every socket - peers list",
+    "lineNumber": 198,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "peers",
+        "description": "List of addresses of peers"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 133,
+    "kind": "method",
+    "name": "addNotExistingPeer",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#addNotExistingPeer",
+    "access": "public",
+    "description": "Adds peers from another node peer list to current node peer list - only unique ones",
+    "lineNumber": 209,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "peers",
+        "description": "List of addresses of peers"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 134,
+    "kind": "method",
+    "name": "connectToNewPeers",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#connectToNewPeers",
+    "access": "public",
+    "description": "Connects to peers after receiving new peers from another node.",
+    "lineNumber": 220,
+    "params": [],
+    "return": null
+  },
+  {
+    "kind": "index",
+    "content": "# L2Y21-AABRDP-simple-blockchain\r\n",
+    "longname": "D:\\quanterall-materials\\blockchain-course\\L2Y21-AABRDP-simple-blockchain\\README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\r\n  \"name\": \"l2y21-aabrdp-simple-blockchain\",\r\n  \"version\": \"1.0.0\",\r\n  \"description\": \"\",\r\n  \"main\": \"app.js\",\r\n  \"scripts\": {\r\n    \"test\": \"jest --watchAll\",\r\n    \"prepare\": \"husky install\",\r\n    \"dev-test\": \"node dev-test\",\r\n    \"start\": \"node app.js\",\r\n    \"dev-start\": \"nodemon app.js\",\r\n    \"lint\": \"npx eslint \\\"**/*.js\\\"\",\r\n    \"lint-fix\": \"npx eslint --fix \\\"**/*.js\\\"\"\r\n  },\r\n  \"repository\": {\r\n    \"type\": \"git\",\r\n    \"url\": \"git+https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain.git\"\r\n  },\r\n  \"author\": \"\",\r\n  \"license\": \"ISC\",\r\n  \"bugs\": {\r\n    \"url\": \"https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain/issues\"\r\n  },\r\n  \"homepage\": \"https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain#readme\",\r\n  \"dependencies\": {\r\n    \"body-parser\": \"^1.19.0\",\r\n    \"crypto-js\": \"^4.1.1\",\r\n    \"elliptic\": \"^6.5.4\",\r\n    \"express\": \"^4.17.1\",\r\n    \"path\": \"^0.12.7\",\r\n    \"public-ip\": \"^4.0.4\",\r\n    \"swagger-ui-express\": \"^4.2.0\",\r\n    \"ws\": \"^8.3.0\",\r\n    \"yamljs\": \"^0.3.0\"\r\n  },\r\n  \"devDependencies\": {\r\n    \"@commitlint/cli\": \"^15.0.0\",\r\n    \"@commitlint/config-conventional\": \"^15.0.0\",\r\n    \"esdoc\": \"^1.1.0\",\r\n    \"esdoc-node\": \"^1.0.5\",\r\n    \"esdoc-standard-plugin\": \"^1.0.0\",\r\n    \"eslint\": \"^8.2.0\",\r\n    \"eslint-config-airbnb-base\": \"^15.0.0\",\r\n    \"eslint-plugin-import\": \"^2.25.2\",\r\n    \"husky\": \"^7.0.4\",\r\n    \"jest\": \"^27.4.4\",\r\n    \"nodemon\": \"^2.0.15\"\r\n  }\r\n}\r\n",
+    "longname": "D:\\quanterall-materials\\blockchain-course\\L2Y21-AABRDP-simple-blockchain\\package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

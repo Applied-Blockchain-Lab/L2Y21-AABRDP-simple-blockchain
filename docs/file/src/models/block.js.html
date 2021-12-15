@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/models/block.js | l2y21-aabrdp-simple-blockchain</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#models">models</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/block.js~Block.html">Block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/chain.js~Chain.html">Chain</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/miner.js~Miner.html">Miner</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/models/transaction.js~Transaction.html">Transaction</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#routes">routes</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-router">router</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getPublicIp">getPublicIp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#ws">ws</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ws/server.js~WsServer.html">WsServer</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/models/block.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const { generateHash } = require(&apos;../utils/crypto-util&apos;);
+const { DIFFICULTY, CREATION_TIME } = require(&apos;../../config/network-parameters&apos;);
+
+/**
+ * Block class
+ * @example &lt;caption&gt;Create a new block object&lt;/caption&gt;
+ * let block = new Block(timestamp, parentHash, hash, nonce, difficulty, transaction);
+ */
+class Block {
+    /**
+     * Block constructor
+     * @param {string} timestamp - Block creation time in seconds after Unix Epoch
+     * @param {string} parentHash - SHA256 hash of the previous block
+     * @param {string} hash - SHA256 hash of the current block
+     * @param {number} nonce - Counter for PoW algorithm
+     * @param {number} difficulty - Target number for current block (count of leading zeros)
+     * @param {object[]} transactions - List of transactions for the current block
+     */
+    constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {
+        this.timestamp = timestamp;
+        this.parentHash = parentHash;
+        this.hash = hash;
+        this.nonce = nonce;
+        this.difficulty = difficulty || DIFFICULTY;
+        this.transactions = transactions;
+    }
+
+    /**
+     * Method to create genesis block with default parameters
+     * @returns {object} New block object
+     */
+    static genesisBlock() {
+        return new Block(&apos;000000&apos;, &apos;-&apos;, &apos;111-111&apos;, 0, DIFFICULTY, []);
+    }
+    
+    /**
+     * Method to mine a new block. Loop stops when hash with current difficulty is found.
+     * @param {object} lastBlock - Block class object
+     * @param {object[]} transactions - Transactions which will be included in current block
+     * @returns New block object with calculated parameters - Block class object
+     */
+    static mineBlock(lastBlock, transactions) {
+        let nonce = 0;
+        let hash;
+        let timestamp;
+        const parentHash = lastBlock.hash;
+        let { difficulty } = lastBlock;
+
+        do {
+            nonce++;
+            timestamp = Date.now();
+            difficulty = Block.adjustDifficulty(lastBlock, timestamp);
+            hash = generateHash(timestamp + parentHash + nonce + difficulty + transactions);
+        } while (hash.substring(0, difficulty) !== &apos;0&apos;.repeat(difficulty));
+
+        return new Block(timestamp, parentHash, hash, nonce, difficulty, transactions);
+    }
+
+    /**
+     * Method for generating hash from existing block - helper to validate chain
+     * @param {object} block - Block class object
+     * @returns Hash from block parameter attributes - string
+     */
+    static blockHash(block) {
+        const {
+            timestamp, parentHash, nonce, difficulty, transactions,
+        } = block;
+
+        return generateHash(timestamp + parentHash + nonce + difficulty + transactions);
+    }
+
+    /**
+     * Method to adjust difficulty.
+     * Sets difficulty according to last block&apos;s timestamp and CREATION_TIME from config file.
+     * @param {object} lastBlock - Block class object
+     * @param {string} currentTime - Time in seconds
+     * @returns Adjusted difficulty - string
+     */
+    static adjustDifficulty(lastBlock, currentTime) {
+        let { difficulty } = lastBlock;
+        difficulty = lastBlock.timestamp + CREATION_TIME &gt; currentTime
+            ? difficulty + 1 : difficulty - 1;
+
+        return difficulty;
+    }
+
+    /**
+     * Method to check if transactions in current block are valid, using isValid helper function
+     * @returns boolean
+     */
+    hasValidTransactions() {
+        for (let i = 0; i &lt; this.transactions.length; i++) {
+            if (!this.transactions[i].isValid()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Method for logging Block class object
+     * @returns string
+     */
+    toString() {
+        return `Block -
+            Timestamp    : ${this.timestamp}
+            Parent hash  : ${this.parentHash}
+            Hash         : ${this.hash}
+            Nonce        : ${this.nonce}
+            Difficulty   : ${this.difficulty}
+            Transactions : ${this.transactions}
+        `;
+    }
+}
+module.exports = Block;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

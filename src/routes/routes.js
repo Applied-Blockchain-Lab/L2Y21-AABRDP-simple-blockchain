@@ -4,6 +4,7 @@ const YAML = require('yamljs');
 const path = require('path');
 
 const { generateKeyPair } = require('../utils/key-generator');
+const { PEERS } = require('../../config/ports-folders');
 
 const swaggerDocument = YAML.load(path.join(__dirname, '../../openapi/openapi.yaml'));
 const app = require('../../app');
@@ -60,8 +61,17 @@ router.post('/minetransactions', (req, res) => {
 });
 
 router.post('/getcoins', (req, res) => {
-    app.blockchain.getCoins(req.body.toAddress, req.body.toAddress);
+    const transaction = app.blockchain.getCoins(req.body.fromAddress, req.body.toAddress);
+    app.wsServer.broadcastTransaction(transaction);
     res.json('100 coins will be added to your address after new block is mined!');
+});
+
+router.get('/peers', (req, res) => {
+    if (PEERS.length === 0) {
+        res.json('No peers');
+    } else {
+        res.json(PEERS);
+    }
 });
 
 module.exports = router;
