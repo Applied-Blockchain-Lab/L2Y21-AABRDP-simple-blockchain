@@ -1,4 +1,4 @@
- require('../app');
+require('../app');
 const axios = require('axios');
 const jestOpenAPI = require('jest-openapi').default;
 const Generator = require('../src/utils/key-generator');
