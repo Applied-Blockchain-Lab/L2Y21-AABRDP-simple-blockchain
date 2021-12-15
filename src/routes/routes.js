@@ -62,7 +62,7 @@ router.post('/minetransactions', (req, res) => {
 });
 
 router.post('/getcoins', (req, res) => {
-    app.blockchain.getCoins(req.body.toAddress,req.body.toAddress);
+    app.blockchain.getCoins(req.body.toAddress, req.body.toAddress);
     res.json('100 coins will be added to your address after new block is mined!');
 });
 
