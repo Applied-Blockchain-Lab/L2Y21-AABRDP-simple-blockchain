@@ -13,7 +13,10 @@ module.exports = {
         'no-plusplus': 0,
         indent: ['error', 4],
         'max-len': 0,
-        'no-unused-vars': ['error', { args: 'none' }],
-        'class-methods-use-this': ['error', { exceptMethods: ['messageHandler', 'sendTransaction'] }],
+        'no-unused-vars': ['error', {
+            args: 'none',
+            varsIgnorePattern: 'ip',
+        }],
+        'class-methods-use-this': ['error', { exceptMethods: ['messageHandler', 'sendTransaction', 'getPeerAddress', 'sendPeers', 'addNotExistingPeer'] }],
     },
 };
