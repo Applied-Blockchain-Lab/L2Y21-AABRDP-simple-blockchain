@@ -61,7 +61,7 @@ class Chain {
     constructor() {
         /**
          * List of Block class objects.
-         * @type {object[]} 
+         * @type {object[]}
          */
         this.chain = [Block.genesisBlock()];
         /**
@@ -103,7 +103,7 @@ class Chain {
 
         const transaction = new Transaction(fromAddress, toAddress, amount, keyPair);
 
-        if (!transaction.isValid()) return (&apos;Cannot add invalid transaction!&apos;);
+        if (!Transaction.isValid(transaction)) return (&apos;Cannot add invalid transaction!&apos;);
 
         this.pendingTransactions.push(transaction);
 
@@ -126,7 +126,7 @@ class Chain {
     }
 
     /**
-     * Method to replace current Chain class member with another Chain class member. 
+     * Method to replace current Chain class member with another Chain class member.
      * It is used for broadcasting blockchain to other peers.
      * @param {object[]} newChain - Chain class object
      * @returns string
@@ -149,23 +149,23 @@ class Chain {
 
     /**
      * Method to check if chain is valid.
-     * Checks are: 
+     * Checks are:
      * - if chain list starts with genesis block;
      * - if current block previous hash and previous block hash are matching;
      * - if current block has valid transactions.
      * @returns boolean
      */
-    isValidChain() {
-        if (JSON.stringify(this.chain[0]) !== JSON.stringify(Block.genesisBlock())) return false;
+    isValidChain(newChain) {
+        if (JSON.stringify(newChain[0]) !== JSON.stringify(Block.genesisBlock())) return false;
 
-        for (let i = 1; i &lt; this.chain.length; i++) {
-            const currentBlock = this.chain[i];
-            const previousBlock = this.chain[i - 1];
+        for (let i = 1; i &lt; newChain.length; i++) {
+            const currentBlock = newChain[i];
+            const previousBlock = newChain[i - 1];
 
             if (currentBlock.parentHash !== previousBlock.hash
                 || currentBlock.hash !== Block.blockHash(currentBlock)) return false;
 
-            if (!currentBlock.hasValidTransactions()) return false;
+            if (!Block.hasValidTransactions(currentBlock)) return false;
         }
         return true;
     }

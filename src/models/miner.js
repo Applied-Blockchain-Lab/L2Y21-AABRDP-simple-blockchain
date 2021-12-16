@@ -35,10 +35,6 @@ class Miner {
 
         this.wsServer.synchronizeChains();
 
-        this.blockchain.clearPendingTransactions();
-
-        this.wsServer.broadcastClearTransactions();
-
         return newBlock;
     }
 }

@@ -40,7 +40,47 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="l2y21-aabrdp-simple-blockchain">L2Y21-AABRDP-simple-blockchain</h1></div>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="l2y21-aabrdp-simple-blockchain">L2Y21-AABRDP-simple-blockchain</h1><h2 id="rules-of-repo">Rules of repo</h2><h3 id="branching-strategy">Branching strategy</h3><p>We use GitHub Flow.</p>
+<h3 id="commit-message-format">Commit message format</h3><p>Our convention for commit messages:</p>
+<pre><code class="lang-text"><code class="source-code prettyprint">feat: Add beta sequence
+^--^ ^---------------^
+| |
+| +-&gt; Summary in present tense.
+|
++-------&gt; Type: chore, docs, feat, fix, refactor, style, or test.</code>
+</code></pre>
+<p>We use tools: <a href="https://commitlint.js.org/#/">Commitlint</a> and <a href="https://github.com/typicode/husky">Husky</a>.</p>
+<h3 id="convention-for-code">Convention for code</h3><p>For this purpose we use <a href="https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb">ESLint AirBnb</a> style guide.
+<a href="https://smartdevpreneur.com/why-use-airbnbs-eslint-config-a-review-of-airbnbs-rules-list/">Why Use AirBnB&#x2019;s ESLint Configuration? A Review of AirBnB&#x2019;s Rules List</a>.</p>
+<h2 id="how-to-use-after-clone--make-sure-to-clone---39-main--39--branch-">How to use after clone (make sure to clone &apos;main&apos; branch)</h2><ol>
+<li>Install packages</li>
+</ol>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm install</code>
+</code></pre>
+<ol start="2">
+<li>Run</li>
+</ol>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm start</code>
+</code></pre>
+<ol start="3">
+<li>Test</li>
+</ol>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm test</code>
+</code></pre>
+<ol start="4">
+<li><p>Before commit ESLint will check your code and problems will come out if there are any. However, you can check or fix your code at any time with:</p>
+</li>
+<li><p>ESLint check:</p>
+</li>
+</ol>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm run lint</code>
+</code></pre>
+<ul>
+<li>ESLint fix:</li>
+</ul>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm run lint-fix</code>
+</code></pre>
+</div>
 </div>
 
 <footer class="footer">

@@ -43,7 +43,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/ws/server.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const Websocket = require(&apos;ws&apos;);
 
-const { WS_PORT, PEERS } = require(&apos;../../config/ports-folders&apos;);
+const { WS_PORT, PEERS, IP_ADDRESS } = require(&apos;../../config/ports-folders&apos;);
 const ip = require(&apos;../utils/get-public-ip&apos;);
 
 const P2P_PORT = process.env.WS_PORT || WS_PORT;
@@ -118,7 +118,7 @@ class WsServer {
     connectToPeers() {
         PEERS.forEach((peer) =&gt; {
             // Check if peer exists - do not connect to peer&apos;s own address
-            if (peer !== `ws://localhost:${P2P_PORT}`) {
+            if (peer !== `ws://${IP_ADDRESS}:${P2P_PORT}`) {
                 this.addAddressToPeers();
 
                 this.connectedPeers.push(peer);
@@ -126,6 +126,7 @@ class WsServer {
                 const socket = new Websocket(peer);
 
                 socket.on(&apos;open&apos;, () =&gt; this.connectSocket(socket));
+                socket.on(&apos;error&apos;, (error) =&gt; { console.log(`Error: ${error}`); });
             }
         });
     }
@@ -144,7 +145,7 @@ class WsServer {
     getPeerAddress() {
         // Get peer with public ip
         // return `ws://${await ip.getPublicIp()}:${server.address().port}`
-        return `ws://localhost:${server.address().port}`;
+        return `ws://${IP_ADDRESS}:${server.address().port}`;
     }
 
     /**
@@ -158,12 +159,10 @@ class WsServer {
             switch (data.type) {
             case MESSAGE_TYPES.chain:
                 this.blockchain.replaceChain(data.chain);
+                this.blockchain.pendingTransactions = data.pendingTransactions;
                 break;
             case MESSAGE_TYPES.transaction:
                 this.blockchain.pendingTransactions.push(data.transaction);
-                break;
-            case MESSAGE_TYPES.clear_transactions:
-                this.blockchain.clearPendingTransactions();
                 break;
             case MESSAGE_TYPES.peer:
                 this.addNotExistingPeer(data.peers);
@@ -183,9 +182,10 @@ class WsServer {
         socket.send(JSON.stringify({
             type: MESSAGE_TYPES.chain,
             chain: this.blockchain.chain,
+            pendingTransactions: this.blockchain.pendingTransactions,
         }));
     }
-    
+
     /**
      * Sends message to socket - transaction object
      * @param {object} socket - Socket object, returned by creating websocket client
@@ -222,15 +222,6 @@ class WsServer {
      */
     broadcastTransaction(transaction) {
         this.sockets.forEach((socket) =&gt; this.sendTransaction(socket, transaction));
-    }
-
-    /**
-     * Sends message to every socket - clears every socket&apos;s pending transactions list
-     */
-    broadcastClearTransactions() {
-        this.sockets.forEach((socket) =&gt; socket.send(JSON.stringify({
-            type: MESSAGE_TYPES.clear_transactions,
-        })));
     }
 
     /**
@@ -275,6 +266,7 @@ class WsServer {
                 const socket = new Websocket(peer);
 
                 socket.on(&apos;open&apos;, () =&gt; this.connectSocket(socket));
+                socket.on(&apos;error&apos;, (error) =&gt; { console.log(`Error: ${error}`); });
             });
         }
     }

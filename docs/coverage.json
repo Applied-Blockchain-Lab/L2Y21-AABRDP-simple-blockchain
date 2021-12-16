@@ -1,7 +1,7 @@
 {
-  "coverage": "58.97%",
+  "coverage": "57.69%",
   "expectCount": 78,
-  "actualCount": 46,
+  "actualCount": 45,
   "files": {
     "src/models/block.js": {
       "expectCount": 16,
@@ -9,12 +9,12 @@
       "undocumentLines": [
         2,
         4,
-        22,
         23,
         24,
         25,
         26,
-        27
+        27,
+        28
       ]
     },
     "src/models/chain.js": {
@@ -37,27 +37,28 @@
       ]
     },
     "src/models/transaction.js": {
-      "expectCount": 12,
+      "expectCount": 13,
       "actualCount": 4,
       "undocumentLines": [
         3,
         5,
-        21,
-        22,
+        7,
         23,
         24,
         25,
-        26
+        26,
+        27,
+        28
       ]
     },
     "src/routes/routes.js": {
       "expectCount": 4,
       "actualCount": 0,
       "undocumentLines": [
-        8,
-        10,
-        12,
-        15
+        7,
+        9,
+        11,
+        14
       ]
     },
     "src/utils/get-public-ip.js": {
@@ -68,8 +69,8 @@
       ]
     },
     "src/ws/server.js": {
-      "expectCount": 23,
-      "actualCount": 19,
+      "expectCount": 22,
+      "actualCount": 18,
       "undocumentLines": [
         4,
         7,
