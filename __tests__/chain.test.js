@@ -88,7 +88,7 @@ describe('Test Chain class', () => {
     it('genesis block data = invalid chain', () => {
         blockchain.chain[0].transactions[0] = ['corrupt data'];
 
-        expect(blockchain.isValidChain()).toBe(false);
+        expect(blockchain.isValidChain(blockchain.chain)).toBe(false);
     });
 
     it('validate valid chain', () => {
@@ -96,7 +96,7 @@ describe('Test Chain class', () => {
         blockchain.addTransaction(TEST_PUB_KEY, TEST_PUB_KEY_S, 1);
         blockchain.addBlock();
 
-        expect(blockchain.isValidChain()).toBe(true);
+        expect(blockchain.isValidChain(blockchain.chain)).toBe(true);
     });
 
     it('change block data = invalid chain', () => {
@@ -105,7 +105,7 @@ describe('Test Chain class', () => {
         blockchain.addBlock();
         blockchain.chain[1].transactions[0] = ['corrupt data'];
 
-        expect(blockchain.isValidChain()).toBe(false);
+        expect(blockchain.isValidChain(blockchain.chain)).toBe(false);
     });
 
     it('previous block hash is invalid = invalid chain', () => {
@@ -118,7 +118,7 @@ describe('Test Chain class', () => {
         blockchain.addBlock();
         blockchain.chain[2].parentHash = '111-111';
 
-        expect(blockchain.isValidChain()).toBe(false);
+        expect(blockchain.isValidChain(blockchain.chain)).toBe(false);
     });
 
     it('replace chain with valid chain = successfully', () => {

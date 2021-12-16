@@ -19,6 +19,6 @@ module.exports = {
             args: 'none',
             varsIgnorePattern: 'ip',
         }],
-        'class-methods-use-this': ['error', { exceptMethods: ['messageHandler', 'sendTransaction', 'getPeerAddress', 'sendPeers', 'addNotExistingPeer'] }],
+        'class-methods-use-this': ['error', { exceptMethods: ['messageHandler', 'sendTransaction', 'getPeerAddress', 'sendPeers', 'addNotExistingPeer', 'isValidChain'] }],
     },
 };

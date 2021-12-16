@@ -17,6 +17,6 @@ describe('Test Miner class', () => {
 
         expect(blockchain.pendingTransactions.length).toEqual(0);
         expect(blockchain.chain.length).toEqual(2);
-        expect(blockchain.isValidChain()).toEqual(true);
+        expect(blockchain.isValidChain(blockchain.chain)).toEqual(true);
     });
 });
