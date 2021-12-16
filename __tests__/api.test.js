@@ -78,7 +78,7 @@ describe('POST /minetransactions', () => {
 
 describe('POST /getcoins', () => {
     it('should satisfy OpenAPI spec', async () => {
-        const res = await axios.post(`http://localhost:${HTTP_PORT}/getcoins`, { toAddress: TEST_PUB_KEY2 });
+        const res = await axios.post(`http://localhost:${HTTP_PORT}/getcoins`, { fromAddress: TEST_PUB_KEY, toAddress: TEST_PUB_KEY2 });
 
         expect(res.status).toEqual(200);
         expect(res).toSatisfyApiSpec();
