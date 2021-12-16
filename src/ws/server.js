@@ -116,12 +116,10 @@ class WsServer {
             switch (data.type) {
             case MESSAGE_TYPES.chain:
                 this.blockchain.replaceChain(data.chain);
+                this.blockchain.pendingTransactions = data.pendingTransactions;
                 break;
             case MESSAGE_TYPES.transaction:
                 this.blockchain.pendingTransactions.push(data.transaction);
-                break;
-            case MESSAGE_TYPES.clear_transactions:
-                this.blockchain.clearPendingTransactions();
                 break;
             case MESSAGE_TYPES.peer:
                 this.addNotExistingPeer(data.peers);
@@ -141,6 +139,7 @@ class WsServer {
         socket.send(JSON.stringify({
             type: MESSAGE_TYPES.chain,
             chain: this.blockchain.chain,
+            pendingTransactions: this.blockchain.pendingTransactions,
         }));
     }
 
@@ -180,15 +179,6 @@ class WsServer {
      */
     broadcastTransaction(transaction) {
         this.sockets.forEach((socket) => this.sendTransaction(socket, transaction));
-    }
-
-    /**
-     * Sends message to every socket - clears every socket's pending transactions list
-     */
-    broadcastClearTransactions() {
-        this.sockets.forEach((socket) => socket.send(JSON.stringify({
-            type: MESSAGE_TYPES.clear_transactions,
-        })));
     }
 
     /**
