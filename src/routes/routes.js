@@ -66,6 +66,27 @@ router.get('/transactions', (req, res) => {
     res.json(app.blockchain.pendingTransactions);
 });
 
+router.get('/transactions/hash/:hash', (req, res) => {
+    let found = false;
+    let foundTx;
+
+    app.blockchain.chain.forEach((block) => {
+        block.transactions.forEach((tx) => {
+            if (req.params.hash === tx.hash) {
+                found = true;
+                foundTx = tx;
+            }
+        });
+    });
+
+    if (found) {
+        res.json(foundTx);
+    } else {
+        res.status(404);
+        res.json(`There is no transaction with hash: ${req.params.hash}`);
+    }
+});
+
 router.get('/address/balance/:address', (req, res) => {
     res.json(app.blockchain.getBalanceOfAddress(req.params.address));
 });
