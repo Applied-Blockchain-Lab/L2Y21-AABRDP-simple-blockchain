@@ -30,26 +30,26 @@ describe('Test Transaction class', () => {
     it('empty signature = not valid tx', () => {
         const tx = new Transaction('from', 'to', 0, 0);
 
-        expect(tx.isValid()).toEqual(false);
+        expect(Transaction.isValid(tx)).toEqual(false);
     });
 
     it('amount=0 = not valid tx', () => {
         const tx = new Transaction('from', 'to', 0, 0);
 
-        expect(tx.isValid()).toEqual(false);
+        expect(Transaction.isValid(tx)).toEqual(false);
     });
 
     it('valid tx', () => {
         const keyPair = ec.keyFromPrivate(pair.privateKey, 'hex');
         const tx = new Transaction(pair.publicKey, 'to', 1, keyPair);
 
-        expect(tx.isValid()).toEqual(true);
+        expect(Transaction.isValid(tx)).toEqual(true);
     });
 
     it('invalid fromAddress = not valid tx', () => {
         const keyPair = ec.keyFromPrivate(pair.privateKey, 'hex');
         const tx = new Transaction('invalid', 'to', 0, keyPair);
 
-        expect(tx.isValid()).toEqual(false);
+        expect(Transaction.isValid(tx)).toEqual(false);
     });
 });

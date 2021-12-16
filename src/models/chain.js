@@ -60,7 +60,7 @@ class Chain {
 
         const transaction = new Transaction(fromAddress, toAddress, amount, keyPair);
 
-        if (!transaction.isValid()) return ('Cannot add invalid transaction!');
+        if (!Transaction.isValid(transaction)) return ('Cannot add invalid transaction!');
 
         this.pendingTransactions.push(transaction);
 
@@ -112,17 +112,17 @@ class Chain {
      * - if current block has valid transactions.
      * @returns boolean
      */
-    isValidChain() {
-        if (JSON.stringify(this.chain[0]) !== JSON.stringify(Block.genesisBlock())) return false;
+    isValidChain(newChain) {
+        if (JSON.stringify(newChain[0]) !== JSON.stringify(Block.genesisBlock())) return false;
 
-        for (let i = 1; i < this.chain.length; i++) {
-            const currentBlock = this.chain[i];
-            const previousBlock = this.chain[i - 1];
+        for (let i = 1; i < newChain.length; i++) {
+            const currentBlock = newChain[i];
+            const previousBlock = newChain[i - 1];
 
             if (currentBlock.parentHash !== previousBlock.hash
                 || currentBlock.hash !== Block.blockHash(currentBlock)) return false;
 
-            if (!currentBlock.hasValidTransactions()) return false;
+            if (!Block.hasValidTransactions(currentBlock)) return false;
         }
         return true;
     }

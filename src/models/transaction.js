@@ -44,15 +44,19 @@ class Transaction {
      * Verifies by using public key.
      * @returns boolean
      */
-    isValid() {
-        if (this.fromAddress === REWARD_TX) return true;
+    static isValid(transaction) {
+        const {
+            timestamp, fromAddress, toAddress, amount, signature,
+        } = transaction;
 
-        if (!this.signature || this.signature.length === 0) return false;
-        if (this.amount === 0) return false;
+        if (fromAddress === REWARD_TX) return true;
 
-        const keyPair = ec.keyFromPublic(this.fromAddress, 'hex');
-        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();
-        return keyPair.verify(signData, this.signature);
+        if (!signature || signature.length === 0) return false;
+        if (amount === 0) return false;
+
+        const keyPair = ec.keyFromPublic(fromAddress, 'hex');
+        const signData = (timestamp + fromAddress + toAddress + amount).toString();
+        return keyPair.verify(signData, signature);
     }
 }
 module.exports = Transaction;

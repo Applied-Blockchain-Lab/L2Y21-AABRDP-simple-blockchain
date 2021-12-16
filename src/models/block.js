@@ -1,5 +1,6 @@
 const { generateHash } = require('../utils/crypto-util');
 const { DIFFICULTY, CREATION_TIME } = require('../../config/network-parameters');
+const Transaction = require('./transaction');
 
 /**
  * Block class
@@ -88,9 +89,9 @@ class Block {
      * Method to check if transactions in current block are valid, using isValid helper function
      * @returns boolean
      */
-    hasValidTransactions() {
-        for (let i = 0; i < this.transactions.length; i++) {
-            if (!this.transactions[i].isValid()) {
+    static hasValidTransactions(block) {
+        for (let i = 0; i < block.transactions.length; i++) {
+            if (!Transaction.isValid(block.transactions[i])) {
                 return false;
             }
         }
