@@ -35,8 +35,56 @@ router.get('/blocks/latest', (req, res) => {
     res.json(app.blockchain.getLatestBlock());
 });
 
+router.get('/blocks/id/:id', (req, res) => {
+    if (+req.params.id <= app.blockchain.chain.length) {
+        res.json(app.blockchain.chain[+req.params.id - 1]);
+    } else {
+        res.status(404);
+        res.json(`There is no block with id: ${req.params.id}`);
+    }
+});
+
+router.get('/blocks/hash/:hash', (req, res) => {
+    let found = false;
+    let foundBlock;
+    app.blockchain.chain.forEach((block) => {
+        if (block.hash === req.params.hash) {
+            found = true;
+            foundBlock = block;
+        }
+    });
+
+    if (found) {
+        res.json(foundBlock);
+    } else {
+        res.status(404);
+        res.json(`There is no block with hash: ${req.params.hash}`);
+    }
+});
+
 router.get('/transactions', (req, res) => {
     res.json(app.blockchain.pendingTransactions);
+});
+
+router.get('/transactions/hash/:hash', (req, res) => {
+    let found = false;
+    let foundTx;
+
+    app.blockchain.chain.forEach((block) => {
+        block.transactions.forEach((tx) => {
+            if (req.params.hash === tx.hash) {
+                found = true;
+                foundTx = tx;
+            }
+        });
+    });
+
+    if (found) {
+        res.json(foundTx);
+    } else {
+        res.status(404);
+        res.json(`There is no transaction with hash: ${req.params.hash}`);
+    }
 });
 
 router.get('/address/balance/:address', (req, res) => {
