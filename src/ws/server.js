@@ -233,6 +233,7 @@ class WsServer {
                 const socket = new Websocket(peer);
 
                 socket.on('open', () => this.connectSocket(socket));
+                socket.on('error', (error) => { console.log(`Error: ${error}`); });
             });
         }
     }
