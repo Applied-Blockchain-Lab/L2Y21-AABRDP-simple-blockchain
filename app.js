@@ -4,7 +4,7 @@ const Blockchain = require('./src/models/chain');
 const WsServer = require('./src/ws/server');
 const Miner = require('./src/models/miner');
 
-const { HTTP_PORT } = require('./config/ports-folders');
+const { HTTP_PORT, IP_ADDRESS } = require('./config/ports-folders');
 
 const app = express();
 
@@ -15,8 +15,8 @@ const miner = new Miner(blockchain, wsServer);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
-app.listen(process.env.HTTP_PORT || HTTP_PORT, () => {
-    console.log(`HTTP server listening at http://localhost:${HTTP_PORT}`);
+app.listen(process.env.HTTP_PORT || HTTP_PORT, IP_ADDRESS, () => {
+    console.log(`HTTP server listening at http://${IP_ADDRESS}:${HTTP_PORT}`);
 });
 
 wsServer.listen();
