@@ -1,6 +1,6 @@
 const Websocket = require('ws');
 
-const { WS_PORT, PEERS } = require('../../config/ports-folders');
+const { WS_PORT, PEERS, IP_ADDRESS } = require('../../config/ports-folders');
 const ip = require('../utils/get-public-ip');
 
 const P2P_PORT = process.env.WS_PORT || WS_PORT;
@@ -75,7 +75,7 @@ class WsServer {
     connectToPeers() {
         PEERS.forEach((peer) => {
             // Check if peer exists - do not connect to peer's own address
-            if (peer !== `ws://localhost:${P2P_PORT}`) {
+            if (peer !== `ws://${IP_ADDRESS}:${P2P_PORT}`) {
                 this.addAddressToPeers();
 
                 this.connectedPeers.push(peer);
@@ -102,7 +102,7 @@ class WsServer {
     getPeerAddress() {
         // Get peer with public ip
         // return `ws://${await ip.getPublicIp()}:${server.address().port}`
-        return `ws://localhost:${server.address().port}`;
+        return `ws://${IP_ADDRESS}:${server.address().port}`;
     }
 
     /**
