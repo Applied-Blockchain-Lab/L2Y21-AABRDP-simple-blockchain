@@ -342,12 +342,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/models/block.js~block#hasvalidtransactions",
-    "class/src/models/block.js~Block.html#instance-method-hasValidTransactions",
-    "src/models/block.js~Block#hasValidTransactions",
-    "method"
-  ],
-  [
     "src/models/block.js~block#hash",
     "class/src/models/block.js~Block.html#instance-member-hash",
     "src/models/block.js~Block#hash",
@@ -399,6 +393,12 @@ window.esdocSearchIndex = [
     "src/models/block.js~block.genesisblock",
     "class/src/models/block.js~Block.html#static-method-genesisBlock",
     "src/models/block.js~Block.genesisBlock",
+    "method"
+  ],
+  [
+    "src/models/block.js~block.hasvalidtransactions",
+    "class/src/models/block.js~Block.html#static-method-hasValidTransactions",
+    "src/models/block.js~Block.hasValidTransactions",
     "method"
   ],
   [
@@ -546,12 +546,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/models/transaction.js~transaction#isvalid",
-    "class/src/models/transaction.js~Transaction.html#instance-method-isValid",
-    "src/models/transaction.js~Transaction#isValid",
-    "method"
-  ],
-  [
     "src/models/transaction.js~transaction#sign",
     "class/src/models/transaction.js~Transaction.html#instance-method-sign",
     "src/models/transaction.js~Transaction#sign",
@@ -574,6 +568,12 @@ window.esdocSearchIndex = [
     "class/src/models/transaction.js~Transaction.html#instance-member-toAddress",
     "src/models/transaction.js~Transaction#toAddress",
     "member"
+  ],
+  [
+    "src/models/transaction.js~transaction.isvalid",
+    "class/src/models/transaction.js~Transaction.html#static-method-isValid",
+    "src/models/transaction.js~Transaction.isValid",
+    "method"
   ],
   [
     "src/routes/routes.js",
@@ -610,12 +610,6 @@ window.esdocSearchIndex = [
     "class/src/ws/server.js~WsServer.html#instance-member-blockchain",
     "src/ws/server.js~WsServer#blockchain",
     "member"
-  ],
-  [
-    "src/ws/server.js~wsserver#broadcastcleartransactions",
-    "class/src/ws/server.js~WsServer.html#instance-method-broadcastClearTransactions",
-    "src/ws/server.js~WsServer#broadcastClearTransactions",
-    "method"
   ],
   [
     "src/ws/server.js~wsserver#broadcastpeers",

@@ -43,6 +43,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/models/transaction.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const EC = require(&apos;elliptic&apos;).ec;
 const { generateHash } = require(&apos;../utils/crypto-util&apos;);
+const { REWARD_TX } = require(&apos;../../config/network-parameters&apos;);
 
 const ec = new EC(&apos;secp256k1&apos;);
 
@@ -75,7 +76,7 @@ class Transaction {
      */
     sign(signingKeyPair) {
         if (signingKeyPair === 0) { return 0; }
-        if (signingKeyPair.getPublic(&apos;hex&apos;) !== this.fromAddress) { return (&apos;You cannot sign transaction for other wallets!&apos;); }
+        if (signingKeyPair.getPublic(&apos;hex&apos;) !== this.fromAddress) { return 0; }
 
         const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();
         return signingKeyPair.sign(signData).toDER(&apos;hex&apos;);
@@ -86,12 +87,19 @@ class Transaction {
      * Verifies by using public key.
      * @returns boolean
      */
-    isValid() {
-        if (!this.signature || this.signature.length === 0) return false;
+    static isValid(transaction) {
+        const {
+            timestamp, fromAddress, toAddress, amount, signature,
+        } = transaction;
 
-        const keyPair = ec.keyFromPublic(this.fromAddress, &apos;hex&apos;);
-        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();
-        return keyPair.verify(signData, this.signature);
+        if (fromAddress === REWARD_TX) return true;
+
+        if (!signature || signature.length === 0) return false;
+        if (amount === 0) return false;
+
+        const keyPair = ec.keyFromPublic(fromAddress, &apos;hex&apos;);
+        const signData = (timestamp + fromAddress + toAddress + amount).toString();
+        return keyPair.verify(signData, signature);
     }
 }
 module.exports = Transaction;

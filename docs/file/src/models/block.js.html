@@ -43,6 +43,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/models/block.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const { generateHash } = require(&apos;../utils/crypto-util&apos;);
 const { DIFFICULTY, CREATION_TIME } = require(&apos;../../config/network-parameters&apos;);
+const Transaction = require(&apos;./transaction&apos;);
 
 /**
  * Block class
@@ -75,7 +76,7 @@ class Block {
     static genesisBlock() {
         return new Block(&apos;000000&apos;, &apos;-&apos;, &apos;111-111&apos;, 0, DIFFICULTY, []);
     }
-    
+
     /**
      * Method to mine a new block. Loop stops when hash with current difficulty is found.
      * @param {object} lastBlock - Block class object
@@ -131,9 +132,9 @@ class Block {
      * Method to check if transactions in current block are valid, using isValid helper function
      * @returns boolean
      */
-    hasValidTransactions() {
-        for (let i = 0; i &lt; this.transactions.length; i++) {
-            if (!this.transactions[i].isValid()) {
+    static hasValidTransactions(block) {
+        for (let i = 0; i &lt; block.transactions.length; i++) {
+            if (!Transaction.isValid(block.transactions[i])) {
                 return false;
             }
         }

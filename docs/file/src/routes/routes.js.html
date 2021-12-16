@@ -42,7 +42,6 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/routes/routes.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const express = require(&apos;express&apos;);
-const bodyParser = require(&apos;body-parser&apos;);
 const swaggerUi = require(&apos;swagger-ui-express&apos;);
 const YAML = require(&apos;yamljs&apos;);
 const path = require(&apos;path&apos;);
@@ -55,7 +54,6 @@ const app = require(&apos;../../app&apos;);
 
 const router = express.Router();
 
-router.use(bodyParser.json());
 router.use(&apos;/api-docs&apos;, swaggerUi.serve);
 
 router.get(&apos;/&apos;, (req, res) =&gt; {
@@ -76,12 +74,60 @@ router.get(&apos;/generate&apos;, (req, res) =&gt; {
     });
 });
 
-router.get(&apos;/blocks/last&apos;, (req, res) =&gt; {
+router.get(&apos;/blocks/latest&apos;, (req, res) =&gt; {
     res.json(app.blockchain.getLatestBlock());
+});
+
+router.get(&apos;/blocks/id/:id&apos;, (req, res) =&gt; {
+    if (+req.params.id &lt;= app.blockchain.chain.length) {
+        res.json(app.blockchain.chain[+req.params.id - 1]);
+    } else {
+        res.status(404);
+        res.json(`There is no block with id: ${req.params.id}`);
+    }
+});
+
+router.get(&apos;/blocks/hash/:hash&apos;, (req, res) =&gt; {
+    let found = false;
+    let foundBlock;
+    app.blockchain.chain.forEach((block) =&gt; {
+        if (block.hash === req.params.hash) {
+            found = true;
+            foundBlock = block;
+        }
+    });
+
+    if (found) {
+        res.json(foundBlock);
+    } else {
+        res.status(404);
+        res.json(`There is no block with hash: ${req.params.hash}`);
+    }
 });
 
 router.get(&apos;/transactions&apos;, (req, res) =&gt; {
     res.json(app.blockchain.pendingTransactions);
+});
+
+router.get(&apos;/transactions/hash/:hash&apos;, (req, res) =&gt; {
+    let found = false;
+    let foundTx;
+
+    app.blockchain.chain.forEach((block) =&gt; {
+        block.transactions.forEach((tx) =&gt; {
+            if (req.params.hash === tx.hash) {
+                found = true;
+                foundTx = tx;
+            }
+        });
+    });
+
+    if (found) {
+        res.json(foundTx);
+    } else {
+        res.status(404);
+        res.json(`There is no transaction with hash: ${req.params.hash}`);
+    }
 });
 
 router.get(&apos;/address/balance/:address&apos;, (req, res) =&gt; {

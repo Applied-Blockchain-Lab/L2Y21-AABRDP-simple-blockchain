@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/models/block.js",
-    "content": "const { generateHash } = require('../utils/crypto-util');\r\nconst { DIFFICULTY, CREATION_TIME } = require('../../config/network-parameters');\r\n\r\n/**\r\n * Block class\r\n * @example <caption>Create a new block object</caption>\r\n * let block = new Block(timestamp, parentHash, hash, nonce, difficulty, transaction);\r\n */\r\nclass Block {\r\n    /**\r\n     * Block constructor\r\n     * @param {string} timestamp - Block creation time in seconds after Unix Epoch\r\n     * @param {string} parentHash - SHA256 hash of the previous block\r\n     * @param {string} hash - SHA256 hash of the current block\r\n     * @param {number} nonce - Counter for PoW algorithm\r\n     * @param {number} difficulty - Target number for current block (count of leading zeros)\r\n     * @param {object[]} transactions - List of transactions for the current block\r\n     */\r\n    constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {\r\n        this.timestamp = timestamp;\r\n        this.parentHash = parentHash;\r\n        this.hash = hash;\r\n        this.nonce = nonce;\r\n        this.difficulty = difficulty || DIFFICULTY;\r\n        this.transactions = transactions;\r\n    }\r\n\r\n    /**\r\n     * Method to create genesis block with default parameters\r\n     * @returns {object} New block object\r\n     */\r\n    static genesisBlock() {\r\n        return new Block('000000', '-', '111-111', 0, DIFFICULTY, []);\r\n    }\r\n    \r\n    /**\r\n     * Method to mine a new block. Loop stops when hash with current difficulty is found.\r\n     * @param {object} lastBlock - Block class object\r\n     * @param {object[]} transactions - Transactions which will be included in current block\r\n     * @returns New block object with calculated parameters - Block class object\r\n     */\r\n    static mineBlock(lastBlock, transactions) {\r\n        let nonce = 0;\r\n        let hash;\r\n        let timestamp;\r\n        const parentHash = lastBlock.hash;\r\n        let { difficulty } = lastBlock;\r\n\r\n        do {\r\n            nonce++;\r\n            timestamp = Date.now();\r\n            difficulty = Block.adjustDifficulty(lastBlock, timestamp);\r\n            hash = generateHash(timestamp + parentHash + nonce + difficulty + transactions);\r\n        } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));\r\n\r\n        return new Block(timestamp, parentHash, hash, nonce, difficulty, transactions);\r\n    }\r\n\r\n    /**\r\n     * Method for generating hash from existing block - helper to validate chain\r\n     * @param {object} block - Block class object\r\n     * @returns Hash from block parameter attributes - string\r\n     */\r\n    static blockHash(block) {\r\n        const {\r\n            timestamp, parentHash, nonce, difficulty, transactions,\r\n        } = block;\r\n\r\n        return generateHash(timestamp + parentHash + nonce + difficulty + transactions);\r\n    }\r\n\r\n    /**\r\n     * Method to adjust difficulty.\r\n     * Sets difficulty according to last block's timestamp and CREATION_TIME from config file.\r\n     * @param {object} lastBlock - Block class object\r\n     * @param {string} currentTime - Time in seconds\r\n     * @returns Adjusted difficulty - string\r\n     */\r\n    static adjustDifficulty(lastBlock, currentTime) {\r\n        let { difficulty } = lastBlock;\r\n        difficulty = lastBlock.timestamp + CREATION_TIME > currentTime\r\n            ? difficulty + 1 : difficulty - 1;\r\n\r\n        return difficulty;\r\n    }\r\n\r\n    /**\r\n     * Method to check if transactions in current block are valid, using isValid helper function\r\n     * @returns boolean\r\n     */\r\n    hasValidTransactions() {\r\n        for (let i = 0; i < this.transactions.length; i++) {\r\n            if (!this.transactions[i].isValid()) {\r\n                return false;\r\n            }\r\n        }\r\n        return true;\r\n    }\r\n\r\n    /**\r\n     * Method for logging Block class object\r\n     * @returns string\r\n     */\r\n    toString() {\r\n        return `Block -\r\n            Timestamp    : ${this.timestamp}\r\n            Parent hash  : ${this.parentHash}\r\n            Hash         : ${this.hash}\r\n            Nonce        : ${this.nonce}\r\n            Difficulty   : ${this.difficulty}\r\n            Transactions : ${this.transactions}\r\n        `;\r\n    }\r\n}\r\nmodule.exports = Block;\r\n",
+    "content": "const { generateHash } = require('../utils/crypto-util');\r\nconst { DIFFICULTY, CREATION_TIME } = require('../../config/network-parameters');\r\nconst Transaction = require('./transaction');\r\n\r\n/**\r\n * Block class\r\n * @example <caption>Create a new block object</caption>\r\n * let block = new Block(timestamp, parentHash, hash, nonce, difficulty, transaction);\r\n */\r\nclass Block {\r\n    /**\r\n     * Block constructor\r\n     * @param {string} timestamp - Block creation time in seconds after Unix Epoch\r\n     * @param {string} parentHash - SHA256 hash of the previous block\r\n     * @param {string} hash - SHA256 hash of the current block\r\n     * @param {number} nonce - Counter for PoW algorithm\r\n     * @param {number} difficulty - Target number for current block (count of leading zeros)\r\n     * @param {object[]} transactions - List of transactions for the current block\r\n     */\r\n    constructor(timestamp, parentHash, hash, nonce, difficulty, transactions) {\r\n        this.timestamp = timestamp;\r\n        this.parentHash = parentHash;\r\n        this.hash = hash;\r\n        this.nonce = nonce;\r\n        this.difficulty = difficulty || DIFFICULTY;\r\n        this.transactions = transactions;\r\n    }\r\n\r\n    /**\r\n     * Method to create genesis block with default parameters\r\n     * @returns {object} New block object\r\n     */\r\n    static genesisBlock() {\r\n        return new Block('000000', '-', '111-111', 0, DIFFICULTY, []);\r\n    }\r\n\r\n    /**\r\n     * Method to mine a new block. Loop stops when hash with current difficulty is found.\r\n     * @param {object} lastBlock - Block class object\r\n     * @param {object[]} transactions - Transactions which will be included in current block\r\n     * @returns New block object with calculated parameters - Block class object\r\n     */\r\n    static mineBlock(lastBlock, transactions) {\r\n        let nonce = 0;\r\n        let hash;\r\n        let timestamp;\r\n        const parentHash = lastBlock.hash;\r\n        let { difficulty } = lastBlock;\r\n\r\n        do {\r\n            nonce++;\r\n            timestamp = Date.now();\r\n            difficulty = Block.adjustDifficulty(lastBlock, timestamp);\r\n            hash = generateHash(timestamp + parentHash + nonce + difficulty + transactions);\r\n        } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));\r\n\r\n        return new Block(timestamp, parentHash, hash, nonce, difficulty, transactions);\r\n    }\r\n\r\n    /**\r\n     * Method for generating hash from existing block - helper to validate chain\r\n     * @param {object} block - Block class object\r\n     * @returns Hash from block parameter attributes - string\r\n     */\r\n    static blockHash(block) {\r\n        const {\r\n            timestamp, parentHash, nonce, difficulty, transactions,\r\n        } = block;\r\n\r\n        return generateHash(timestamp + parentHash + nonce + difficulty + transactions);\r\n    }\r\n\r\n    /**\r\n     * Method to adjust difficulty.\r\n     * Sets difficulty according to last block's timestamp and CREATION_TIME from config file.\r\n     * @param {object} lastBlock - Block class object\r\n     * @param {string} currentTime - Time in seconds\r\n     * @returns Adjusted difficulty - string\r\n     */\r\n    static adjustDifficulty(lastBlock, currentTime) {\r\n        let { difficulty } = lastBlock;\r\n        difficulty = lastBlock.timestamp + CREATION_TIME > currentTime\r\n            ? difficulty + 1 : difficulty - 1;\r\n\r\n        return difficulty;\r\n    }\r\n\r\n    /**\r\n     * Method to check if transactions in current block are valid, using isValid helper function\r\n     * @returns boolean\r\n     */\r\n    static hasValidTransactions(block) {\r\n        for (let i = 0; i < block.transactions.length; i++) {\r\n            if (!Transaction.isValid(block.transactions[i])) {\r\n                return false;\r\n            }\r\n        }\r\n        return true;\r\n    }\r\n\r\n    /**\r\n     * Method for logging Block class object\r\n     * @returns string\r\n     */\r\n    toString() {\r\n        return `Block -\r\n            Timestamp    : ${this.timestamp}\r\n            Parent hash  : ${this.parentHash}\r\n            Hash         : ${this.hash}\r\n            Nonce        : ${this.nonce}\r\n            Difficulty   : ${this.difficulty}\r\n            Transactions : ${this.transactions}\r\n        `;\r\n    }\r\n}\r\nmodule.exports = Block;\r\n",
     "static": true,
     "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/block.js",
     "access": "public",
@@ -631,7 +631,7 @@
     "examples": [
       "<caption>Create a new block object</caption>\nlet block = new Block(timestamp, parentHash, hash, nonce, difficulty, transaction);"
     ],
-    "lineNumber": 11,
+    "lineNumber": 12,
     "interface": false
   },
   {
@@ -645,7 +645,7 @@
     "longname": "src/models/block.js~Block#constructor",
     "access": "public",
     "description": "Block constructor",
-    "lineNumber": 21,
+    "lineNumber": 22,
     "params": [
       {
         "nullable": null,
@@ -718,7 +718,7 @@
     "longname": "src/models/block.js~Block#timestamp",
     "access": "public",
     "description": null,
-    "lineNumber": 22,
+    "lineNumber": 23,
     "undocument": true,
     "type": {
       "types": [
@@ -735,7 +735,7 @@
     "longname": "src/models/block.js~Block#parentHash",
     "access": "public",
     "description": null,
-    "lineNumber": 23,
+    "lineNumber": 24,
     "undocument": true,
     "type": {
       "types": [
@@ -752,7 +752,7 @@
     "longname": "src/models/block.js~Block#hash",
     "access": "public",
     "description": null,
-    "lineNumber": 24,
+    "lineNumber": 25,
     "undocument": true,
     "type": {
       "types": [
@@ -769,7 +769,7 @@
     "longname": "src/models/block.js~Block#nonce",
     "access": "public",
     "description": null,
-    "lineNumber": 25,
+    "lineNumber": 26,
     "undocument": true,
     "type": {
       "types": [
@@ -786,7 +786,7 @@
     "longname": "src/models/block.js~Block#difficulty",
     "access": "public",
     "description": null,
-    "lineNumber": 26,
+    "lineNumber": 27,
     "undocument": true,
     "type": {
       "types": [
@@ -803,7 +803,7 @@
     "longname": "src/models/block.js~Block#transactions",
     "access": "public",
     "description": null,
-    "lineNumber": 27,
+    "lineNumber": 28,
     "undocument": true,
     "type": {
       "types": [
@@ -822,7 +822,7 @@
     "longname": "src/models/block.js~Block.genesisBlock",
     "access": "public",
     "description": "Method to create genesis block with default parameters",
-    "lineNumber": 34,
+    "lineNumber": 35,
     "unknown": [
       {
         "tagName": "@returns",
@@ -850,7 +850,7 @@
     "longname": "src/models/block.js~Block.mineBlock",
     "access": "public",
     "description": "Method to mine a new block. Loop stops when hash with current difficulty is found.",
-    "lineNumber": 44,
+    "lineNumber": 45,
     "unknown": [
       {
         "tagName": "@returns",
@@ -899,7 +899,7 @@
     "longname": "src/models/block.js~Block.blockHash",
     "access": "public",
     "description": "Method for generating hash from existing block - helper to validate chain",
-    "lineNumber": 66,
+    "lineNumber": 67,
     "unknown": [
       {
         "tagName": "@returns",
@@ -938,7 +938,7 @@
     "longname": "src/models/block.js~Block.adjustDifficulty",
     "access": "public",
     "description": "Method to adjust difficulty.\nSets difficulty according to last block's timestamp and CREATION_TIME from config file.",
-    "lineNumber": 81,
+    "lineNumber": 82,
     "unknown": [
       {
         "tagName": "@returns",
@@ -983,11 +983,11 @@
     "memberof": "src/models/block.js~Block",
     "generator": false,
     "async": false,
-    "static": false,
-    "longname": "src/models/block.js~Block#hasValidTransactions",
+    "static": true,
+    "longname": "src/models/block.js~Block.hasValidTransactions",
     "access": "public",
     "description": "Method to check if transactions in current block are valid, using isValid helper function",
-    "lineNumber": 93,
+    "lineNumber": 94,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1002,7 +1002,14 @@
       "spread": false,
       "description": "boolean"
     },
-    "params": []
+    "params": [
+      {
+        "name": "block",
+        "types": [
+          "*"
+        ]
+      }
+    ]
   },
   {
     "__docId__": 64,
@@ -1015,7 +1022,7 @@
     "longname": "src/models/block.js~Block#toString",
     "access": "public",
     "description": "Method for logging Block class object",
-    "lineNumber": 106,
+    "lineNumber": 107,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1036,7 +1043,7 @@
     "__docId__": 65,
     "kind": "file",
     "name": "src/models/chain.js",
-    "content": "const fs = require('fs');\r\nconst path = require('path');\r\nconst EC = require('elliptic').ec;\r\n\r\nconst Block = require('./block');\r\nconst Transaction = require('./transaction');\r\nconst { BLOCK_SIZE } = require('../../config/network-parameters');\r\nconst { KEY_PAIRS_FOLDER } = require('../../config/ports-folders');\r\n\r\nconst ec = new EC('secp256k1');\r\n\r\n/**\r\n * Chain class\r\n * @example <caption>Create a new blockchain object</caption>\r\n * let blockchain = new Chain();\r\n */\r\nclass Chain {\r\n    constructor() {\r\n        /**\r\n         * List of Block class objects.\r\n         * @type {object[]} \r\n         */\r\n        this.chain = [Block.genesisBlock()];\r\n        /**\r\n         * List of Transaction class objects.\r\n         * @type {object[]}\r\n         */\r\n        this.pendingTransactions = [];\r\n    }\r\n\r\n    /**\r\n     * Method to add transaction in pendingTransactions array.\r\n     * Has few checks for validation.\r\n     * Reads public and private keys from .json file in keypairs directory.\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @param {number} amount - Amount to send\r\n     * @returns Transaction class object\r\n     */\r\n    addTransaction(fromAddress, toAddress, amount) {\r\n        let fileContent;\r\n\r\n        if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }\r\n\r\n        if (amount === 0) {\r\n            return console.log('Amount can\\'t be 0!');\r\n        }\r\n\r\n        if (amount > this.getBalanceOfAddress(fromAddress)) {\r\n            return console.log(`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);\r\n        }\r\n\r\n        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {\r\n            if (file === `${fromAddress}.json`) {\r\n                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));\r\n            }\r\n        });\r\n\r\n        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');\r\n\r\n        const transaction = new Transaction(fromAddress, toAddress, amount, keyPair);\r\n\r\n        if (!transaction.isValid()) return ('Cannot add invalid transaction!');\r\n\r\n        this.pendingTransactions.push(transaction);\r\n\r\n        return transaction;\r\n    }\r\n\r\n    /**\r\n     * Method to add Block class object to chain member in Chain class.\r\n     * @returns Block class object\r\n     */\r\n    addBlock() {\r\n        if (this.pendingTransactions.length <= 1) {\r\n            return console.log('No pendingTransactions - cannot mine new block!');\r\n        }\r\n\r\n        const newBlock = Block.mineBlock(this.getLatestBlock(), this.getFromPendingTransactions());\r\n        this.chain.push(newBlock);\r\n\r\n        return newBlock;\r\n    }\r\n\r\n    /**\r\n     * Method to replace current Chain class member with another Chain class member. \r\n     * It is used for broadcasting blockchain to other peers.\r\n     * @param {object[]} newChain - Chain class object\r\n     * @returns string\r\n     */\r\n    replaceChain(newChain) {\r\n        if (newChain.length <= this.chain.length) {\r\n            console.log('Received chain is not longer than the current chain.');\r\n            return 'Received chain is not longer than the current chain.';\r\n        }\r\n\r\n        if (!this.isValidChain(newChain)) {\r\n            console.log('Received chain is not valid.');\r\n            return 'Received chain is not valid.';\r\n        }\r\n\r\n        this.chain = newChain;\r\n        console.log('Replacing with the new chain!');\r\n        return 'Replacing with the new chain!';\r\n    }\r\n\r\n    /**\r\n     * Method to check if chain is valid.\r\n     * Checks are: \r\n     * - if chain list starts with genesis block;\r\n     * - if current block previous hash and previous block hash are matching;\r\n     * - if current block has valid transactions.\r\n     * @returns boolean\r\n     */\r\n    isValidChain() {\r\n        if (JSON.stringify(this.chain[0]) !== JSON.stringify(Block.genesisBlock())) return false;\r\n\r\n        for (let i = 1; i < this.chain.length; i++) {\r\n            const currentBlock = this.chain[i];\r\n            const previousBlock = this.chain[i - 1];\r\n\r\n            if (currentBlock.parentHash !== previousBlock.hash\r\n                || currentBlock.hash !== Block.blockHash(currentBlock)) return false;\r\n\r\n            if (!currentBlock.hasValidTransactions()) return false;\r\n        }\r\n        return true;\r\n    }\r\n\r\n    /**\r\n     * Clears pending transactions list in Chain class object.\r\n     */\r\n    clearPendingTransactions() {\r\n        this.pendingTransactions = [];\r\n    }\r\n\r\n    /**\r\n     * Returns last block from chain list.\r\n     * @returns object\r\n     */\r\n    getLatestBlock() {\r\n        return this.chain[this.chain.length - 1];\r\n    }\r\n\r\n    /**\r\n     * Cuts pending transaction list to BLOCK_SIZE, declared in config file.\r\n     * @returns Transaction class object array\r\n     */\r\n    getFromPendingTransactions() {\r\n        return this.pendingTransactions[BLOCK_SIZE - 1]\r\n            ? this.pendingTransactions.splice(0, BLOCK_SIZE)\r\n            : this.pendingTransactions.splice(0, this.pendingTransactions.length);\r\n    }\r\n\r\n    /**\r\n     * Returns balance of given address.\r\n     * Subtracts, if address is sender and adds, if address is receiver.\r\n     * @param {string} address - Public key in hex string generated by elliptic (secp256k1) library\r\n     * @returns number\r\n     */\r\n    getBalanceOfAddress(address) {\r\n        let balance = 0;\r\n\r\n        this.chain.forEach((block) => {\r\n            block.transactions.forEach((transaction) => {\r\n                if (transaction.fromAddress === address) {\r\n                    balance -= transaction.amount;\r\n                }\r\n                if (transaction.toAddress === address) {\r\n                    balance += transaction.amount;\r\n                }\r\n            });\r\n        });\r\n        return balance;\r\n    }\r\n\r\n    /**\r\n     * Sends coins to given address from faucet address.\r\n     * Faucet address .json file must be in keypairs directory.\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @returns transaction object\r\n     */\r\n    getCoins(fromAddress, toAddress) {\r\n        let fileContent;\r\n\r\n        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {\r\n            if (file === `${fromAddress}.json`) {\r\n                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));\r\n            }\r\n        });\r\n\r\n        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');\r\n        const transaction = new Transaction(fromAddress, toAddress, 100, keyPair);\r\n        this.pendingTransactions.push(transaction);\r\n        return transaction;\r\n    }\r\n}\r\nmodule.exports = Chain;\r\n",
+    "content": "const fs = require('fs');\r\nconst path = require('path');\r\nconst EC = require('elliptic').ec;\r\n\r\nconst Block = require('./block');\r\nconst Transaction = require('./transaction');\r\nconst { BLOCK_SIZE } = require('../../config/network-parameters');\r\nconst { KEY_PAIRS_FOLDER } = require('../../config/ports-folders');\r\n\r\nconst ec = new EC('secp256k1');\r\n\r\n/**\r\n * Chain class\r\n * @example <caption>Create a new blockchain object</caption>\r\n * let blockchain = new Chain();\r\n */\r\nclass Chain {\r\n    constructor() {\r\n        /**\r\n         * List of Block class objects.\r\n         * @type {object[]}\r\n         */\r\n        this.chain = [Block.genesisBlock()];\r\n        /**\r\n         * List of Transaction class objects.\r\n         * @type {object[]}\r\n         */\r\n        this.pendingTransactions = [];\r\n    }\r\n\r\n    /**\r\n     * Method to add transaction in pendingTransactions array.\r\n     * Has few checks for validation.\r\n     * Reads public and private keys from .json file in keypairs directory.\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @param {number} amount - Amount to send\r\n     * @returns Transaction class object\r\n     */\r\n    addTransaction(fromAddress, toAddress, amount) {\r\n        let fileContent;\r\n\r\n        if (fromAddress === '' || toAddress === '' || amount === '') { return ('Transaction must include from and to addresses and amount!'); }\r\n\r\n        if (amount === 0) {\r\n            return console.log('Amount can\\'t be 0!');\r\n        }\r\n\r\n        if (amount > this.getBalanceOfAddress(fromAddress)) {\r\n            return console.log(`Amount ${amount} exceeds current balance ${this.getBalanceOfAddress(fromAddress)}.`);\r\n        }\r\n\r\n        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {\r\n            if (file === `${fromAddress}.json`) {\r\n                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));\r\n            }\r\n        });\r\n\r\n        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');\r\n\r\n        const transaction = new Transaction(fromAddress, toAddress, amount, keyPair);\r\n\r\n        if (!Transaction.isValid(transaction)) return ('Cannot add invalid transaction!');\r\n\r\n        this.pendingTransactions.push(transaction);\r\n\r\n        return transaction;\r\n    }\r\n\r\n    /**\r\n     * Method to add Block class object to chain member in Chain class.\r\n     * @returns Block class object\r\n     */\r\n    addBlock() {\r\n        if (this.pendingTransactions.length <= 1) {\r\n            return console.log('No pendingTransactions - cannot mine new block!');\r\n        }\r\n\r\n        const newBlock = Block.mineBlock(this.getLatestBlock(), this.getFromPendingTransactions());\r\n        this.chain.push(newBlock);\r\n\r\n        return newBlock;\r\n    }\r\n\r\n    /**\r\n     * Method to replace current Chain class member with another Chain class member.\r\n     * It is used for broadcasting blockchain to other peers.\r\n     * @param {object[]} newChain - Chain class object\r\n     * @returns string\r\n     */\r\n    replaceChain(newChain) {\r\n        if (newChain.length <= this.chain.length) {\r\n            console.log('Received chain is not longer than the current chain.');\r\n            return 'Received chain is not longer than the current chain.';\r\n        }\r\n\r\n        if (!this.isValidChain(newChain)) {\r\n            console.log('Received chain is not valid.');\r\n            return 'Received chain is not valid.';\r\n        }\r\n\r\n        this.chain = newChain;\r\n        console.log('Replacing with the new chain!');\r\n        return 'Replacing with the new chain!';\r\n    }\r\n\r\n    /**\r\n     * Method to check if chain is valid.\r\n     * Checks are:\r\n     * - if chain list starts with genesis block;\r\n     * - if current block previous hash and previous block hash are matching;\r\n     * - if current block has valid transactions.\r\n     * @returns boolean\r\n     */\r\n    isValidChain(newChain) {\r\n        if (JSON.stringify(newChain[0]) !== JSON.stringify(Block.genesisBlock())) return false;\r\n\r\n        for (let i = 1; i < newChain.length; i++) {\r\n            const currentBlock = newChain[i];\r\n            const previousBlock = newChain[i - 1];\r\n\r\n            if (currentBlock.parentHash !== previousBlock.hash\r\n                || currentBlock.hash !== Block.blockHash(currentBlock)) return false;\r\n\r\n            if (!Block.hasValidTransactions(currentBlock)) return false;\r\n        }\r\n        return true;\r\n    }\r\n\r\n    /**\r\n     * Clears pending transactions list in Chain class object.\r\n     */\r\n    clearPendingTransactions() {\r\n        this.pendingTransactions = [];\r\n    }\r\n\r\n    /**\r\n     * Returns last block from chain list.\r\n     * @returns object\r\n     */\r\n    getLatestBlock() {\r\n        return this.chain[this.chain.length - 1];\r\n    }\r\n\r\n    /**\r\n     * Cuts pending transaction list to BLOCK_SIZE, declared in config file.\r\n     * @returns Transaction class object array\r\n     */\r\n    getFromPendingTransactions() {\r\n        return this.pendingTransactions[BLOCK_SIZE - 1]\r\n            ? this.pendingTransactions.splice(0, BLOCK_SIZE)\r\n            : this.pendingTransactions.splice(0, this.pendingTransactions.length);\r\n    }\r\n\r\n    /**\r\n     * Returns balance of given address.\r\n     * Subtracts, if address is sender and adds, if address is receiver.\r\n     * @param {string} address - Public key in hex string generated by elliptic (secp256k1) library\r\n     * @returns number\r\n     */\r\n    getBalanceOfAddress(address) {\r\n        let balance = 0;\r\n\r\n        this.chain.forEach((block) => {\r\n            block.transactions.forEach((transaction) => {\r\n                if (transaction.fromAddress === address) {\r\n                    balance -= transaction.amount;\r\n                }\r\n                if (transaction.toAddress === address) {\r\n                    balance += transaction.amount;\r\n                }\r\n            });\r\n        });\r\n        return balance;\r\n    }\r\n\r\n    /**\r\n     * Sends coins to given address from faucet address.\r\n     * Faucet address .json file must be in keypairs directory.\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @returns transaction object\r\n     */\r\n    getCoins(fromAddress, toAddress) {\r\n        let fileContent;\r\n\r\n        fs.readdirSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/`)).forEach((file) => {\r\n            if (file === `${fromAddress}.json`) {\r\n                fileContent = JSON.parse(fs.readFileSync(path.join(__dirname, `../../${KEY_PAIRS_FOLDER}/${file}`)));\r\n            }\r\n        });\r\n\r\n        const keyPair = ec.keyFromPrivate(fileContent.privateKey, 'hex');\r\n        const transaction = new Transaction(fromAddress, toAddress, 100, keyPair);\r\n        this.pendingTransactions.push(transaction);\r\n        return transaction;\r\n    }\r\n}\r\nmodule.exports = Chain;\r\n",
     "static": true,
     "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/chain.js",
     "access": "public",
@@ -1273,7 +1280,7 @@
     "static": false,
     "longname": "src/models/chain.js~Chain#replaceChain",
     "access": "public",
-    "description": "Method to replace current Chain class member with another Chain class member. \nIt is used for broadcasting blockchain to other peers.",
+    "description": "Method to replace current Chain class member with another Chain class member.\nIt is used for broadcasting blockchain to other peers.",
     "lineNumber": 93,
     "unknown": [
       {
@@ -1312,7 +1319,7 @@
     "static": false,
     "longname": "src/models/chain.js~Chain#isValidChain",
     "access": "public",
-    "description": "Method to check if chain is valid.\nChecks are: \n- if chain list starts with genesis block;\n- if current block previous hash and previous block hash are matching;\n- if current block has valid transactions.",
+    "description": "Method to check if chain is valid.\nChecks are:\n- if chain list starts with genesis block;\n- if current block previous hash and previous block hash are matching;\n- if current block has valid transactions.",
     "lineNumber": 117,
     "unknown": [
       {
@@ -1328,7 +1335,14 @@
       "spread": false,
       "description": "boolean"
     },
-    "params": []
+    "params": [
+      {
+        "name": "newChain",
+        "types": [
+          "*"
+        ]
+      }
+    ]
   },
   {
     "__docId__": 78,
@@ -1493,7 +1507,7 @@
     "__docId__": 84,
     "kind": "file",
     "name": "src/models/miner.js",
-    "content": "const Transaction = require('./transaction');\r\n\r\nconst { MINING_REWARD } = require('../../config/network-parameters');\r\n\r\n/**\r\n * Miner class\r\n * @example <caption>Create a new miner object</caption>\r\n * let blockchain = new Chain();\r\n * let wsServer = new wsServer(...params);\r\n * let miner = new Miner(blockchain, wsServer);\r\n */\r\nclass Miner {\r\n    /**\r\n     * Miner constructor\r\n     * @param {object} blockchain - Blockchain class object.\r\n     * @param {object} wsServer - Websocket class object.\r\n     */\r\n    constructor(blockchain, wsServer) {\r\n        this.blockchain = blockchain;\r\n        this.wsServer = wsServer;\r\n    }\r\n\r\n    /**\r\n     * Method to mine new block in blockchain.\r\n     * Uses Websocket to synchronize chains and to clear pending transactions list.\r\n     * @param {string} minerAddress - Public key in hex string generated by elliptic (secp256k1) library\r\n     * @returns Block class object\r\n     */\r\n    mine(minerAddress) {\r\n        const coinbaseTransaction = new Transaction(0, minerAddress, MINING_REWARD, 0);\r\n\r\n        this.blockchain.pendingTransactions.unshift(coinbaseTransaction);\r\n\r\n        const newBlock = this.blockchain.addBlock();\r\n\r\n        this.wsServer.synchronizeChains();\r\n\r\n        this.blockchain.clearPendingTransactions();\r\n\r\n        this.wsServer.broadcastClearTransactions();\r\n\r\n        return newBlock;\r\n    }\r\n}\r\n\r\nmodule.exports = Miner;\r\n",
+    "content": "const Transaction = require('./transaction');\r\n\r\nconst { MINING_REWARD, REWARD_TX } = require('../../config/network-parameters');\r\n\r\n/**\r\n * Miner class\r\n * @example <caption>Create a new miner object</caption>\r\n * let blockchain = new Chain();\r\n * let wsServer = new wsServer(...params);\r\n * let miner = new Miner(blockchain, wsServer);\r\n */\r\nclass Miner {\r\n    /**\r\n     * Miner constructor\r\n     * @param {object} blockchain - Blockchain class object.\r\n     * @param {object} wsServer - Websocket class object.\r\n     */\r\n    constructor(blockchain, wsServer) {\r\n        this.blockchain = blockchain;\r\n        this.wsServer = wsServer;\r\n    }\r\n\r\n    /**\r\n     * Method to mine new block in blockchain.\r\n     * Uses Websocket to synchronize chains and to clear pending transactions list.\r\n     * @param {string} minerAddress - Public key in hex string generated by elliptic (secp256k1) library\r\n     * @returns Block class object\r\n     */\r\n    mine(minerAddress) {\r\n        const coinbaseTransaction = new Transaction(REWARD_TX, minerAddress, MINING_REWARD, 0);\r\n\r\n        this.blockchain.pendingTransactions.unshift(coinbaseTransaction);\r\n\r\n        const newBlock = this.blockchain.addBlock();\r\n\r\n        this.wsServer.synchronizeChains();\r\n\r\n        return newBlock;\r\n    }\r\n}\r\n\r\nmodule.exports = Miner;\r\n",
     "static": true,
     "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/miner.js",
     "access": "public",
@@ -1651,7 +1665,7 @@
     "__docId__": 91,
     "kind": "file",
     "name": "src/models/transaction.js",
-    "content": "const EC = require('elliptic').ec;\r\nconst { generateHash } = require('../utils/crypto-util');\r\n\r\nconst ec = new EC('secp256k1');\r\n\r\n/**\r\n * Transaction class\r\n * @example <caption>Create a new transaction object</caption>\r\n * let transaction = new Transaction(sender public key, receiver public key, amount);\r\n */\r\nclass Transaction {\r\n    /**\r\n     * Transaction constructor\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @param {number} amount - Amount to send\r\n     * @param {object} keyPair - Private and public key object, generated with elliptic(secp256k1) library\r\n     */\r\n    constructor(fromAddress, toAddress, amount, keyPair) {\r\n        this.timestamp = Date.now();\r\n        this.fromAddress = fromAddress;\r\n        this.toAddress = toAddress;\r\n        this.amount = amount;\r\n        this.signature = this.sign(keyPair);\r\n        this.hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount + this.signature);\r\n    }\r\n\r\n    /**\r\n     * Method for creating a digital signature.\r\n     * @param {object} signingKeyPair - Private and public key object\r\n     * @returns Encoded hex string\r\n     */\r\n    sign(signingKeyPair) {\r\n        if (signingKeyPair === 0) { return 0; }\r\n        if (signingKeyPair.getPublic('hex') !== this.fromAddress) { return ('You cannot sign transaction for other wallets!'); }\r\n\r\n        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();\r\n        return signingKeyPair.sign(signData).toDER('hex');\r\n    }\r\n\r\n    /**\r\n     * Helper method to check if transaction object is valid.\r\n     * Verifies by using public key.\r\n     * @returns boolean\r\n     */\r\n    isValid() {\r\n        if (!this.signature || this.signature.length === 0) return false;\r\n\r\n        const keyPair = ec.keyFromPublic(this.fromAddress, 'hex');\r\n        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();\r\n        return keyPair.verify(signData, this.signature);\r\n    }\r\n}\r\nmodule.exports = Transaction;\r\n",
+    "content": "const EC = require('elliptic').ec;\r\nconst { generateHash } = require('../utils/crypto-util');\r\nconst { REWARD_TX } = require('../../config/network-parameters');\r\n\r\nconst ec = new EC('secp256k1');\r\n\r\n/**\r\n * Transaction class\r\n * @example <caption>Create a new transaction object</caption>\r\n * let transaction = new Transaction(sender public key, receiver public key, amount);\r\n */\r\nclass Transaction {\r\n    /**\r\n     * Transaction constructor\r\n     * @param {string} fromAddress - Sender public key in hex string (secp256k1)\r\n     * @param {string} toAddress - Receiver public key in hex string (secp256k1)\r\n     * @param {number} amount - Amount to send\r\n     * @param {object} keyPair - Private and public key object, generated with elliptic(secp256k1) library\r\n     */\r\n    constructor(fromAddress, toAddress, amount, keyPair) {\r\n        this.timestamp = Date.now();\r\n        this.fromAddress = fromAddress;\r\n        this.toAddress = toAddress;\r\n        this.amount = amount;\r\n        this.signature = this.sign(keyPair);\r\n        this.hash = generateHash(this.timestamp + this.fromAddress + this.toAddress + this.amount + this.signature);\r\n    }\r\n\r\n    /**\r\n     * Method for creating a digital signature.\r\n     * @param {object} signingKeyPair - Private and public key object\r\n     * @returns Encoded hex string\r\n     */\r\n    sign(signingKeyPair) {\r\n        if (signingKeyPair === 0) { return 0; }\r\n        if (signingKeyPair.getPublic('hex') !== this.fromAddress) { return 0; }\r\n\r\n        const signData = (this.timestamp + this.fromAddress + this.toAddress + this.amount).toString();\r\n        return signingKeyPair.sign(signData).toDER('hex');\r\n    }\r\n\r\n    /**\r\n     * Helper method to check if transaction object is valid.\r\n     * Verifies by using public key.\r\n     * @returns boolean\r\n     */\r\n    static isValid(transaction) {\r\n        const {\r\n            timestamp, fromAddress, toAddress, amount, signature,\r\n        } = transaction;\r\n\r\n        if (fromAddress === REWARD_TX) return true;\r\n\r\n        if (!signature || signature.length === 0) return false;\r\n        if (amount === 0) return false;\r\n\r\n        const keyPair = ec.keyFromPublic(fromAddress, 'hex');\r\n        const signData = (timestamp + fromAddress + toAddress + amount).toString();\r\n        return keyPair.verify(signData, signature);\r\n    }\r\n}\r\nmodule.exports = Transaction;\r\n",
     "static": true,
     "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/models/transaction.js",
     "access": "public",
@@ -1682,10 +1696,10 @@
   {
     "__docId__": 93,
     "kind": "variable",
-    "name": "ec",
+    "name": "REWARD_TX",
     "memberof": "src/models/transaction.js",
     "static": true,
-    "longname": "src/models/transaction.js~ec",
+    "longname": "src/models/transaction.js~REWARD_TX",
     "access": "public",
     "export": false,
     "importPath": "l2y21-aabrdp-simple-blockchain/src/models/transaction.js",
@@ -1702,6 +1716,27 @@
   },
   {
     "__docId__": 94,
+    "kind": "variable",
+    "name": "ec",
+    "memberof": "src/models/transaction.js",
+    "static": true,
+    "longname": "src/models/transaction.js~ec",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/models/transaction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 95,
     "kind": "class",
     "name": "Transaction",
     "memberof": "src/models/transaction.js",
@@ -1715,11 +1750,11 @@
     "examples": [
       "<caption>Create a new transaction object</caption>\nlet transaction = new Transaction(sender public key, receiver public key, amount);"
     ],
-    "lineNumber": 12,
+    "lineNumber": 14,
     "interface": false
   },
   {
-    "__docId__": 95,
+    "__docId__": 96,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/models/transaction.js~Transaction",
@@ -1729,7 +1764,7 @@
     "longname": "src/models/transaction.js~Transaction#constructor",
     "access": "public",
     "description": "Transaction constructor",
-    "lineNumber": 20,
+    "lineNumber": 22,
     "params": [
       {
         "nullable": null,
@@ -1774,46 +1809,12 @@
     ]
   },
   {
-    "__docId__": 96,
+    "__docId__": 97,
     "kind": "member",
     "name": "timestamp",
     "memberof": "src/models/transaction.js~Transaction",
     "static": false,
     "longname": "src/models/transaction.js~Transaction#timestamp",
-    "access": "public",
-    "description": null,
-    "lineNumber": 21,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 97,
-    "kind": "member",
-    "name": "fromAddress",
-    "memberof": "src/models/transaction.js~Transaction",
-    "static": false,
-    "longname": "src/models/transaction.js~Transaction#fromAddress",
-    "access": "public",
-    "description": null,
-    "lineNumber": 22,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 98,
-    "kind": "member",
-    "name": "toAddress",
-    "memberof": "src/models/transaction.js~Transaction",
-    "static": false,
-    "longname": "src/models/transaction.js~Transaction#toAddress",
     "access": "public",
     "description": null,
     "lineNumber": 23,
@@ -1825,12 +1826,12 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 98,
     "kind": "member",
-    "name": "amount",
+    "name": "fromAddress",
     "memberof": "src/models/transaction.js~Transaction",
     "static": false,
-    "longname": "src/models/transaction.js~Transaction#amount",
+    "longname": "src/models/transaction.js~Transaction#fromAddress",
     "access": "public",
     "description": null,
     "lineNumber": 24,
@@ -1842,12 +1843,12 @@
     }
   },
   {
-    "__docId__": 100,
+    "__docId__": 99,
     "kind": "member",
-    "name": "signature",
+    "name": "toAddress",
     "memberof": "src/models/transaction.js~Transaction",
     "static": false,
-    "longname": "src/models/transaction.js~Transaction#signature",
+    "longname": "src/models/transaction.js~Transaction#toAddress",
     "access": "public",
     "description": null,
     "lineNumber": 25,
@@ -1859,12 +1860,12 @@
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 100,
     "kind": "member",
-    "name": "hash",
+    "name": "amount",
     "memberof": "src/models/transaction.js~Transaction",
     "static": false,
-    "longname": "src/models/transaction.js~Transaction#hash",
+    "longname": "src/models/transaction.js~Transaction#amount",
     "access": "public",
     "description": null,
     "lineNumber": 26,
@@ -1876,7 +1877,41 @@
     }
   },
   {
+    "__docId__": 101,
+    "kind": "member",
+    "name": "signature",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#signature",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
     "__docId__": 102,
+    "kind": "member",
+    "name": "hash",
+    "memberof": "src/models/transaction.js~Transaction",
+    "static": false,
+    "longname": "src/models/transaction.js~Transaction#hash",
+    "access": "public",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 103,
     "kind": "method",
     "name": "sign",
     "memberof": "src/models/transaction.js~Transaction",
@@ -1886,7 +1921,7 @@
     "longname": "src/models/transaction.js~Transaction#sign",
     "access": "public",
     "description": "Method for creating a digital signature.",
-    "lineNumber": 34,
+    "lineNumber": 36,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1915,17 +1950,17 @@
     }
   },
   {
-    "__docId__": 103,
+    "__docId__": 104,
     "kind": "method",
     "name": "isValid",
     "memberof": "src/models/transaction.js~Transaction",
     "generator": false,
     "async": false,
-    "static": false,
-    "longname": "src/models/transaction.js~Transaction#isValid",
+    "static": true,
+    "longname": "src/models/transaction.js~Transaction.isValid",
     "access": "public",
     "description": "Helper method to check if transaction object is valid.\nVerifies by using public key.",
-    "lineNumber": 47,
+    "lineNumber": 49,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1940,13 +1975,20 @@
       "spread": false,
       "description": "boolean"
     },
-    "params": []
+    "params": [
+      {
+        "name": "transaction",
+        "types": [
+          "*"
+        ]
+      }
+    ]
   },
   {
-    "__docId__": 104,
+    "__docId__": 105,
     "kind": "file",
     "name": "src/routes/routes.js",
-    "content": "const express = require('express');\r\nconst bodyParser = require('body-parser');\r\nconst swaggerUi = require('swagger-ui-express');\r\nconst YAML = require('yamljs');\r\nconst path = require('path');\r\n\r\nconst { generateKeyPair } = require('../utils/key-generator');\r\nconst { PEERS } = require('../../config/ports-folders');\r\n\r\nconst swaggerDocument = YAML.load(path.join(__dirname, '../../openapi/openapi.yaml'));\r\nconst app = require('../../app');\r\n\r\nconst router = express.Router();\r\n\r\nrouter.use(bodyParser.json());\r\nrouter.use('/api-docs', swaggerUi.serve);\r\n\r\nrouter.get('/', (req, res) => {\r\n    res.send('Welcome to AABRDP-simple-blockchain!');\r\n});\r\n\r\nrouter.get('/api-docs', swaggerUi.setup(swaggerDocument));\r\n\r\nrouter.get('/chain', (req, res) => {\r\n    res.json(app.blockchain);\r\n});\r\n\r\nrouter.get('/generate', (req, res) => {\r\n    const { privateKey, publicKey } = generateKeyPair();\r\n    res.json({\r\n        'Generated private key': privateKey,\r\n        'Generated public key': publicKey,\r\n    });\r\n});\r\n\r\nrouter.get('/blocks/last', (req, res) => {\r\n    res.json(app.blockchain.getLatestBlock());\r\n});\r\n\r\nrouter.get('/transactions', (req, res) => {\r\n    res.json(app.blockchain.pendingTransactions);\r\n});\r\n\r\nrouter.get('/address/balance/:address', (req, res) => {\r\n    res.json(app.blockchain.getBalanceOfAddress(req.params.address));\r\n});\r\n\r\nrouter.post('/addtransaction', (req, res) => {\r\n    const transaction = app.blockchain.addTransaction(req.body.fromAddress, req.body.toAddress, req.body.amount);\r\n    app.wsServer.broadcastTransaction(transaction);\r\n    res.redirect('/transactions');\r\n});\r\n\r\nrouter.post('/minetransactions', (req, res) => {\r\n    const block = app.miner.mine(req.body.mineraddress);\r\n\r\n    if (block) {\r\n        console.log(`New block added: ${block.toString()}`);\r\n        res.redirect('/chain');\r\n    } else {\r\n        res.json('No pendingTransactions - cannot mine new block!');\r\n    }\r\n});\r\n\r\nrouter.post('/getcoins', (req, res) => {\r\n    const transaction = app.blockchain.getCoins(req.body.fromAddress, req.body.toAddress);\r\n    app.wsServer.broadcastTransaction(transaction);\r\n    res.json('100 coins will be added to your address after new block is mined!');\r\n});\r\n\r\nrouter.get('/peers', (req, res) => {\r\n    if (PEERS.length === 0) {\r\n        res.json('No peers');\r\n    } else {\r\n        res.json(PEERS);\r\n    }\r\n});\r\n\r\nmodule.exports = router;\r\n",
+    "content": "const express = require('express');\r\nconst swaggerUi = require('swagger-ui-express');\r\nconst YAML = require('yamljs');\r\nconst path = require('path');\r\n\r\nconst { generateKeyPair } = require('../utils/key-generator');\r\nconst { PEERS } = require('../../config/ports-folders');\r\n\r\nconst swaggerDocument = YAML.load(path.join(__dirname, '../../openapi/openapi.yaml'));\r\nconst app = require('../../app');\r\n\r\nconst router = express.Router();\r\n\r\nrouter.use('/api-docs', swaggerUi.serve);\r\n\r\nrouter.get('/', (req, res) => {\r\n    res.send('Welcome to AABRDP-simple-blockchain!');\r\n});\r\n\r\nrouter.get('/api-docs', swaggerUi.setup(swaggerDocument));\r\n\r\nrouter.get('/chain', (req, res) => {\r\n    res.json(app.blockchain);\r\n});\r\n\r\nrouter.get('/generate', (req, res) => {\r\n    const { privateKey, publicKey } = generateKeyPair();\r\n    res.json({\r\n        'Generated private key': privateKey,\r\n        'Generated public key': publicKey,\r\n    });\r\n});\r\n\r\nrouter.get('/blocks/latest', (req, res) => {\r\n    res.json(app.blockchain.getLatestBlock());\r\n});\r\n\r\nrouter.get('/blocks/id/:id', (req, res) => {\r\n    if (+req.params.id <= app.blockchain.chain.length) {\r\n        res.json(app.blockchain.chain[+req.params.id - 1]);\r\n    } else {\r\n        res.status(404);\r\n        res.json(`There is no block with id: ${req.params.id}`);\r\n    }\r\n});\r\n\r\nrouter.get('/blocks/hash/:hash', (req, res) => {\r\n    let found = false;\r\n    let foundBlock;\r\n    app.blockchain.chain.forEach((block) => {\r\n        if (block.hash === req.params.hash) {\r\n            found = true;\r\n            foundBlock = block;\r\n        }\r\n    });\r\n\r\n    if (found) {\r\n        res.json(foundBlock);\r\n    } else {\r\n        res.status(404);\r\n        res.json(`There is no block with hash: ${req.params.hash}`);\r\n    }\r\n});\r\n\r\nrouter.get('/transactions', (req, res) => {\r\n    res.json(app.blockchain.pendingTransactions);\r\n});\r\n\r\nrouter.get('/transactions/hash/:hash', (req, res) => {\r\n    let found = false;\r\n    let foundTx;\r\n\r\n    app.blockchain.chain.forEach((block) => {\r\n        block.transactions.forEach((tx) => {\r\n            if (req.params.hash === tx.hash) {\r\n                found = true;\r\n                foundTx = tx;\r\n            }\r\n        });\r\n    });\r\n\r\n    if (found) {\r\n        res.json(foundTx);\r\n    } else {\r\n        res.status(404);\r\n        res.json(`There is no transaction with hash: ${req.params.hash}`);\r\n    }\r\n});\r\n\r\nrouter.get('/address/balance/:address', (req, res) => {\r\n    res.json(app.blockchain.getBalanceOfAddress(req.params.address));\r\n});\r\n\r\nrouter.post('/addtransaction', (req, res) => {\r\n    const transaction = app.blockchain.addTransaction(req.body.fromAddress, req.body.toAddress, req.body.amount);\r\n    app.wsServer.broadcastTransaction(transaction);\r\n    res.redirect('/transactions');\r\n});\r\n\r\nrouter.post('/minetransactions', (req, res) => {\r\n    const block = app.miner.mine(req.body.mineraddress);\r\n\r\n    if (block) {\r\n        console.log(`New block added: ${block.toString()}`);\r\n        res.redirect('/chain');\r\n    } else {\r\n        res.json('No pendingTransactions - cannot mine new block!');\r\n    }\r\n});\r\n\r\nrouter.post('/getcoins', (req, res) => {\r\n    const transaction = app.blockchain.getCoins(req.body.fromAddress, req.body.toAddress);\r\n    app.wsServer.broadcastTransaction(transaction);\r\n    res.json('100 coins will be added to your address after new block is mined!');\r\n});\r\n\r\nrouter.get('/peers', (req, res) => {\r\n    if (PEERS.length === 0) {\r\n        res.json('No peers');\r\n    } else {\r\n        res.json(PEERS);\r\n    }\r\n});\r\n\r\nmodule.exports = router;\r\n",
     "static": true,
     "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/routes/routes.js",
     "access": "public",
@@ -1954,7 +1996,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 105,
+    "__docId__": 106,
     "kind": "variable",
     "name": "generateKeyPair",
     "memberof": "src/routes/routes.js",
@@ -1965,28 +2007,7 @@
     "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 8,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 106,
-    "kind": "variable",
-    "name": "PEERS",
-    "memberof": "src/routes/routes.js",
-    "static": true,
-    "longname": "src/routes/routes.js~PEERS",
-    "access": "public",
-    "export": false,
-    "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 10,
+    "lineNumber": 7,
     "undocument": true,
     "type": {
       "types": [
@@ -1998,16 +2019,16 @@
   {
     "__docId__": 107,
     "kind": "variable",
-    "name": "swaggerDocument",
+    "name": "PEERS",
     "memberof": "src/routes/routes.js",
     "static": true,
-    "longname": "src/routes/routes.js~swaggerDocument",
+    "longname": "src/routes/routes.js~PEERS",
     "access": "public",
     "export": false,
     "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 9,
     "undocument": true,
     "type": {
       "types": [
@@ -2019,6 +2040,27 @@
   {
     "__docId__": 108,
     "kind": "variable",
+    "name": "swaggerDocument",
+    "memberof": "src/routes/routes.js",
+    "static": true,
+    "longname": "src/routes/routes.js~swaggerDocument",
+    "access": "public",
+    "export": false,
+    "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 109,
+    "kind": "variable",
     "name": "router",
     "memberof": "src/routes/routes.js",
     "static": true,
@@ -2028,7 +2070,7 @@
     "importPath": "l2y21-aabrdp-simple-blockchain/src/routes/routes.js",
     "importStyle": "router",
     "description": null,
-    "lineNumber": 15,
+    "lineNumber": 14,
     "undocument": true,
     "type": {
       "types": [
@@ -2037,7 +2079,7 @@
     }
   },
   {
-    "__docId__": 109,
+    "__docId__": 110,
     "kind": "file",
     "name": "src/utils/get-public-ip.js",
     "content": "const publicIp = require('public-ip');\r\n\r\nexports.getPublicIp = async () => {\r\n    const ip = await publicIp.v4();\r\n    return ip;\r\n};\r\n",
@@ -2048,7 +2090,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 110,
+    "__docId__": 111,
     "kind": "function",
     "name": "getPublicIp",
     "memberof": "src/utils/get-public-ip.js",
@@ -2071,10 +2113,10 @@
     }
   },
   {
-    "__docId__": 111,
+    "__docId__": 112,
     "kind": "file",
     "name": "src/ws/server.js",
-    "content": "const Websocket = require('ws');\r\n\r\nconst { WS_PORT, PEERS } = require('../../config/ports-folders');\r\nconst ip = require('../utils/get-public-ip');\r\n\r\nconst P2P_PORT = process.env.WS_PORT || WS_PORT;\r\n\r\nconst MESSAGE_TYPES = {\r\n    chain: 'CHAIN',\r\n    transaction: 'TRANSACTION',\r\n    clear_transactions: 'CLEAR_TRANSACTIONS',\r\n    peer: 'PEER',\r\n};\r\n\r\nlet server;\r\n\r\n/**\r\n * WsServer class\r\n * @example <caption>Create a new websocket object</caption>\r\n * let blockchain = new Blockchain();\r\n * let wsServer = new WsServer(blockchain);\r\n */\r\nclass WsServer {\r\n    /**\r\n     * WsServer constructor\r\n     * @param {object} blockchain - Blockchain class object\r\n     */\r\n    constructor(blockchain) {\r\n        this.blockchain = blockchain;\r\n        /**\r\n         * @type {object[]} - List of socket objects\r\n         */\r\n        this.sockets = [];\r\n        /**\r\n         * @type {string[]} - List of addresses of connected peers\r\n         */\r\n        this.connectedPeers = [];\r\n    }\r\n\r\n    /**\r\n     * Starts Websocket Server. Connects to peers and listens for connections.\r\n     */\r\n    listen() {\r\n        server = new Websocket.Server({ port: P2P_PORT });\r\n\r\n        server.on('connection', (socket) => this.connectSocket(socket));\r\n\r\n        this.connectToPeers();\r\n\r\n        console.log(`Listening for peer-to-peer connections on ${WS_PORT}`);\r\n    }\r\n\r\n    /**\r\n     * Functionalities:\r\n     * - Adds current socket to socket list;\r\n     * - Sends socket to message handler method;\r\n     * - Sends current chain to other peers;\r\n     * - Broadcasts own peers list to other peers.\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    connectSocket(socket) {\r\n        this.sockets.push(socket);\r\n        console.log('Socket connected');\r\n\r\n        this.messageHandler(socket);\r\n\r\n        this.sendChain(socket);\r\n\r\n        this.broadcastPeers(PEERS);\r\n    }\r\n\r\n    /**\r\n     * Opens Websocket client connection to peers in peers list, excluding own address.\r\n     */\r\n    connectToPeers() {\r\n        PEERS.forEach((peer) => {\r\n            // Check if peer exists - do not connect to peer's own address\r\n            if (peer !== `ws://localhost:${P2P_PORT}`) {\r\n                this.addAddressToPeers();\r\n\r\n                this.connectedPeers.push(peer);\r\n\r\n                const socket = new Websocket(peer);\r\n\r\n                socket.on('open', () => this.connectSocket(socket));\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Adds own address to peers list\r\n     */\r\n    addAddressToPeers() {\r\n        PEERS.push(this.getPeerAddress());\r\n    }\r\n\r\n    /**\r\n     * Returns address and port\r\n     * @returns address of peer - string\r\n     */\r\n    getPeerAddress() {\r\n        // Get peer with public ip\r\n        // return `ws://${await ip.getPublicIp()}:${server.address().port}`\r\n        return `ws://localhost:${server.address().port}`;\r\n    }\r\n\r\n    /**\r\n     * Handles incoming message by comparing different message types\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    messageHandler(socket) {\r\n        socket.on('message', (message) => {\r\n            const data = JSON.parse(message);\r\n\r\n            switch (data.type) {\r\n            case MESSAGE_TYPES.chain:\r\n                this.blockchain.replaceChain(data.chain);\r\n                break;\r\n            case MESSAGE_TYPES.transaction:\r\n                this.blockchain.pendingTransactions.push(data.transaction);\r\n                break;\r\n            case MESSAGE_TYPES.clear_transactions:\r\n                this.blockchain.clearPendingTransactions();\r\n                break;\r\n            case MESSAGE_TYPES.peer:\r\n                this.addNotExistingPeer(data.peers);\r\n                this.connectToNewPeers();\r\n                break;\r\n            default:\r\n                break;\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Sends message to socket - chain object\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    sendChain(socket) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.chain,\r\n            chain: this.blockchain.chain,\r\n        }));\r\n    }\r\n    \r\n    /**\r\n     * Sends message to socket - transaction object\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     * @param {object} transaction - Transaction class object\r\n     */\r\n    sendTransaction(socket, transaction) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.transaction,\r\n            transaction,\r\n        }));\r\n    }\r\n\r\n    /**\r\n     * Sends message to socket - peers list\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    sendPeers(socket) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.peer,\r\n            peers: PEERS,\r\n        }));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - current chain\r\n     */\r\n    synchronizeChains() {\r\n        this.sockets.forEach((socket) => this.sendChain(socket));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - current transaction\r\n     * @param {object} transaction - Transaction class object\r\n     */\r\n    broadcastTransaction(transaction) {\r\n        this.sockets.forEach((socket) => this.sendTransaction(socket, transaction));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - clears every socket's pending transactions list\r\n     */\r\n    broadcastClearTransactions() {\r\n        this.sockets.forEach((socket) => socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.clear_transactions,\r\n        })));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - peers list\r\n     * @param {string[]} peers - List of addresses of peers\r\n     */\r\n    broadcastPeers(peers) {\r\n        this.sockets.forEach((socket) => socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.peer,\r\n            peers,\r\n        })));\r\n    }\r\n\r\n    /**\r\n     * Adds peers from another node peer list to current node peer list - only unique ones\r\n     * @param {string[]} peers - List of addresses of peers\r\n     */\r\n    addNotExistingPeer(peers) {\r\n        peers.forEach((peer) => {\r\n            if (!PEERS.includes(peer)) {\r\n                PEERS.push(peer);\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Connects to peers after receiving new peers from another node.\r\n     */\r\n    connectToNewPeers() {\r\n        let difference = [];\r\n        let actualArray = [];\r\n\r\n        if (this.connectedPeers.length > 0) {\r\n            difference = PEERS.filter((x) => !this.connectedPeers.includes(x));\r\n            actualArray = difference.filter((x) => x !== this.getPeerAddress());\r\n        }\r\n\r\n        if (actualArray.length > 0) {\r\n            actualArray.forEach((peer) => {\r\n                this.connectedPeers.push(peer);\r\n\r\n                const socket = new Websocket(peer);\r\n\r\n                socket.on('open', () => this.connectSocket(socket));\r\n            });\r\n        }\r\n    }\r\n}\r\n\r\nmodule.exports = WsServer;\r\n",
+    "content": "const Websocket = require('ws');\r\n\r\nconst { WS_PORT, PEERS, IP_ADDRESS } = require('../../config/ports-folders');\r\nconst ip = require('../utils/get-public-ip');\r\n\r\nconst P2P_PORT = process.env.WS_PORT || WS_PORT;\r\n\r\nconst MESSAGE_TYPES = {\r\n    chain: 'CHAIN',\r\n    transaction: 'TRANSACTION',\r\n    clear_transactions: 'CLEAR_TRANSACTIONS',\r\n    peer: 'PEER',\r\n};\r\n\r\nlet server;\r\n\r\n/**\r\n * WsServer class\r\n * @example <caption>Create a new websocket object</caption>\r\n * let blockchain = new Blockchain();\r\n * let wsServer = new WsServer(blockchain);\r\n */\r\nclass WsServer {\r\n    /**\r\n     * WsServer constructor\r\n     * @param {object} blockchain - Blockchain class object\r\n     */\r\n    constructor(blockchain) {\r\n        this.blockchain = blockchain;\r\n        /**\r\n         * @type {object[]} - List of socket objects\r\n         */\r\n        this.sockets = [];\r\n        /**\r\n         * @type {string[]} - List of addresses of connected peers\r\n         */\r\n        this.connectedPeers = [];\r\n    }\r\n\r\n    /**\r\n     * Starts Websocket Server. Connects to peers and listens for connections.\r\n     */\r\n    listen() {\r\n        server = new Websocket.Server({ port: P2P_PORT });\r\n\r\n        server.on('connection', (socket) => this.connectSocket(socket));\r\n\r\n        this.connectToPeers();\r\n\r\n        console.log(`Listening for peer-to-peer connections on ${WS_PORT}`);\r\n    }\r\n\r\n    /**\r\n     * Functionalities:\r\n     * - Adds current socket to socket list;\r\n     * - Sends socket to message handler method;\r\n     * - Sends current chain to other peers;\r\n     * - Broadcasts own peers list to other peers.\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    connectSocket(socket) {\r\n        this.sockets.push(socket);\r\n        console.log('Socket connected');\r\n\r\n        this.messageHandler(socket);\r\n\r\n        this.sendChain(socket);\r\n\r\n        this.broadcastPeers(PEERS);\r\n    }\r\n\r\n    /**\r\n     * Opens Websocket client connection to peers in peers list, excluding own address.\r\n     */\r\n    connectToPeers() {\r\n        PEERS.forEach((peer) => {\r\n            // Check if peer exists - do not connect to peer's own address\r\n            if (peer !== `ws://${IP_ADDRESS}:${P2P_PORT}`) {\r\n                this.addAddressToPeers();\r\n\r\n                this.connectedPeers.push(peer);\r\n\r\n                const socket = new Websocket(peer);\r\n\r\n                socket.on('open', () => this.connectSocket(socket));\r\n                socket.on('error', (error) => { console.log(`Error: ${error}`); });\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Adds own address to peers list\r\n     */\r\n    addAddressToPeers() {\r\n        PEERS.push(this.getPeerAddress());\r\n    }\r\n\r\n    /**\r\n     * Returns address and port\r\n     * @returns address of peer - string\r\n     */\r\n    getPeerAddress() {\r\n        // Get peer with public ip\r\n        // return `ws://${await ip.getPublicIp()}:${server.address().port}`\r\n        return `ws://${IP_ADDRESS}:${server.address().port}`;\r\n    }\r\n\r\n    /**\r\n     * Handles incoming message by comparing different message types\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    messageHandler(socket) {\r\n        socket.on('message', (message) => {\r\n            const data = JSON.parse(message);\r\n\r\n            switch (data.type) {\r\n            case MESSAGE_TYPES.chain:\r\n                this.blockchain.replaceChain(data.chain);\r\n                this.blockchain.pendingTransactions = data.pendingTransactions;\r\n                break;\r\n            case MESSAGE_TYPES.transaction:\r\n                this.blockchain.pendingTransactions.push(data.transaction);\r\n                break;\r\n            case MESSAGE_TYPES.peer:\r\n                this.addNotExistingPeer(data.peers);\r\n                this.connectToNewPeers();\r\n                break;\r\n            default:\r\n                break;\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Sends message to socket - chain object\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    sendChain(socket) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.chain,\r\n            chain: this.blockchain.chain,\r\n            pendingTransactions: this.blockchain.pendingTransactions,\r\n        }));\r\n    }\r\n\r\n    /**\r\n     * Sends message to socket - transaction object\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     * @param {object} transaction - Transaction class object\r\n     */\r\n    sendTransaction(socket, transaction) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.transaction,\r\n            transaction,\r\n        }));\r\n    }\r\n\r\n    /**\r\n     * Sends message to socket - peers list\r\n     * @param {object} socket - Socket object, returned by creating websocket client\r\n     */\r\n    sendPeers(socket) {\r\n        socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.peer,\r\n            peers: PEERS,\r\n        }));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - current chain\r\n     */\r\n    synchronizeChains() {\r\n        this.sockets.forEach((socket) => this.sendChain(socket));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - current transaction\r\n     * @param {object} transaction - Transaction class object\r\n     */\r\n    broadcastTransaction(transaction) {\r\n        this.sockets.forEach((socket) => this.sendTransaction(socket, transaction));\r\n    }\r\n\r\n    /**\r\n     * Sends message to every socket - peers list\r\n     * @param {string[]} peers - List of addresses of peers\r\n     */\r\n    broadcastPeers(peers) {\r\n        this.sockets.forEach((socket) => socket.send(JSON.stringify({\r\n            type: MESSAGE_TYPES.peer,\r\n            peers,\r\n        })));\r\n    }\r\n\r\n    /**\r\n     * Adds peers from another node peer list to current node peer list - only unique ones\r\n     * @param {string[]} peers - List of addresses of peers\r\n     */\r\n    addNotExistingPeer(peers) {\r\n        peers.forEach((peer) => {\r\n            if (!PEERS.includes(peer)) {\r\n                PEERS.push(peer);\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Connects to peers after receiving new peers from another node.\r\n     */\r\n    connectToNewPeers() {\r\n        let difference = [];\r\n        let actualArray = [];\r\n\r\n        if (this.connectedPeers.length > 0) {\r\n            difference = PEERS.filter((x) => !this.connectedPeers.includes(x));\r\n            actualArray = difference.filter((x) => x !== this.getPeerAddress());\r\n        }\r\n\r\n        if (actualArray.length > 0) {\r\n            actualArray.forEach((peer) => {\r\n                this.connectedPeers.push(peer);\r\n\r\n                const socket = new Websocket(peer);\r\n\r\n                socket.on('open', () => this.connectSocket(socket));\r\n                socket.on('error', (error) => { console.log(`Error: ${error}`); });\r\n            });\r\n        }\r\n    }\r\n}\r\n\r\nmodule.exports = WsServer;\r\n",
     "static": true,
     "longname": "D:/quanterall-materials/blockchain-course/L2Y21-AABRDP-simple-blockchain/src/ws/server.js",
     "access": "public",
@@ -2082,7 +2124,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 112,
+    "__docId__": 113,
     "kind": "variable",
     "name": "WS_PORT",
     "memberof": "src/ws/server.js",
@@ -2103,7 +2145,7 @@
     "ignore": true
   },
   {
-    "__docId__": 113,
+    "__docId__": 114,
     "kind": "variable",
     "name": "P2P_PORT",
     "memberof": "src/ws/server.js",
@@ -2124,7 +2166,7 @@
     "ignore": true
   },
   {
-    "__docId__": 114,
+    "__docId__": 115,
     "kind": "variable",
     "name": "MESSAGE_TYPES",
     "memberof": "src/ws/server.js",
@@ -2145,7 +2187,7 @@
     "ignore": true
   },
   {
-    "__docId__": 115,
+    "__docId__": 116,
     "kind": "class",
     "name": "WsServer",
     "memberof": "src/ws/server.js",
@@ -2163,7 +2205,7 @@
     "interface": false
   },
   {
-    "__docId__": 116,
+    "__docId__": 117,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/ws/server.js~WsServer",
@@ -2188,7 +2230,7 @@
     ]
   },
   {
-    "__docId__": 117,
+    "__docId__": 118,
     "kind": "member",
     "name": "blockchain",
     "memberof": "src/ws/server.js~WsServer",
@@ -2205,7 +2247,7 @@
     }
   },
   {
-    "__docId__": 118,
+    "__docId__": 119,
     "kind": "member",
     "name": "sockets",
     "memberof": "src/ws/server.js~WsServer",
@@ -2224,7 +2266,7 @@
     }
   },
   {
-    "__docId__": 119,
+    "__docId__": 120,
     "kind": "member",
     "name": "connectedPeers",
     "memberof": "src/ws/server.js~WsServer",
@@ -2243,7 +2285,7 @@
     }
   },
   {
-    "__docId__": 120,
+    "__docId__": 121,
     "kind": "method",
     "name": "listen",
     "memberof": "src/ws/server.js~WsServer",
@@ -2258,7 +2300,7 @@
     "return": null
   },
   {
-    "__docId__": 121,
+    "__docId__": 122,
     "kind": "method",
     "name": "connectSocket",
     "memberof": "src/ws/server.js~WsServer",
@@ -2284,7 +2326,7 @@
     "return": null
   },
   {
-    "__docId__": 122,
+    "__docId__": 123,
     "kind": "method",
     "name": "connectToPeers",
     "memberof": "src/ws/server.js~WsServer",
@@ -2299,7 +2341,7 @@
     "return": null
   },
   {
-    "__docId__": 123,
+    "__docId__": 124,
     "kind": "method",
     "name": "addAddressToPeers",
     "memberof": "src/ws/server.js~WsServer",
@@ -2309,12 +2351,12 @@
     "longname": "src/ws/server.js~WsServer#addAddressToPeers",
     "access": "public",
     "description": "Adds own address to peers list",
-    "lineNumber": 94,
+    "lineNumber": 95,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 124,
+    "__docId__": 125,
     "kind": "method",
     "name": "getPeerAddress",
     "memberof": "src/ws/server.js~WsServer",
@@ -2324,7 +2366,7 @@
     "longname": "src/ws/server.js~WsServer#getPeerAddress",
     "access": "public",
     "description": "Returns address and port",
-    "lineNumber": 102,
+    "lineNumber": 103,
     "unknown": [
       {
         "tagName": "@returns",
@@ -2342,7 +2384,7 @@
     "params": []
   },
   {
-    "__docId__": 125,
+    "__docId__": 126,
     "kind": "method",
     "name": "messageHandler",
     "memberof": "src/ws/server.js~WsServer",
@@ -2352,33 +2394,7 @@
     "longname": "src/ws/server.js~WsServer#messageHandler",
     "access": "public",
     "description": "Handles incoming message by comparing different message types",
-    "lineNumber": 112,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "socket",
-        "description": "Socket object, returned by creating websocket client"
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 126,
-    "kind": "method",
-    "name": "sendChain",
-    "memberof": "src/ws/server.js~WsServer",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/ws/server.js~WsServer#sendChain",
-    "access": "public",
-    "description": "Sends message to socket - chain object",
-    "lineNumber": 140,
+    "lineNumber": 113,
     "params": [
       {
         "nullable": null,
@@ -2395,6 +2411,32 @@
   },
   {
     "__docId__": 127,
+    "kind": "method",
+    "name": "sendChain",
+    "memberof": "src/ws/server.js~WsServer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/ws/server.js~WsServer#sendChain",
+    "access": "public",
+    "description": "Sends message to socket - chain object",
+    "lineNumber": 139,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "socket",
+        "description": "Socket object, returned by creating websocket client"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 128,
     "kind": "method",
     "name": "sendTransaction",
     "memberof": "src/ws/server.js~WsServer",
@@ -2430,7 +2472,7 @@
     "return": null
   },
   {
-    "__docId__": 128,
+    "__docId__": 129,
     "kind": "method",
     "name": "sendPeers",
     "memberof": "src/ws/server.js~WsServer",
@@ -2456,7 +2498,7 @@
     "return": null
   },
   {
-    "__docId__": 129,
+    "__docId__": 130,
     "kind": "method",
     "name": "synchronizeChains",
     "memberof": "src/ws/server.js~WsServer",
@@ -2471,7 +2513,7 @@
     "return": null
   },
   {
-    "__docId__": 130,
+    "__docId__": 131,
     "kind": "method",
     "name": "broadcastTransaction",
     "memberof": "src/ws/server.js~WsServer",
@@ -2497,21 +2539,6 @@
     "return": null
   },
   {
-    "__docId__": 131,
-    "kind": "method",
-    "name": "broadcastClearTransactions",
-    "memberof": "src/ws/server.js~WsServer",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/ws/server.js~WsServer#broadcastClearTransactions",
-    "access": "public",
-    "description": "Sends message to every socket - clears every socket's pending transactions list",
-    "lineNumber": 188,
-    "params": [],
-    "return": null
-  },
-  {
     "__docId__": 132,
     "kind": "method",
     "name": "broadcastPeers",
@@ -2522,7 +2549,7 @@
     "longname": "src/ws/server.js~WsServer#broadcastPeers",
     "access": "public",
     "description": "Sends message to every socket - peers list",
-    "lineNumber": 198,
+    "lineNumber": 189,
     "params": [
       {
         "nullable": null,
@@ -2548,7 +2575,7 @@
     "longname": "src/ws/server.js~WsServer#addNotExistingPeer",
     "access": "public",
     "description": "Adds peers from another node peer list to current node peer list - only unique ones",
-    "lineNumber": 209,
+    "lineNumber": 200,
     "params": [
       {
         "nullable": null,
@@ -2574,13 +2601,13 @@
     "longname": "src/ws/server.js~WsServer#connectToNewPeers",
     "access": "public",
     "description": "Connects to peers after receiving new peers from another node.",
-    "lineNumber": 220,
+    "lineNumber": 211,
     "params": [],
     "return": null
   },
   {
     "kind": "index",
-    "content": "# L2Y21-AABRDP-simple-blockchain\r\n",
+    "content": "# L2Y21-AABRDP-simple-blockchain\r\n\r\n## Rules of repo\r\n\r\n### Branching strategy\r\n\r\nWe use GitHub Flow.\r\n\r\n### Commit message format\r\n\r\nOur convention for commit messages:\r\n\r\n```text\r\nfeat: Add beta sequence\r\n^--^ ^---------------^\r\n| |\r\n| +-> Summary in present tense.\r\n|\r\n+-------> Type: chore, docs, feat, fix, refactor, style, or test.\r\n```\r\n\r\nWe use tools: [Commitlint](https://commitlint.js.org/#/) and [Husky](https://github.com/typicode/husky).\r\n\r\n### Convention for code\r\n\r\nFor this purpose we use [ESLint AirBnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) style guide.\r\n[Why Use AirBnB’s ESLint Configuration? A Review of AirBnB’s Rules List](https://smartdevpreneur.com/why-use-airbnbs-eslint-config-a-review-of-airbnbs-rules-list/).\r\n\r\n## How to use after clone (make sure to clone 'main' branch)\r\n\r\n1. Install packages\r\n\r\n```sh\r\nnpm install\r\n```\r\n\r\n2. Run\r\n\r\n```sh\r\nnpm start\r\n```\r\n\r\n3. Test\r\n\r\n```sh\r\nnpm test\r\n```\r\n\r\n4. Before commit ESLint will check your code and problems will come out if there are any. However, you can check or fix your code at any time with:\r\n\r\n- ESLint check:\r\n\r\n```sh\r\nnpm run lint\r\n```\r\n\r\n- ESLint fix:\r\n\r\n```sh\r\nnpm run lint-fix\r\n```\r\n",
     "longname": "D:\\quanterall-materials\\blockchain-course\\L2Y21-AABRDP-simple-blockchain\\README.md",
     "name": "./README.md",
     "static": true,
@@ -2588,7 +2615,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\r\n  \"name\": \"l2y21-aabrdp-simple-blockchain\",\r\n  \"version\": \"1.0.0\",\r\n  \"description\": \"\",\r\n  \"main\": \"app.js\",\r\n  \"scripts\": {\r\n    \"test\": \"jest --watchAll\",\r\n    \"prepare\": \"husky install\",\r\n    \"dev-test\": \"node dev-test\",\r\n    \"start\": \"node app.js\",\r\n    \"dev-start\": \"nodemon app.js\",\r\n    \"lint\": \"npx eslint \\\"**/*.js\\\"\",\r\n    \"lint-fix\": \"npx eslint --fix \\\"**/*.js\\\"\"\r\n  },\r\n  \"repository\": {\r\n    \"type\": \"git\",\r\n    \"url\": \"git+https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain.git\"\r\n  },\r\n  \"author\": \"\",\r\n  \"license\": \"ISC\",\r\n  \"bugs\": {\r\n    \"url\": \"https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain/issues\"\r\n  },\r\n  \"homepage\": \"https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain#readme\",\r\n  \"dependencies\": {\r\n    \"body-parser\": \"^1.19.0\",\r\n    \"crypto-js\": \"^4.1.1\",\r\n    \"elliptic\": \"^6.5.4\",\r\n    \"express\": \"^4.17.1\",\r\n    \"path\": \"^0.12.7\",\r\n    \"public-ip\": \"^4.0.4\",\r\n    \"swagger-ui-express\": \"^4.2.0\",\r\n    \"ws\": \"^8.3.0\",\r\n    \"yamljs\": \"^0.3.0\"\r\n  },\r\n  \"devDependencies\": {\r\n    \"@commitlint/cli\": \"^15.0.0\",\r\n    \"@commitlint/config-conventional\": \"^15.0.0\",\r\n    \"esdoc\": \"^1.1.0\",\r\n    \"esdoc-node\": \"^1.0.5\",\r\n    \"esdoc-standard-plugin\": \"^1.0.0\",\r\n    \"eslint\": \"^8.2.0\",\r\n    \"eslint-config-airbnb-base\": \"^15.0.0\",\r\n    \"eslint-plugin-import\": \"^2.25.2\",\r\n    \"husky\": \"^7.0.4\",\r\n    \"jest\": \"^27.4.4\",\r\n    \"nodemon\": \"^2.0.15\"\r\n  }\r\n}\r\n",
+    "content": "{\r\n  \"name\": \"l2y21-aabrdp-simple-blockchain\",\r\n  \"version\": \"1.0.0\",\r\n  \"description\": \"\",\r\n  \"main\": \"app.js\",\r\n  \"scripts\": {\r\n    \"test\": \"jest --forceExit\",\r\n    \"prepare\": \"husky install\",\r\n    \"dev-test\": \"node dev-test\",\r\n    \"start\": \"node app.js\",\r\n    \"dev-start\": \"nodemon app.js\",\r\n    \"lint\": \"npx eslint \\\"**/*.js\\\"\",\r\n    \"lint-fix\": \"npx eslint --fix \\\"**/*.js\\\"\"\r\n  },\r\n  \"repository\": {\r\n    \"type\": \"git\",\r\n    \"url\": \"git+https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain.git\"\r\n  },\r\n  \"author\": \"\",\r\n  \"license\": \"ISC\",\r\n  \"bugs\": {\r\n    \"url\": \"https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain/issues\"\r\n  },\r\n  \"homepage\": \"https://github.com/Applied-Blockchain-Lab/L2Y21-AABRDP-simple-blockchain#readme\",\r\n  \"dependencies\": {\r\n    \"axios\": \"^0.24.0\",\r\n    \"crypto-js\": \"^4.1.1\",\r\n    \"dotenv\": \"^10.0.0\",\r\n    \"elliptic\": \"^6.5.4\",\r\n    \"express\": \"^4.17.1\",\r\n    \"jest-openapi\": \"^0.14.1\",\r\n    \"path\": \"^0.12.7\",\r\n    \"public-ip\": \"^4.0.4\",\r\n    \"swagger-ui-express\": \"^4.2.0\",\r\n    \"ws\": \"^8.3.0\",\r\n    \"yamljs\": \"^0.3.0\"\r\n  },\r\n  \"devDependencies\": {\r\n    \"@commitlint/cli\": \"^15.0.0\",\r\n    \"@commitlint/config-conventional\": \"^15.0.0\",\r\n    \"esdoc\": \"^1.1.0\",\r\n    \"esdoc-node\": \"^1.0.5\",\r\n    \"esdoc-standard-plugin\": \"^1.0.0\",\r\n    \"eslint\": \"^8.2.0\",\r\n    \"eslint-config-airbnb-base\": \"^15.0.0\",\r\n    \"eslint-plugin-import\": \"^2.25.2\",\r\n    \"husky\": \"^7.0.4\",\r\n    \"jest\": \"^27.4.4\",\r\n    \"nodemon\": \"^2.0.15\"\r\n  }\r\n}\r\n",
     "longname": "D:\\quanterall-materials\\blockchain-course\\L2Y21-AABRDP-simple-blockchain\\package.json",
     "name": "package.json",
     "static": true,

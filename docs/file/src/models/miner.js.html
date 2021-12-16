@@ -43,7 +43,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/models/miner.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const Transaction = require(&apos;./transaction&apos;);
 
-const { MINING_REWARD } = require(&apos;../../config/network-parameters&apos;);
+const { MINING_REWARD, REWARD_TX } = require(&apos;../../config/network-parameters&apos;);
 
 /**
  * Miner class
@@ -70,17 +70,13 @@ class Miner {
      * @returns Block class object
      */
     mine(minerAddress) {
-        const coinbaseTransaction = new Transaction(0, minerAddress, MINING_REWARD, 0);
+        const coinbaseTransaction = new Transaction(REWARD_TX, minerAddress, MINING_REWARD, 0);
 
         this.blockchain.pendingTransactions.unshift(coinbaseTransaction);
 
         const newBlock = this.blockchain.addBlock();
 
         this.wsServer.synchronizeChains();
-
-        this.blockchain.clearPendingTransactions();
-
-        this.wsServer.broadcastClearTransactions();
 
         return newBlock;
     }
