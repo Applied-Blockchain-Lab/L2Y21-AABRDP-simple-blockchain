@@ -35,12 +35,30 @@ router.get('/blocks/latest', (req, res) => {
     res.json(app.blockchain.getLatestBlock());
 });
 
-router.get('/blocks/:id', (req, res) => {
+router.get('/blocks/id/:id', (req, res) => {
     if (+req.params.id <= app.blockchain.chain.length) {
         res.json(app.blockchain.chain[+req.params.id - 1]);
     } else {
         res.status(404);
         res.json(`There is no block with id: ${req.params.id}`);
+    }
+});
+
+router.get('/blocks/hash/:hash', (req, res) => {
+    let found = false;
+    let foundBlock;
+    app.blockchain.chain.forEach((block) => {
+        if (block.hash === req.params.hash) {
+            found = true;
+            foundBlock = block;
+        }
+    });
+
+    if (found) {
+        res.json(foundBlock);
+    } else {
+        res.status(404);
+        res.json(`There is no block with hash: ${req.params.hash}`);
     }
 });
 
