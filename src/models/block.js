@@ -1,7 +1,8 @@
 const { generateHash } = require('../utils/crypto-util');
 const { DIFFICULTY, CREATION_TIME } = require('../../config/network-parameters');
 const Transaction = require('./transaction');
-
+const { TIMESTAMP, PARENT_HASH, HASH } = require('../../config/genesis-block');
+const { TRANSACTIONS } = require('../../config/genesis-block');
 /**
  * Block class
  * @example <caption>Create a new block object</caption>
@@ -31,7 +32,7 @@ class Block {
      * @returns {object} New block object
      */
     static genesisBlock() {
-        return new Block('000000', '-', '111-111', 0, DIFFICULTY, []);
+        return new Block(TIMESTAMP, PARENT_HASH, HASH, 0, DIFFICULTY, TRANSACTIONS);
     }
 
     /**
