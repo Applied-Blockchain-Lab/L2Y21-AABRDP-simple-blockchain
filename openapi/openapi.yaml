@@ -156,3 +156,79 @@ paths:
           application/json:
             schema:
               type: string
+ /peers:
+  get:
+    summary: Show node peers
+    tags:
+    - GET data
+    description: Show node peers, including his own address
+    responses:
+      200:
+        description: Array of string
+        content:
+          application/json:
+            schema:
+              type: array
+ /blocks/id/{id}:
+  get:
+    summary: Get block by id
+    tags:
+      - GET data
+    description: Get information about one block by id
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: block height
+        example: 1
+    responses:
+      200:
+        description: Object with block information
+        content:
+          application/json:
+            schema:
+              type: object
+ /blocks/hash/{hash}:
+  get:
+    summary: Get block by hash
+    tags:
+      - GET data
+    description: Get information about one block by hash
+    parameters:
+      - in: path
+        name: hash
+        schema:
+          type: string
+        required: true
+        description: block hash
+        example: 111-111
+    responses:
+      200:
+        description: Object with block information
+        content:
+          application/json:
+            schema:
+              type: object
+ /transactions/hash/{hash}:
+  get:
+    summary: Get transaction by hash
+    tags:
+      - GET data
+    description: Get information about one transaction by hash
+    parameters:
+      - in: path
+        name: hash
+        schema:
+          type: string
+        required: true
+        description: transaction hash
+        example: e0053b8a68af69557cebbc30eb462c04104be564ab2d4b3dbc84bae31dba9b8f
+    responses:
+      200:
+        description: Object with transaction information
+        content:
+          application/json:
+            schema:
+              type: object
