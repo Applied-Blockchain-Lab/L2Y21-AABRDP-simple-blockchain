@@ -85,12 +85,6 @@ describe('Test Chain class', () => {
         expect(blockchain.getBalanceOfAddress(TEST_PUB_KEY)).toEqual(60);
     });
 
-    it('genesis block data = invalid chain', () => {
-        blockchain.chain[0].transactions[0] = ['corrupt data'];
-
-        expect(blockchain.isValidChain(blockchain.chain)).toBe(false);
-    });
-
     it('validate valid chain', () => {
         blockchain.addTransaction(TEST_PUB_KEY, TEST_PUB_KEY_S, 1);
         blockchain.addTransaction(TEST_PUB_KEY, TEST_PUB_KEY_S, 1);

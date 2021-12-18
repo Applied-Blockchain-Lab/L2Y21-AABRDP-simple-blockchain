@@ -1,5 +1,7 @@
 const Block = require('../src/models/block');
 const { DIFFICULTY, CREATION_TIME } = require('../config/network-parameters');
+const { TIMESTAMP, PARENT_HASH, HASH } = require('../config/genesis-block');
+const { TRANSACTIONS } = require('../config/genesis-block');
 
 describe('Test Block class', () => {
     let transactions;
@@ -8,7 +10,7 @@ describe('Test Block class', () => {
     let genesis;
 
     beforeEach(() => {
-        genesis = new Block('000000', '-', '111-111', 0, DIFFICULTY, []);
+        genesis = new Block(TIMESTAMP, PARENT_HASH, HASH, 0, DIFFICULTY, TRANSACTIONS);
         transactions = ['tx1', 'tx2', 'tx3', 'tx4', 'tx5'];
         lastBlock = Block.genesisBlock();
         block = Block.mineBlock(lastBlock, transactions);
