@@ -36,26 +36,29 @@ npm install
 
 2. Run
 
-```sh
-npm start
-```
+    ```sh
+    npm start
+    ```
+
+For testing API endpoinst go to **/api-docs**. We use [Swagger](https://swagger.io/tools/swagger-ui/).
+For code documentation run **docs/index.html**. We use [ESDoc](https://esdoc.org/).
 
 3. Test
 
-```sh
-npm test
-```
+    ```sh
+    npm test
+    ```
 
 4. Before commit ESLint will check your code and problems will come out if there are any. However, you can check or fix your code at any time with:
 
-- ESLint check:
+    - ESLint check:
 
-```sh
-npm run lint
-```
+    ```sh
+    npm run lint
+    ```
 
-- ESLint fix:
+    - ESLint fix:
 
-```sh
-npm run lint-fix
-```
+    ```sh
+    npm run lint-fix
+    ```
