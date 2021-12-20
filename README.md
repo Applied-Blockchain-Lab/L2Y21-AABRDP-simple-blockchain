@@ -30,9 +30,9 @@ For this purpose we use [ESLint AirBnb](https://github.com/airbnb/javascript/tre
 
 1. Install packages
 
-```sh
-npm install
-```
+    ```sh
+    npm install
+    ```
 
 2. Run
 
@@ -40,8 +40,8 @@ npm install
     npm start
     ```
 
-For testing API endpoinst go to **/api-docs**. We use [Swagger](https://swagger.io/tools/swagger-ui/).
-For code documentation run **docs/index.html**. We use [ESDoc](https://esdoc.org/).
+    For testing API endpoinst go to **/api-docs**. We use [Swagger](https://swagger.io/tools/swagger-ui/).
+    For code documentation run **docs/index.html**. We use [ESDoc](https://esdoc.org/).
 
 3. Test
 
@@ -53,12 +53,12 @@ For code documentation run **docs/index.html**. We use [ESDoc](https://esdoc.org
 
     - ESLint check:
 
-    ```sh
-    npm run lint
-    ```
+        ```sh
+        npm run lint
+        ```
 
     - ESLint fix:
 
-    ```sh
-    npm run lint-fix
-    ```
+        ```sh
+        npm run lint-fix
+        ```
